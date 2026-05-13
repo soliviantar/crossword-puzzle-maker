@@ -33,10 +33,19 @@ class MainPage:
   private val partialRandomElement = dom.document.getElementById("partial-random").asInstanceOf[Input]
   private val partialOddElement = dom.document.getElementById("partial-odd").asInstanceOf[Input]
   private val partialEvenElement = dom.document.getElementById("partial-even").asInstanceOf[Input]
+  private val partialOddEvenElement = dom.document.getElementById("partial-oddeven").asInstanceOf[Input]
   private val partialCustomElement = dom.document.getElementById("partial-custom").asInstanceOf[Input]
   
   private val customInputContainer = dom.document.getElementById("custom-input-container").asInstanceOf[org.scalajs.dom.html.Element]
   private val customWordNumbersElement = dom.document.getElementById("custom-word-numbers").asInstanceOf[Input]
+
+  private val oddevenOptionsContainer = dom.document.getElementById("oddeven-options-container").asInstanceOf[org.scalajs.dom.html.Element]
+  private val gridName1Element = dom.document.getElementById("grid-name-1").asInstanceOf[Input]
+  private val gridName2Element = dom.document.getElementById("grid-name-2").asInstanceOf[Input]
+  private val titleSizeElement = dom.document.getElementById("title-size").asInstanceOf[Input]
+  private val gridInstruction1Element = dom.document.getElementById("grid-instruction-1").asInstanceOf[TextArea]
+  private val gridInstruction2Element = dom.document.getElementById("grid-instruction-2").asInstanceOf[TextArea]
+  private val instructionFontSizeElement = dom.document.getElementById("instruction-font-size").asInstanceOf[Input]
 
   private val numberLightGrayElement = dom.document.getElementById("number-light-gray").asInstanceOf[Input]
   private val numberDarkGrayElement = dom.document.getElementById("number-dark-gray").asInstanceOf[Input]
@@ -73,16 +82,24 @@ class MainPage:
     renderSolution()
   })
 
-  partialRandomElement.addEventListener("click", { _ => 
+  partialRandomElement.addEventListener("click", { _ =>
     hideCustomInput()
+    hideOddevenOptions()
     renderSolution()
   })
-  partialOddElement.addEventListener("click", { _ => 
+  partialOddElement.addEventListener("click", { _ =>
     hideCustomInput()
+    hideOddevenOptions()
     renderSolution()
   })
-  partialEvenElement.addEventListener("click", { _ => 
+  partialEvenElement.addEventListener("click", { _ =>
     hideCustomInput()
+    hideOddevenOptions()
+    renderSolution()
+  })
+  partialOddEvenElement.addEventListener("click", { _ =>
+    hideCustomInput()
+    showOddevenOptions()
     renderSolution()
   })
   partialCustomElement.addEventListener("click", { _ => 
@@ -91,6 +108,14 @@ class MainPage:
   })
   
   customWordNumbersElement.addEventListener("input", { _ => renderSolution() })
+
+  // Event listeners for oddeven options
+  gridName1Element.addEventListener("input", { _ => renderSolution() })
+  gridName2Element.addEventListener("input", { _ => renderSolution() })
+  titleSizeElement.addEventListener("input", { _ => renderSolution() })
+  gridInstruction1Element.addEventListener("input", { _ => renderSolution() })
+  gridInstruction2Element.addEventListener("input", { _ => renderSolution() })
+  instructionFontSizeElement.addEventListener("input", { _ => renderSolution() })
 
   // Initialize partial submenu visibility
   showPartialSubmenu()
@@ -145,6 +170,14 @@ class MainPage:
   def hideCustomInput(): Unit =
     customInputContainer.style.display = "none"
 
+  /** show oddeven options container */
+  def showOddevenOptions(): Unit =
+    oddevenOptionsContainer.style.display = "block"
+
+  /** hide oddeven options container */
+  def hideOddevenOptions(): Unit =
+    oddevenOptionsContainer.style.display = "none"
+
   /** show the generated puzzle */
   def renderSolution(): Unit =
     val showPartialSolution = resultPartialElement.checked
@@ -154,6 +187,7 @@ class MainPage:
       if (partialRandomElement.checked) "random"
       else if (partialOddElement.checked) "odd"
       else if (partialEvenElement.checked) "even"
+      else if (partialOddEvenElement.checked) "oddeven"
       else if (partialCustomElement.checked) "custom"
       else "random"
     
@@ -164,9 +198,16 @@ class MainPage:
       else if (numberDarkGrayElement.checked) "#666666"
       else "#000000" // black
 
-    val letterCase = 
+    val letterCase =
       if (letterUppercaseElement.checked) "uppercase"
       else "lowercase"
+
+    val gridName1 = gridName1Element.value
+    val gridName2 = gridName2Element.value
+    val titleSize = titleSizeElement.value
+    val gridInstruction1 = gridInstruction1Element.value
+    val gridInstruction2 = gridInstruction2Element.value
+    val instructionFontSize = instructionFontSizeElement.value
 
     outputPuzzleElement.innerHTML = HtmlRenderer.renderPuzzle(
       refinedPuzzle,
@@ -175,7 +216,13 @@ class MainPage:
       partialMode = partialMode,
       customWordNumbers = customWordNumbers,
       numberColor = numberColor,
-      letterCase = letterCase)
+      letterCase = letterCase,
+      gridName1 = gridName1,
+      gridName2 = gridName2,
+      titleSize = titleSize,
+      gridInstruction1 = gridInstruction1,
+      gridInstruction2 = gridInstruction2,
+      instructionFontSize = instructionFontSize)
 
     val unusedWords = mainInputWords.filterNot(refinedPuzzle.words.contains)
     val extraWords = refinedPuzzle.words -- initialPuzzle.words

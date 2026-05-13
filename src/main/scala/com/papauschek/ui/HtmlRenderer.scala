@@ -9,17 +9,29 @@ object HtmlRenderer:
    * @param puzzle the puzzle to render
    * @param showSolution if true, shows the solution (all characters) of the puzzle
    * @param showPartialSolution if true, shows partial solution based on selected mode
-   * @param partialMode the mode for partial solution: "random", "odd", "even", or "custom"
+   * @param partialMode the mode for partial solution: "random", "odd", "even", "oddeven", or "custom"
    * @param customWordNumbers comma-separated word numbers for custom mode
    * @param numberColor the color for the word numbers (hex color code)
-   * @param letterCase the case for letters: "uppercase" or "lowercase" */
+   * @param letterCase the case for letters: "uppercase" or "lowercase"
+   * @param gridName1 custom name for first grid in oddeven mode
+   * @param gridName2 custom name for second grid in oddeven mode
+   * @param titleSize size for grid titles in pixels (e.g., "24")
+   * @param gridInstruction1 instruction text for first grid
+   * @param gridInstruction2 instruction text for second grid
+   * @param instructionFontSize font size for instructions in pixels (e.g., "16") */
   def renderPuzzle(puzzle: Puzzle,
                    showSolution: Boolean = false,
                    showPartialSolution: Boolean = false,
                    partialMode: String = "random",
                    customWordNumbers: String = "",
                    numberColor: String = "#999999",
-                   letterCase: String = "uppercase"): String =
+                   letterCase: String = "uppercase",
+                   gridName1: String = "A",
+                   gridName2: String = "B",
+                   titleSize: String = "24",
+                   gridInstruction1: String = "",
+                   gridInstruction2: String = "",
+                   instructionFontSize: String = "16"): String =
 
     val annotation = puzzle.getAnnotation
 
@@ -53,7 +65,7 @@ object HtmlRenderer:
     // Determine which points should be shown based on the mode
     val visiblePoints = if (showPartialSolution) {
       partialMode match {
-        case "random" => 
+        case "random" =>
           // Use existing random logic
           puzzle.getCharsShownInPartialSolution()
         case "odd" =>
@@ -64,9 +76,12 @@ object HtmlRenderer:
           // Collect all points from even-numbered words
           val evenWordNumbers = annotation.values.flatten.map(_.index).filter(_ % 2 == 0).toSet
           collectAllPointsFromWords(puzzle, annotation, evenWordNumbers)
+        case "oddeven" =>
+          // For oddeven mode, we'll handle this specially by rendering two grids
+          Set.empty[Point] // Placeholder, actual rendering handled separately
         case "custom" =>
           // Collect all points from custom word numbers
-          val customWordNums = customWordNumbers.split(",").map(_.trim).filter(_.nonEmpty).flatMap(s => 
+          val customWordNums = customWordNumbers.split(",").map(_.trim).filter(_.nonEmpty).flatMap(s =>
             try Some(s.toInt)
             catch case _: NumberFormatException => None
           ).toSet
@@ -123,23 +138,106 @@ object HtmlRenderer:
 
     val renderedPuzzle = (0 until puzzle.config.height).map(renderHeight).mkString("\r\n")
 
-    s"""<svg viewBox="-8 -8 ${puzzle.config.width * 10 + 15} ${puzzle.config.height * 10 + 15}">
-      |  <style>
-      |    .annotation-horizontal {
-      |      font: 5px sans-serif;
-      |      fill: ${numberColor};
-      |    }
-      |    .annotation-vertical {
-      |      font: 5px sans-serif;
-      |      fill: ${numberColor};
-      |    }
-      |    .letter {
-      |      font: 8px sans-serif;
-      |      fill: black;
-      |    }
-      |  </style>
-      |  $renderedPuzzle
-      |</svg>""".stripMargin
+    // Handle oddeven mode by rendering two separate grids
+    if (showPartialSolution && partialMode == "oddeven") {
+      val oddWordNumbers = annotation.values.flatten.map(_.index).filter(_ % 2 == 1).toSet
+      val evenWordNumbers = annotation.values.flatten.map(_.index).filter(_ % 2 == 0).toSet
+
+      def renderGrid(wordNumbers: Set[Int]): String = {
+        val gridVisiblePoints = collectAllPointsFromWords(puzzle, annotation, wordNumbers)
+
+        def renderCellWithVisibility(x: Int, y: Int): String =
+          puzzle.getChar(x, y) match {
+            case ' ' => ""
+            case char =>
+              val showLetter = gridVisiblePoints.contains(Point(x, y))
+              val displayChar = if (letterCase == "lowercase") char.toString.toLowerCase else char.toString.toUpperCase
+              val yPos = if (letterCase == "lowercase") y * 10 + 5.5 else y * 10 + 6
+              val svgLetter = Option.when(showLetter) {
+                s"""<text x="${x * 10 + 5}" y="$yPos" text-anchor="middle" dominant-baseline="middle" class="letter">$displayChar</text>"""
+              }
+
+              val svgAnnotation = annotation.get(Point(x, y)) match {
+                case Some(anno) if anno.nonEmpty =>
+                  val horizontalAnnotations = anno.filter(!_.vertical)
+                  val verticalAnnotations = anno.filter(_.vertical)
+
+                  val horizontalText = if (horizontalAnnotations.nonEmpty) {
+                    val indices = horizontalAnnotations.map(_.index).mkString(",")
+                    s"""<text x="${x * 10 - 1.5}" y="${y * 10 + 5}" text-anchor="end" dominant-baseline="middle" class="annotation-horizontal">$indices</text>"""
+                  } else ""
+
+                  val verticalText = if (verticalAnnotations.nonEmpty) {
+                    val indices = verticalAnnotations.map(_.index).mkString(",")
+                    s"""<text x="${x * 10 + 5}" y="${y * 10 - 3}" text-anchor="middle" dominant-baseline="middle" class="annotation-vertical">$indices</text>"""
+                  } else ""
+
+                  Some(horizontalText + verticalText)
+                case _ => None
+              }
+
+              val svgCell = s"""<rect x="${x * 10}" y="${y * 10}" rx="0.5" ry="0.5" width="10" height="10"
+                |  style="fill:white;stroke:black;stroke-width:0.3" />""".stripMargin
+
+              svgCell + svgAnnotation.mkString + svgLetter.mkString
+          }
+
+        def renderHeightWithVisibility(y: Int): String =
+          (0 until puzzle.config.width).map(renderCellWithVisibility(_, y)).mkString("\r\n")
+
+        val gridRendered = (0 until puzzle.config.height).map(renderHeightWithVisibility).mkString("\r\n")
+
+        s"""<svg viewBox="-8 -8 ${puzzle.config.width * 10 + 15} ${puzzle.config.height * 10 + 15}">
+          |  <style>
+          |    .annotation-horizontal {
+          |      font: 5px sans-serif;
+          |      fill: ${numberColor};
+          |    }
+          |    .annotation-vertical {
+          |      font: 5px sans-serif;
+          |      fill: ${numberColor};
+          |    }
+          |    .letter {
+          |      font: 8px sans-serif;
+          |      fill: black;
+          |    }
+          |  </style>
+          |  $gridRendered
+          |</svg>""".stripMargin
+      }
+
+      // Render odd grid first, then even grid
+      s"""<div>
+         |  <div class="d-flex align-items-center mb-3">
+         |    <h3 style="font-size: ${titleSize}px; margin: 0;">${gridName1}</h3>
+         |    ${if (gridInstruction1.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px;">${gridInstruction1}</p>""" else ""}
+         |  </div>
+         |  ${renderGrid(oddWordNumbers)}
+         |  <div class="d-flex align-items-center mb-3 mt-4">
+         |    <h3 style="font-size: ${titleSize}px; margin: 0;">${gridName2}</h3>
+         |    ${if (gridInstruction2.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px;">${gridInstruction2}</p>""" else ""}
+         |  </div>
+         |  ${renderGrid(evenWordNumbers)}
+         |</div>""".stripMargin
+    } else {
+      s"""<svg viewBox="-8 -8 ${puzzle.config.width * 10 + 15} ${puzzle.config.height * 10 + 15}">
+        |  <style>
+        |    .annotation-horizontal {
+        |      font: 5px sans-serif;
+        |      fill: ${numberColor};
+        |    }
+        |    .annotation-vertical {
+        |      font: 5px sans-serif;
+        |      fill: ${numberColor};
+        |    }
+        |    .letter {
+        |      font: 8px sans-serif;
+        |      fill: black;
+        |    }
+        |  </style>
+        |  $renderedPuzzle
+        |</svg>""".stripMargin
+    }
 
 
   val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

@@ -116,6 +116,9 @@ VUELVAN
                         <input type="radio" class="btn-check" name="partial-mode" id="partial-even" autocomplete="off">
                         <label class="btn btn-outline-danger" for="partial-even">Even</label>
 
+                        <input type="radio" class="btn-check" name="partial-mode" id="partial-oddeven" autocomplete="off">
+                        <label class="btn btn-outline-danger" for="partial-oddeven">Odd & Even</label>
+
                         <input type="radio" class="btn-check" name="partial-mode" id="partial-custom" autocomplete="off">
                         <label class="btn btn-outline-danger" for="partial-custom">Custom</label>
                     </div>
@@ -123,6 +126,26 @@ VUELVAN
                     <div class="mb-3" id="custom-input-container" style="display: none;">
                         <label for="custom-word-numbers" class="form-label">Word Numbers (e.g., 1, 5, 12):</label>
                         <input type="text" class="form-control" id="custom-word-numbers" placeholder="1, 5, 12">
+                    </div>
+                    
+                    <div class="mb-3" id="oddeven-options-container" style="display: none;">
+                        <label class="form-label">Grid Names:</label>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" id="grid-name-1" placeholder="A" value="A">
+                            <input type="text" class="form-control" id="grid-name-2" placeholder="B" value="B">
+                        </div>
+
+                        <label for="title-size" class="form-label">Title Size (px):</label>
+                        <input type="number" class="form-control mb-2" id="title-size" value="24" min="12" max="72">
+
+                        <label class="form-label">Instructions:</label>
+                        <div class="mb-2">
+                            <textarea class="form-control mb-2" id="grid-instruction-1" rows="3" placeholder="Instruction for first grid" style="resize: vertical;"></textarea>
+                            <textarea class="form-control" id="grid-instruction-2" rows="3" placeholder="Instruction for second grid" style="resize: vertical;"></textarea>
+                        </div>
+
+                        <label for="instruction-font-size" class="form-label">Instruction Font Size (px):</label>
+                        <input type="number" class="form-control" id="instruction-font-size" value="16" min="10" max="32">
                     </div>
                     
                     <div class="btn-group mb-3" role="group" aria-label="Number color selection">
