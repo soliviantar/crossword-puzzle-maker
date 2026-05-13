@@ -1,6 +1,19 @@
 [![Scala CI](https://github.com/papauschek/crossword-puzzle-maker/actions/workflows/scala.yml/badge.svg)](https://github.com/papauschek/crossword-puzzle-maker/actions/workflows/scala.yml)
 
-# Chris' Crossword Puzzle Maker
+Modified version of Chris' Crossword Puzzle Maker
+
+## Added
+* Partial solution modes (odd, even and custom words)
+* Different shades for numbers
+* Numbers moved outside the boxes
+* Option to choose between CAPS and lowercase
+
+## Try the modified version here:
+**https://soliviantar.github.io/crossword-puzzle-maker**
+
+## Original README below
+
+## Chris' Crossword Puzzle Maker
 
 A crossword puzzle generator that creates dense puzzles, written in Scala.js.
 
