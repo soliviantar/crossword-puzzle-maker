@@ -28,50 +28,36 @@
                     A minimum of 20 words is recommended, the more, the better!
                 </label>
                 <textarea class="form-control" id="input" rows="10">
-Artichoke
-Asparagus
-Aubergene
-Avocado
-Beet
-Bok Choy
-Broccoli
-Broccolini
-Raab
-Brussels
-Sprouts
-Cabbage
-Carrots
-Celeriac
-Celery
-Chard
-Chicory
-Corn Cress
-Cucumbers
-Daikon
-Garlic
-Gourds
-Jicama
-Kale
-Kohlrabi
-Lettuce
-Endive
-Beans
-Mushrooms
-Onions
-Parsnips
-Peas
-Peppers
-Potatoes
-Pumpkin
-Radicchio
-Radish
-Rhubarb
-Spinach
-Squash
-Tomatillo
-Tomatoes
-Turnips
-Zucchini
+CONSIGUIERAS
+CONTENDRÁ
+DETENGAMOS
+DIERA
+DIGAS
+DIJESEN
+DIRÁ
+DURMIERA
+EMPEZÁRAMOS
+ENCONTRARAS
+ENCONTRARÁS
+ESPERARÍAIS
+ESTUVIESEIS
+HABRÍAN
+HUBIERA
+LEAN
+PENSAREMOS
+PIENSE
+PONDRÉ
+PREGUNTES
+PUSIÉRAMOS
+QUERRÍAMOS
+REHARÍA
+SEÁIS
+SINTÁIS
+TENGA
+TRADUZCAN
+VENDRÍAS
+VINIERA
+VUELVAN
                 </textarea>
             </div>
         </div>
@@ -80,9 +66,9 @@ Zucchini
             <h2><i class="bi bi-2-circle"></i> Choose Size</h2>
             <label for="width" class="form-label">Specify width and height (maximum = 30x30):</label>
             <div class="input-group mb-3">
-                <input id="width" type="number" class="form-control" aria-label="Width" value="12">
+                <input id="width" type="number" class="form-control" aria-label="Width" value="30">
                 <span class="input-group-text">x</span>
-                <input id="height" type="number" class="form-control" aria-label="Height" value="12">
+                <input id="height" type="number" class="form-control" aria-label="Height" value="20">
             </div>
 
             <button type="button" class="btn btn-primary" id="generate-button">Generate Puzzle</button>
@@ -118,6 +104,44 @@ Zucchini
 
                         <input type="radio" class="btn-check" name="btnradio" id="result-full" autocomplete="off">
                         <label class="btn btn-outline-primary" for="result-full">Full Solution</label>
+                    </div>
+                    
+                    <div class="btn-group mb-3" role="group" aria-label="Partial solution options" id="partial-submenu">
+                        <input type="radio" class="btn-check" name="partial-mode" id="partial-random" autocomplete="off" checked>
+                        <label class="btn btn-outline-danger" for="partial-random">Random</label>
+
+                        <input type="radio" class="btn-check" name="partial-mode" id="partial-odd" autocomplete="off">
+                        <label class="btn btn-outline-danger" for="partial-odd">Odd</label>
+
+                        <input type="radio" class="btn-check" name="partial-mode" id="partial-even" autocomplete="off">
+                        <label class="btn btn-outline-danger" for="partial-even">Even</label>
+
+                        <input type="radio" class="btn-check" name="partial-mode" id="partial-custom" autocomplete="off">
+                        <label class="btn btn-outline-danger" for="partial-custom">Custom</label>
+                    </div>
+                    
+                    <div class="mb-3" id="custom-input-container" style="display: none;">
+                        <label for="custom-word-numbers" class="form-label">Word Numbers (e.g., 1, 5, 12):</label>
+                        <input type="text" class="form-control" id="custom-word-numbers" placeholder="1, 5, 12">
+                    </div>
+                    
+                    <div class="btn-group mb-3" role="group" aria-label="Number color selection">
+                        <input type="radio" class="btn-check" name="number-color" id="number-light-gray" autocomplete="off" checked>
+                        <label class="btn btn-outline-secondary" for="number-light-gray">Light Gray</label>
+
+                        <input type="radio" class="btn-check" name="number-color" id="number-dark-gray" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="number-dark-gray">Dark Gray</label>
+
+                        <input type="radio" class="btn-check" name="number-color" id="number-black" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="number-black">Black</label>
+                    </div>
+                    
+                    <div class="btn-group mb-3" role="group" aria-label="Letter case selection">
+                        <input type="radio" class="btn-check" name="letter-case" id="letter-uppercase" autocomplete="off" checked>
+                        <label class="btn btn-outline-info" for="letter-uppercase">CAPS</label>
+
+                        <input type="radio" class="btn-check" name="letter-case" id="letter-lowercase" autocomplete="off">
+                        <label class="btn btn-outline-info" for="letter-lowercase">lowercase</label>
                     </div>
                 </div>
                 <div class="col-lg-6" style="text-align: right">

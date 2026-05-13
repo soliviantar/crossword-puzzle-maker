@@ -29,6 +29,22 @@ class MainPage:
   private val resultPartialElement = dom.document.getElementById("result-partial").asInstanceOf[Input]
   private val resultFullElement = dom.document.getElementById("result-full").asInstanceOf[Input]
 
+  private val partialSubmenu = dom.document.getElementById("partial-submenu").asInstanceOf[org.scalajs.dom.html.Element]
+  private val partialRandomElement = dom.document.getElementById("partial-random").asInstanceOf[Input]
+  private val partialOddElement = dom.document.getElementById("partial-odd").asInstanceOf[Input]
+  private val partialEvenElement = dom.document.getElementById("partial-even").asInstanceOf[Input]
+  private val partialCustomElement = dom.document.getElementById("partial-custom").asInstanceOf[Input]
+  
+  private val customInputContainer = dom.document.getElementById("custom-input-container").asInstanceOf[org.scalajs.dom.html.Element]
+  private val customWordNumbersElement = dom.document.getElementById("custom-word-numbers").asInstanceOf[Input]
+
+  private val numberLightGrayElement = dom.document.getElementById("number-light-gray").asInstanceOf[Input]
+  private val numberDarkGrayElement = dom.document.getElementById("number-dark-gray").asInstanceOf[Input]
+  private val numberBlackElement = dom.document.getElementById("number-black").asInstanceOf[Input]
+
+  private val letterUppercaseElement = dom.document.getElementById("letter-uppercase").asInstanceOf[Input]
+  private val letterLowercaseElement = dom.document.getElementById("letter-lowercase").asInstanceOf[Input]
+
   private val widthInputElement = dom.document.getElementById("width").asInstanceOf[Input]
   private val heightInputElement = dom.document.getElementById("height").asInstanceOf[Input]
 
@@ -44,9 +60,47 @@ class MainPage:
   refineButton.addEventListener("click", { _ => refineSolution() })
   printButton.addEventListener("click", { _ => printSolution() })
 
-  resultWithoutElement.addEventListener("click", { _ => renderSolution() })
-  resultPartialElement.addEventListener("click", { _ => renderSolution() })
-  resultFullElement.addEventListener("click", { _ => renderSolution() })
+  resultWithoutElement.addEventListener("click", { _ => 
+    hidePartialSubmenu()
+    renderSolution()
+  })
+  resultPartialElement.addEventListener("click", { _ => 
+    showPartialSubmenu()
+    renderSolution()
+  })
+  resultFullElement.addEventListener("click", { _ => 
+    hidePartialSubmenu()
+    renderSolution()
+  })
+
+  partialRandomElement.addEventListener("click", { _ => 
+    hideCustomInput()
+    renderSolution()
+  })
+  partialOddElement.addEventListener("click", { _ => 
+    hideCustomInput()
+    renderSolution()
+  })
+  partialEvenElement.addEventListener("click", { _ => 
+    hideCustomInput()
+    renderSolution()
+  })
+  partialCustomElement.addEventListener("click", { _ => 
+    showCustomInput()
+    renderSolution()
+  })
+  
+  customWordNumbersElement.addEventListener("input", { _ => renderSolution() })
+
+  // Initialize partial submenu visibility
+  showPartialSubmenu()
+
+  numberLightGrayElement.addEventListener("click", { _ => renderSolution() })
+  numberDarkGrayElement.addEventListener("click", { _ => renderSolution() })
+  numberBlackElement.addEventListener("click", { _ => renderSolution() })
+
+  letterUppercaseElement.addEventListener("click", { _ => renderSolution() })
+  letterLowercaseElement.addEventListener("click", { _ => renderSolution() })
 
   /** read the words from the user interface and generate the puzzle in the background using web workers */
   def generateSolution(): Unit =
@@ -75,15 +129,53 @@ class MainPage:
     }
 
 
+  /** show partial solution submenu */
+  def showPartialSubmenu(): Unit =
+    partialSubmenu.style.display = "flex"
+
+  /** hide partial solution submenu */
+  def hidePartialSubmenu(): Unit =
+    partialSubmenu.style.display = "none"
+
+  /** show custom input field */
+  def showCustomInput(): Unit =
+    customInputContainer.style.display = "block"
+
+  /** hide custom input field */
+  def hideCustomInput(): Unit =
+    customInputContainer.style.display = "none"
+
   /** show the generated puzzle */
   def renderSolution(): Unit =
     val showPartialSolution = resultPartialElement.checked
     val showFullSolution = resultFullElement.checked
+    
+    val partialMode = 
+      if (partialRandomElement.checked) "random"
+      else if (partialOddElement.checked) "odd"
+      else if (partialEvenElement.checked) "even"
+      else if (partialCustomElement.checked) "custom"
+      else "random"
+    
+    val customWordNumbers = customWordNumbersElement.value
+    
+    val numberColor = 
+      if (numberLightGrayElement.checked) "#999999"
+      else if (numberDarkGrayElement.checked) "#666666"
+      else "#000000" // black
+
+    val letterCase = 
+      if (letterUppercaseElement.checked) "uppercase"
+      else "lowercase"
 
     outputPuzzleElement.innerHTML = HtmlRenderer.renderPuzzle(
       refinedPuzzle,
       showSolution = showFullSolution,
-      showPartialSolution = showPartialSolution)
+      showPartialSolution = showPartialSolution,
+      partialMode = partialMode,
+      customWordNumbers = customWordNumbers,
+      numberColor = numberColor,
+      letterCase = letterCase)
 
     val unusedWords = mainInputWords.filterNot(refinedPuzzle.words.contains)
     val extraWords = refinedPuzzle.words -- initialPuzzle.words
