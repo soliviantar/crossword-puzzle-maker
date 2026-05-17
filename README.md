@@ -7,6 +7,11 @@ Modified version of Chris' Crossword Puzzle Maker
 * Different shades for numbers
 * Numbers moved outside the boxes
 * Option to choose between CAPS and lowercase
+* Optional titles and instructions for grids
+* Refresh button
+* Option to add clues in step 1 using :
+* Option to select what is printed in solution & clues sheet
+* Words can have spaces which resolve into empty boxes
 
 ## Try the modified version here:
 **https://soliviantar.github.io/crossword-puzzle-maker**
