@@ -36,7 +36,8 @@ case class Puzzle(chars: Array[Char],
     (0 until chars.length).foreach {
       index =>
         val char = chars(index)
-        if (char != ' ') {
+        // phrase-space cells and truly empty cells are not connection points
+        if (char != ' ' && char != Puzzle.PHRASE_SPACE) {
           val x = index % config.width
           val y = index / config.width
           if (isEmpty(x + 1, y) && isEmpty(x - 1, y) &&
@@ -60,9 +61,15 @@ case class Puzzle(chars: Array[Char],
     val newChars = new Array[Char](chars.length)
     Array.copy(chars, 0, newChars, 0, chars.length)
     if (vertical) {
-      (0 until word.length).foreach { index => newChars(toIndex(x, y + index)) = word(index) }
+      (0 until word.length).foreach { index =>
+        val ch = word(index)
+        newChars(toIndex(x, y + index)) = if (ch == ' ') Puzzle.PHRASE_SPACE else ch
+      }
     } else {
-      (0 until word.length).foreach { index => newChars(toIndex(x + index, y)) = word(index) }
+      (0 until word.length).foreach { index =>
+        val ch = word(index)
+        newChars(toIndex(x + index, y)) = if (ch == ' ') Puzzle.PHRASE_SPACE else ch
+      }
     }
     copy(chars = newChars, words = words + word)
 
@@ -75,11 +82,14 @@ case class Puzzle(chars: Array[Char],
     if (y < 0 || y >= config.height || ((x < 0 || x >= config.width) && !config.wrapping)) ' '
     else chars((x + config.width) % config.width + y * config.width) // handles x >= config.width for wrapping puzzle
 
-  /** @return true if the given location in the puzzle is empty (= space character) */
+  /** @return true if the given location in the puzzle is empty (= space character, NOT phrase space) */
   private def isEmpty(x: Int, y: Int): Boolean = getChar(x, y) == ' '
 
-  /** @return true if the given location in the puzzle is filled with a character */
+  /** @return true if the given location in the puzzle is filled with a character (letter or phrase space) */
   private def hasChar(x: Int, y: Int): Boolean = getChar(x, y) != ' '
+
+  /** @return true if the given location holds a phrase-internal blank cell */
+  private def isPhraseSpace(x: Int, y: Int): Boolean = getChar(x, y) == Puzzle.PHRASE_SPACE
 
   /** tries to add the given word to the puzzle
    * @return array representing all possible variations of adding the word to the puzzle */
@@ -107,17 +117,27 @@ case class Puzzle(chars: Array[Char],
       index =>
         val (locX, locY) = if (vertical) (x, y + index) else (x + index, y)
         val existingChar = getChar(locX, locY)
+        val wordChar = word(index)
 
-        val same = existingChar == word(index)
-        val isEmpty = existingChar == ' '
-        if (same) connect = true
-
-        (same || isEmpty) && // field is empty or char already there
-          (!isEmpty || {
-            // check adjacent fields for added chars
+        if (wordChar == ' ') {
+          // Phrase-internal space: the grid cell must be truly empty
+          existingChar == ' ' && {
+            // phrase space cells obey the same perpendicular adjacency rules
             if (vertical) (!hasChar(locX - 1, locY) && !hasChar(locX + 1, locY))
             else (!hasChar(locX, locY - 1) && !hasChar(locX, locY + 1))
-          })
+          }
+        } else {
+          val same = existingChar == wordChar
+          val cellEmpty = existingChar == ' '
+          if (same) connect = true
+
+          (same || cellEmpty) && // field is empty or char already there
+            (!cellEmpty || {
+              // check adjacent fields for added chars
+              if (vertical) (!hasChar(locX - 1, locY) && !hasChar(locX + 1, locY))
+              else (!hasChar(locX, locY - 1) && !hasChar(locX, locY + 1))
+            })
+        }
     } && connect && {
       // test ends of word
       if (vertical) (!hasChar(x, y - 1) && !hasChar(x, y + word.length))
@@ -139,22 +159,19 @@ case class Puzzle(chars: Array[Char],
    *  with a vertical word at (wx-1, wy+1), and vice-versa. */
   private def hasAnnotationOverlap(word: String, vertical: Boolean, x: Int, y: Int): Boolean =
     if (vertical) {
-      // New word is VERTICAL starting at (x, y).
-      // Conflict: a horizontal word already starts at (x+1, y-1).
-      // A horizontal word start at (hx, hy) means: hasChar(hx,hy) && isEmpty(hx-1,hy)
       val hx = x + 1
       val hy = y - 1
       hx < config.width && hy >= 0 &&
-        hasChar(hx, hy) && isEmpty(hx - 1, hy) &&
-        isEmpty(hx, hy - 1) // extra guard: (hx,hy) is indeed a word-start, not mid-word
+        hasChar(hx, hy) && !isPhraseSpace(hx, hy) &&
+        isEmpty(hx - 1, hy) &&
+        isEmpty(hx, hy - 1)
     } else {
-      // New word is HORIZONTAL starting at (x, y).
-      // Conflict: a vertical word already starts at (x-1, y+1).
       val vx = x - 1
       val vy = y + 1
       vx >= 0 && vy < config.height &&
-        hasChar(vx, vy) && isEmpty(vx, vy - 1) &&
-        isEmpty(vx - 1, vy) // extra guard: (vx,vy) is indeed a word-start, not mid-word
+        hasChar(vx, vy) && !isPhraseSpace(vx, vy) &&
+        isEmpty(vx, vy - 1) &&
+        isEmpty(vx - 1, vy)
     }
 
   /** @return a simple text representation of the crossword puzzle, for debugging */
@@ -197,10 +214,12 @@ case class Puzzle(chars: Array[Char],
     val isStart = if (vertical) isEmpty(x, y - 1) else isEmpty(x - 1, y)
     if (!isStart) return false
 
-    // Check if all characters match
+    // Check if all characters match (spaces in word match PHRASE_SPACE in grid)
     val allMatch = (0 until word.length).forall { index =>
       val (locX, locY) = if (vertical) (x, y + index) else (x + index, y)
-      getChar(locX, locY) == word(index)
+      val gridChar = getChar(locX, locY)
+      val wordChar = word(index)
+      if (wordChar == ' ') gridChar == Puzzle.PHRASE_SPACE else gridChar == wordChar
     }
     if (!allMatch) return false
 
@@ -215,7 +234,8 @@ case class Puzzle(chars: Array[Char],
     val points = for {
       x <- 0 until config.width
       y <- 0 until config.height
-      nonEmpty = !isEmpty(x, y)
+      // phrase-space cells are never word starts
+      nonEmpty = !isEmpty(x, y) && !isPhraseSpace(x, y)
       vertical = isEmpty(x, y - 1)
       horizontal = isEmpty(x - 1, y)
         if nonEmpty && (vertical || horizontal)
@@ -237,12 +257,11 @@ case class Puzzle(chars: Array[Char],
 
   /** @return reconstruct the word at the given point, assuming the given orientation */
   private def getWord(point: Point, vertical: Boolean): String =
-    (for {
-      c <- 0 until config.height.max(config.width)
-    } yield {
-      if (vertical) getChar(point.x, point.y + c)
-      else getChar(point.x + c, point.y)
-    }).takeWhile(!_.isWhitespace).mkString
+    (0 until config.height.max(config.width))
+      .map(c => if (vertical) getChar(point.x, point.y + c) else getChar(point.x + c, point.y))
+      .takeWhile(_ != ' ')             // stop at truly empty cells
+      .map(ch => if (ch == Puzzle.PHRASE_SPACE) ' ' else ch)  // convert sentinel back to space
+      .mkString
 
 
   /** @return the set of locations in the puzzle that should be revealed in the partial solution in the UI
@@ -253,7 +272,8 @@ case class Puzzle(chars: Array[Char],
     var resultSet = Set.empty[Point]
     for {
       x <- 0 until config.width
-      y <- 0 until config.height if hasChar(x, y)
+      // phrase-space cells have no letter to reveal
+      y <- 0 until config.height if hasChar(x, y) && !isPhraseSpace(x, y)
     } yield {
       val point = Point(x, y)
       // randomly select `solvedFraction` random fraction of points, but no direct neighbors
@@ -271,6 +291,10 @@ case class Puzzle(chars: Array[Char],
 
 
 object Puzzle:
+
+  /** sentinel character stored in the chars array for phrase-internal blank cells (e.g. the space in "HE VISTO").
+   *  Distinct from ' ' which means a truly empty / black cell. */
+  val PHRASE_SPACE: Char = '~'
 
   /** macro for JSON serialization */
   implicit val rw: ReadWriter[Puzzle] = macroRW

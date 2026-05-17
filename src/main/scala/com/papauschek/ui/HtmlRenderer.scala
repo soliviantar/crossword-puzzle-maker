@@ -94,7 +94,10 @@ object HtmlRenderer:
 
     def renderCell(x: Int, y: Int): String =
       puzzle.getChar(x, y) match {
-        case ' ' => ""
+        case ' ' => ""  // empty / black cell – not rendered
+        case '~' =>     // phrase-internal blank cell – white box, no letter
+          s"""<rect x="${x * 10}" y="${y * 10}" rx="0.5" ry="0.5" width="10" height="10"
+             |  style="fill:white;stroke:black;stroke-width:0.3" />""".stripMargin
         case char =>
           // Show letter if in full solution OR if cell is in visible points
           val showLetter = showSolution || {
@@ -149,6 +152,9 @@ object HtmlRenderer:
         def renderCellWithVisibility(x: Int, y: Int): String =
           puzzle.getChar(x, y) match {
             case ' ' => ""
+            case '~' =>
+              s"""<rect x="${x * 10}" y="${y * 10}" rx="0.5" ry="0.5" width="10" height="10"
+                 |  style="fill:white;stroke:black;stroke-width:0.3" />""".stripMargin
             case char =>
               val showLetter = gridVisiblePoints.contains(Point(x, y))
               val displayChar = if (letterCase == "lowercase") char.toString.toLowerCase else char.toString.toUpperCase

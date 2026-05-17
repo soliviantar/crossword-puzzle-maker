@@ -1339,13 +1339,18 @@ function $p_Lcom_papauschek_ui_HtmlRenderer$__renderCell$1__Lcom_papauschek_puzz
   if ((x8 === 32)) {
     return ""
   };
+  if ((x8 === 126)) {
+    $m_sc_StringOps$();
+    var x$1 = (((("<rect x=\"" + Math.imul(10, x)) + "\" y=\"") + Math.imul(10, y)) + "\" rx=\"0.5\" ry=\"0.5\" width=\"10\" height=\"10\"\r\n             |  style=\"fill:white;stroke:black;stroke-width:0.3\" />");
+    return $m_sc_StringOps$().stripMargin$extension__T__C__T(x$1, 124)
+  };
   var showLetter = (showSolution$1 || (showPartialSolution$1 && $n(visiblePoints$1).contains__O__Z(new $c_Lcom_papauschek_puzzle_Point($m_Lcom_papauschek_puzzle_Point$().apply__I__I__I(x, y)))));
   if ((letterCase$1 === "lowercase")) {
-    var this$2 = $n($as_T(String.fromCharCode(x8)));
-    var displayChar = $as_T(this$2.toLowerCase())
-  } else {
     var this$4 = $n($as_T(String.fromCharCode(x8)));
-    var displayChar = $as_T(this$4.toUpperCase())
+    var displayChar = $as_T(this$4.toLowerCase())
+  } else {
+    var this$6 = $n($as_T(String.fromCharCode(x8)));
+    var displayChar = $as_T(this$6.toUpperCase())
   };
   var yPos = ((letterCase$1 === "lowercase") ? (Math.imul(10, y) + 5.5) : ((6 + Math.imul(10, y)) | 0));
   var svgLetter = (showLetter ? new $c_s_Some((((((("<text x=\"" + ((5 + Math.imul(10, x)) | 0)) + "\" y=\"") + yPos) + "\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"letter\">") + displayChar) + "</text>")) : $m_s_None$());
@@ -1354,13 +1359,13 @@ function $p_Lcom_papauschek_ui_HtmlRenderer$__renderCell$1__Lcom_papauschek_puzz
     var x5 = $n(annotation$1).get__O__s_Option(new $c_Lcom_papauschek_puzzle_Point($m_Lcom_papauschek_puzzle_Point$().apply__I__I__I(x, y)));
     if ((x5 instanceof $c_s_Some)) {
       var anno = $as_sci_Seq($n($as_s_Some(x5)).s_Some__f_value);
-      var this$6 = $n(anno);
-      if ((!this$6.isEmpty__Z())) {
-        var this$7 = $n($as_sc_IterableOnceOps($n(anno).map__F1__O(new $c_sjsr_AnonFunction1(((_$7) => {
+      var this$8 = $n(anno);
+      if ((!this$8.isEmpty__Z())) {
+        var this$9 = $n($as_sc_IterableOnceOps($n(anno).map__F1__O(new $c_sjsr_AnonFunction1(((_$7) => {
           var _$7$1 = $as_Lcom_papauschek_puzzle_AnnotatedPoint(_$7);
           return $n(_$7$1).Lcom_papauschek_puzzle_AnnotatedPoint__f_index
         })))));
-        $f_sc_IterableOnceOps__mkString__T__T__T__T(this$7, "", ",", "");
+        $f_sc_IterableOnceOps__mkString__T__T__T__T(this$9, "", ",", "");
         var horizontalAnnotations = $as_sci_Seq($n(anno).filter__F1__O(new $c_sjsr_AnonFunction1(((_$8) => {
           var _$8$1 = $as_Lcom_papauschek_puzzle_AnnotatedPoint(_$8);
           return (!$n(_$8$1).Lcom_papauschek_puzzle_AnnotatedPoint__f_vertical)
@@ -1369,24 +1374,24 @@ function $p_Lcom_papauschek_ui_HtmlRenderer$__renderCell$1__Lcom_papauschek_puzz
           var _$9$1 = $as_Lcom_papauschek_puzzle_AnnotatedPoint(_$9);
           return $n(_$9$1).Lcom_papauschek_puzzle_AnnotatedPoint__f_vertical
         }))));
-        var this$8 = $n(horizontalAnnotations);
-        if ((!this$8.isEmpty__Z())) {
-          var this$9 = $n($as_sc_IterableOnceOps($n(horizontalAnnotations).map__F1__O(new $c_sjsr_AnonFunction1(((_$10) => {
+        var this$10 = $n(horizontalAnnotations);
+        if ((!this$10.isEmpty__Z())) {
+          var this$11 = $n($as_sc_IterableOnceOps($n(horizontalAnnotations).map__F1__O(new $c_sjsr_AnonFunction1(((_$10) => {
             var _$10$1 = $as_Lcom_papauschek_puzzle_AnnotatedPoint(_$10);
             return $n(_$10$1).Lcom_papauschek_puzzle_AnnotatedPoint__f_index
           })))));
-          var indices = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$9, "", ",", "");
+          var indices = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$11, "", ",", "");
           var horizontalText = (((((("<text x=\"" + (Math.imul(10, x) - 1.5)) + "\" y=\"") + ((5 + Math.imul(10, y)) | 0)) + "\" text-anchor=\"end\" dominant-baseline=\"middle\" class=\"annotation-horizontal\">") + indices) + "</text>")
         } else {
           var horizontalText = ""
         };
-        var this$10 = $n(verticalAnnotations);
-        if ((!this$10.isEmpty__Z())) {
-          var this$11 = $n($as_sc_IterableOnceOps($n(verticalAnnotations).map__F1__O(new $c_sjsr_AnonFunction1(((_$11) => {
+        var this$12 = $n(verticalAnnotations);
+        if ((!this$12.isEmpty__Z())) {
+          var this$13 = $n($as_sc_IterableOnceOps($n(verticalAnnotations).map__F1__O(new $c_sjsr_AnonFunction1(((_$11) => {
             var _$11$1 = $as_Lcom_papauschek_puzzle_AnnotatedPoint(_$11);
             return $n(_$11$1).Lcom_papauschek_puzzle_AnnotatedPoint__f_index
           })))));
-          var indices$2 = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$11, "", ",", "");
+          var indices$2 = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$13, "", ",", "");
           var verticalText = (((((("<text x=\"" + ((5 + Math.imul(10, x)) | 0)) + "\" y=\"") + (((-3) + Math.imul(10, y)) | 0)) + "\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"annotation-vertical\">") + indices$2) + "</text>")
         } else {
           var verticalText = ""
@@ -1399,12 +1404,12 @@ function $p_Lcom_papauschek_ui_HtmlRenderer$__renderCell$1__Lcom_papauschek_puzz
     var svgAnnotation = $m_s_None$()
   };
   $m_sc_StringOps$();
-  var x$1 = (((("<rect x=\"" + Math.imul(10, x)) + "\" y=\"") + Math.imul(10, y)) + "\" rx=\"0.5\" ry=\"0.5\" width=\"10\" height=\"10\"\r\n            |  style=\"fill:white;stroke:black;stroke-width:0.3\" />");
-  var svgCell = $m_sc_StringOps$().stripMargin$extension__T__C__T(x$1, 124);
-  var this$15 = $n($m_s_Option$().option2Iterable__s_Option__sc_Iterable(svgAnnotation));
-  var $x_1 = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$15, "", "", "");
-  var this$16 = $n($m_s_Option$().option2Iterable__s_Option__sc_Iterable(svgLetter));
-  return ((("" + svgCell) + $x_1) + $f_sc_IterableOnceOps__mkString__T__T__T__T(this$16, "", "", ""))
+  var x$2 = (((("<rect x=\"" + Math.imul(10, x)) + "\" y=\"") + Math.imul(10, y)) + "\" rx=\"0.5\" ry=\"0.5\" width=\"10\" height=\"10\"\r\n            |  style=\"fill:white;stroke:black;stroke-width:0.3\" />");
+  var svgCell = $m_sc_StringOps$().stripMargin$extension__T__C__T(x$2, 124);
+  var this$17 = $n($m_s_Option$().option2Iterable__s_Option__sc_Iterable(svgAnnotation));
+  var $x_1 = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$17, "", "", "");
+  var this$18 = $n($m_s_Option$().option2Iterable__s_Option__sc_Iterable(svgLetter));
+  return ((("" + svgCell) + $x_1) + $f_sc_IterableOnceOps__mkString__T__T__T__T(this$18, "", "", ""))
 }
 function $p_Lcom_papauschek_ui_HtmlRenderer$__renderHeight$1__Lcom_papauschek_puzzle_Puzzle__Z__Z__sci_Set__T__sci_Map__I__T($thiz, puzzle$2, showSolution$2, showPartialSolution$2, visiblePoints$2, letterCase$2, annotation$2, y) {
   var end = $n($n(puzzle$2).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width;
@@ -1435,13 +1440,18 @@ function $p_Lcom_papauschek_ui_HtmlRenderer$__renderCellWithVisibility$1__Lcom_p
   if ((x12 === 32)) {
     return ""
   };
+  if ((x12 === 126)) {
+    $m_sc_StringOps$();
+    var x$1 = (((("<rect x=\"" + Math.imul(10, x)) + "\" y=\"") + Math.imul(10, y)) + "\" rx=\"0.5\" ry=\"0.5\" width=\"10\" height=\"10\"\r\n                 |  style=\"fill:white;stroke:black;stroke-width:0.3\" />");
+    return $m_sc_StringOps$().stripMargin$extension__T__C__T(x$1, 124)
+  };
   var showLetter = $n(gridVisiblePoints$1).contains__O__Z(new $c_Lcom_papauschek_puzzle_Point($m_Lcom_papauschek_puzzle_Point$().apply__I__I__I(x, y)));
   if ((letterCase$5 === "lowercase")) {
-    var this$2 = $n($as_T(String.fromCharCode(x12)));
-    var displayChar = $as_T(this$2.toLowerCase())
-  } else {
     var this$4 = $n($as_T(String.fromCharCode(x12)));
-    var displayChar = $as_T(this$4.toUpperCase())
+    var displayChar = $as_T(this$4.toLowerCase())
+  } else {
+    var this$6 = $n($as_T(String.fromCharCode(x12)));
+    var displayChar = $as_T(this$6.toUpperCase())
   };
   var yPos = ((letterCase$5 === "lowercase") ? (Math.imul(10, y) + 5.5) : ((6 + Math.imul(10, y)) | 0));
   var svgLetter = (showLetter ? new $c_s_Some((((((("<text x=\"" + ((5 + Math.imul(10, x)) | 0)) + "\" y=\"") + yPos) + "\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"letter\">") + displayChar) + "</text>")) : $m_s_None$());
@@ -1450,8 +1460,8 @@ function $p_Lcom_papauschek_ui_HtmlRenderer$__renderCellWithVisibility$1__Lcom_p
     var x9 = $n(annotation$5).get__O__s_Option(new $c_Lcom_papauschek_puzzle_Point($m_Lcom_papauschek_puzzle_Point$().apply__I__I__I(x, y)));
     if ((x9 instanceof $c_s_Some)) {
       var anno = $as_sci_Seq($n($as_s_Some(x9)).s_Some__f_value);
-      var this$6 = $n(anno);
-      if ((!this$6.isEmpty__Z())) {
+      var this$8 = $n(anno);
+      if ((!this$8.isEmpty__Z())) {
         var horizontalAnnotations = $as_sci_Seq($n(anno).filter__F1__O(new $c_sjsr_AnonFunction1(((_$17) => {
           var _$17$1 = $as_Lcom_papauschek_puzzle_AnnotatedPoint(_$17);
           return (!$n(_$17$1).Lcom_papauschek_puzzle_AnnotatedPoint__f_vertical)
@@ -1460,24 +1470,24 @@ function $p_Lcom_papauschek_ui_HtmlRenderer$__renderCellWithVisibility$1__Lcom_p
           var _$18$1 = $as_Lcom_papauschek_puzzle_AnnotatedPoint(_$18);
           return $n(_$18$1).Lcom_papauschek_puzzle_AnnotatedPoint__f_vertical
         }))));
-        var this$7 = $n(horizontalAnnotations);
-        if ((!this$7.isEmpty__Z())) {
-          var this$8 = $n($as_sc_IterableOnceOps($n(horizontalAnnotations).map__F1__O(new $c_sjsr_AnonFunction1(((_$19) => {
+        var this$9 = $n(horizontalAnnotations);
+        if ((!this$9.isEmpty__Z())) {
+          var this$10 = $n($as_sc_IterableOnceOps($n(horizontalAnnotations).map__F1__O(new $c_sjsr_AnonFunction1(((_$19) => {
             var _$19$1 = $as_Lcom_papauschek_puzzle_AnnotatedPoint(_$19);
             return $n(_$19$1).Lcom_papauschek_puzzle_AnnotatedPoint__f_index
           })))));
-          var indices = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$8, "", ",", "");
+          var indices = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$10, "", ",", "");
           var horizontalText = (((((("<text x=\"" + (Math.imul(10, x) - 1.5)) + "\" y=\"") + ((5 + Math.imul(10, y)) | 0)) + "\" text-anchor=\"end\" dominant-baseline=\"middle\" class=\"annotation-horizontal\">") + indices) + "</text>")
         } else {
           var horizontalText = ""
         };
-        var this$9 = $n(verticalAnnotations);
-        if ((!this$9.isEmpty__Z())) {
-          var this$10 = $n($as_sc_IterableOnceOps($n(verticalAnnotations).map__F1__O(new $c_sjsr_AnonFunction1(((_$20) => {
+        var this$11 = $n(verticalAnnotations);
+        if ((!this$11.isEmpty__Z())) {
+          var this$12 = $n($as_sc_IterableOnceOps($n(verticalAnnotations).map__F1__O(new $c_sjsr_AnonFunction1(((_$20) => {
             var _$20$1 = $as_Lcom_papauschek_puzzle_AnnotatedPoint(_$20);
             return $n(_$20$1).Lcom_papauschek_puzzle_AnnotatedPoint__f_index
           })))));
-          var indices$2 = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$10, "", ",", "");
+          var indices$2 = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$12, "", ",", "");
           var verticalText = (((((("<text x=\"" + ((5 + Math.imul(10, x)) | 0)) + "\" y=\"") + (((-3) + Math.imul(10, y)) | 0)) + "\" text-anchor=\"middle\" dominant-baseline=\"middle\" class=\"annotation-vertical\">") + indices$2) + "</text>")
         } else {
           var verticalText = ""
@@ -1490,12 +1500,12 @@ function $p_Lcom_papauschek_ui_HtmlRenderer$__renderCellWithVisibility$1__Lcom_p
     var svgAnnotation = $m_s_None$()
   };
   $m_sc_StringOps$();
-  var x$1 = (((("<rect x=\"" + Math.imul(10, x)) + "\" y=\"") + Math.imul(10, y)) + "\" rx=\"0.5\" ry=\"0.5\" width=\"10\" height=\"10\"\r\n                |  style=\"fill:white;stroke:black;stroke-width:0.3\" />");
-  var svgCell = $m_sc_StringOps$().stripMargin$extension__T__C__T(x$1, 124);
-  var this$14 = $n($m_s_Option$().option2Iterable__s_Option__sc_Iterable(svgAnnotation));
-  var $x_1 = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$14, "", "", "");
-  var this$15 = $n($m_s_Option$().option2Iterable__s_Option__sc_Iterable(svgLetter));
-  return ((("" + svgCell) + $x_1) + $f_sc_IterableOnceOps__mkString__T__T__T__T(this$15, "", "", ""))
+  var x$2 = (((("<rect x=\"" + Math.imul(10, x)) + "\" y=\"") + Math.imul(10, y)) + "\" rx=\"0.5\" ry=\"0.5\" width=\"10\" height=\"10\"\r\n                |  style=\"fill:white;stroke:black;stroke-width:0.3\" />");
+  var svgCell = $m_sc_StringOps$().stripMargin$extension__T__C__T(x$2, 124);
+  var this$16 = $n($m_s_Option$().option2Iterable__s_Option__sc_Iterable(svgAnnotation));
+  var $x_1 = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$16, "", "", "");
+  var this$17 = $n($m_s_Option$().option2Iterable__s_Option__sc_Iterable(svgLetter));
+  return ((("" + svgCell) + $x_1) + $f_sc_IterableOnceOps__mkString__T__T__T__T(this$17, "", "", ""))
 }
 function $p_Lcom_papauschek_ui_HtmlRenderer$__renderHeightWithVisibility$1__Lcom_papauschek_puzzle_Puzzle__sci_Set__T__sci_Map__I__T($thiz, puzzle$6, gridVisiblePoints$2, letterCase$6, annotation$6, y) {
   var end = $n($n(puzzle$6).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width;
@@ -12442,64 +12452,6 @@ function $f_Lupickle_implicits_CaseClassReaderPiece$CaseClassReader__visitString
   var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([]));
   return $thiz.make__sci_Map__O(this$1.from__sc_IterableOnce__sci_Map(elems))
 }
-function $p_jl_Character$__getTypeGE256__I__I($thiz, codePoint) {
-  return $n($p_jl_Character$__charTypes__AI($thiz)).get($p_jl_Character$__findIndexOfRange__AI__I__Z__I($thiz, $p_jl_Character$__charTypeIndices__AI($thiz), codePoint, false))
-}
-function $p_jl_Character$__java$lang$Character$$charTypesFirst256$lzycompute__AI($thiz) {
-  if (((((1 & $thiz.jl_Character$__f_bitmap$0) << 24) >> 24) === 0)) {
-    $thiz.jl_Character$__f_java$lang$Character$$charTypesFirst256 = new $ac_I(new Int32Array([15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 12, 24, 24, 24, 26, 24, 24, 24, 21, 22, 24, 25, 24, 20, 24, 24, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 24, 24, 25, 25, 25, 24, 24, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 21, 24, 22, 27, 23, 27, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 21, 25, 22, 25, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 12, 24, 26, 26, 26, 26, 28, 24, 27, 28, 5, 29, 25, 16, 28, 27, 28, 25, 11, 11, 27, 2, 24, 24, 27, 11, 5, 30, 11, 11, 11, 24, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 25, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 25, 2, 2, 2, 2, 2, 2, 2, 2]));
-    $thiz.jl_Character$__f_bitmap$0 = (((1 | $thiz.jl_Character$__f_bitmap$0) << 24) >> 24)
-  };
-  return $thiz.jl_Character$__f_java$lang$Character$$charTypesFirst256
-}
-function $p_jl_Character$__charTypeIndices$lzycompute__AI($thiz) {
-  if (((((2 & $thiz.jl_Character$__f_bitmap$0) << 24) >> 24) === 0)) {
-    var deltas = new $ac_I(new Int32Array([257, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3, 2, 1, 1, 1, 2, 1, 3, 2, 4, 1, 2, 1, 3, 3, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 1, 1, 1, 2, 2, 1, 1, 3, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 2, 1, 2, 2, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 1, 69, 1, 27, 18, 4, 12, 14, 5, 7, 1, 1, 1, 17, 112, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 3, 1, 5, 2, 1, 1, 3, 1, 1, 1, 2, 1, 17, 1, 9, 35, 1, 2, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 2, 2, 51, 48, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 38, 2, 1, 6, 1, 39, 1, 1, 1, 4, 1, 1, 45, 1, 1, 1, 2, 1, 2, 1, 1, 8, 27, 5, 3, 2, 11, 5, 1, 3, 2, 1, 2, 2, 11, 1, 2, 2, 32, 1, 10, 21, 10, 4, 2, 1, 99, 1, 1, 7, 1, 1, 6, 2, 2, 1, 4, 2, 10, 3, 2, 1, 14, 1, 1, 1, 1, 30, 27, 2, 89, 11, 1, 14, 10, 33, 9, 2, 1, 3, 1, 5, 22, 4, 1, 9, 1, 3, 1, 5, 2, 15, 1, 25, 3, 2, 1, 65, 1, 1, 11, 55, 27, 1, 3, 1, 54, 1, 1, 1, 1, 3, 8, 4, 1, 2, 1, 7, 10, 2, 2, 10, 1, 1, 6, 1, 7, 1, 1, 2, 1, 8, 2, 2, 2, 22, 1, 7, 1, 1, 3, 4, 2, 1, 1, 3, 4, 2, 2, 2, 2, 1, 1, 8, 1, 4, 2, 1, 3, 2, 2, 10, 2, 2, 6, 1, 1, 5, 2, 1, 1, 6, 4, 2, 2, 22, 1, 7, 1, 2, 1, 2, 1, 2, 2, 1, 1, 3, 2, 4, 2, 2, 3, 3, 1, 7, 4, 1, 1, 7, 10, 2, 3, 1, 11, 2, 1, 1, 9, 1, 3, 1, 22, 1, 7, 1, 2, 1, 5, 2, 1, 1, 3, 5, 1, 2, 1, 1, 2, 1, 2, 1, 15, 2, 2, 2, 10, 1, 1, 15, 1, 2, 1, 8, 2, 2, 2, 22, 1, 7, 1, 2, 1, 5, 2, 1, 1, 1, 1, 1, 4, 2, 2, 2, 2, 1, 8, 1, 1, 4, 2, 1, 3, 2, 2, 10, 1, 1, 6, 10, 1, 1, 1, 6, 3, 3, 1, 4, 3, 2, 1, 1, 1, 2, 3, 2, 3, 3, 3, 12, 4, 2, 1, 2, 3, 3, 1, 3, 1, 2, 1, 6, 1, 14, 10, 3, 6, 1, 1, 6, 3, 1, 8, 1, 3, 1, 23, 1, 10, 1, 5, 3, 1, 3, 4, 1, 3, 1, 4, 7, 2, 1, 2, 6, 2, 2, 2, 10, 8, 7, 1, 2, 2, 1, 8, 1, 3, 1, 23, 1, 10, 1, 5, 2, 1, 1, 1, 1, 5, 1, 1, 2, 1, 2, 2, 7, 2, 7, 1, 1, 2, 2, 2, 10, 1, 2, 15, 2, 1, 8, 1, 3, 1, 41, 2, 1, 3, 4, 1, 3, 1, 3, 1, 1, 8, 1, 8, 2, 2, 2, 10, 6, 3, 1, 6, 2, 2, 1, 18, 3, 24, 1, 9, 1, 1, 2, 7, 3, 1, 4, 3, 3, 1, 1, 1, 8, 18, 2, 1, 12, 48, 1, 2, 7, 4, 1, 6, 1, 8, 1, 10, 2, 37, 2, 1, 1, 2, 2, 1, 1, 2, 1, 6, 4, 1, 7, 1, 3, 1, 1, 1, 1, 2, 2, 1, 4, 1, 2, 6, 1, 2, 1, 2, 5, 1, 1, 1, 6, 2, 10, 2, 4, 32, 1, 3, 15, 1, 1, 3, 2, 6, 10, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 8, 1, 36, 4, 14, 1, 5, 1, 2, 5, 11, 1, 36, 1, 8, 1, 6, 1, 2, 5, 4, 2, 37, 43, 2, 4, 1, 6, 1, 2, 2, 2, 1, 10, 6, 6, 2, 2, 4, 3, 1, 3, 2, 7, 3, 4, 13, 1, 2, 2, 6, 1, 1, 1, 10, 3, 1, 2, 38, 1, 1, 5, 1, 2, 43, 1, 1, 332, 1, 4, 2, 7, 1, 1, 1, 4, 2, 41, 1, 4, 2, 33, 1, 4, 2, 7, 1, 1, 1, 4, 2, 15, 1, 57, 1, 4, 2, 67, 2, 3, 9, 20, 3, 16, 10, 6, 85, 11, 1, 620, 2, 17, 1, 26, 1, 1, 3, 75, 3, 3, 15, 13, 1, 4, 3, 11, 18, 3, 2, 9, 18, 2, 12, 13, 1, 3, 1, 2, 12, 52, 2, 1, 7, 8, 1, 2, 11, 3, 1, 3, 1, 1, 1, 2, 10, 6, 10, 6, 6, 1, 4, 3, 1, 1, 10, 6, 35, 1, 52, 8, 41, 1, 1, 5, 70, 10, 29, 3, 3, 4, 2, 3, 4, 2, 1, 6, 3, 4, 1, 3, 2, 10, 30, 2, 5, 11, 44, 4, 17, 7, 2, 6, 10, 1, 3, 34, 23, 2, 3, 2, 2, 53, 1, 1, 1, 7, 1, 1, 1, 1, 2, 8, 6, 10, 2, 1, 10, 6, 10, 6, 7, 1, 6, 82, 4, 1, 47, 1, 1, 5, 1, 1, 5, 1, 2, 7, 4, 10, 7, 10, 9, 9, 3, 2, 1, 30, 1, 4, 2, 2, 1, 1, 2, 2, 10, 44, 1, 1, 2, 3, 1, 1, 3, 2, 8, 4, 36, 8, 8, 2, 2, 3, 5, 10, 3, 3, 10, 30, 6, 2, 64, 8, 8, 3, 1, 13, 1, 7, 4, 1, 4, 2, 1, 2, 9, 44, 63, 13, 1, 34, 37, 39, 21, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 8, 6, 2, 6, 2, 8, 8, 8, 8, 6, 2, 6, 2, 8, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8, 14, 2, 8, 8, 8, 8, 8, 8, 5, 1, 2, 4, 1, 1, 1, 3, 3, 1, 2, 4, 1, 3, 4, 2, 2, 4, 1, 3, 8, 5, 3, 2, 3, 1, 2, 4, 1, 2, 1, 11, 5, 6, 2, 1, 1, 1, 2, 1, 1, 1, 8, 1, 1, 5, 1, 9, 1, 1, 4, 2, 3, 1, 1, 1, 11, 1, 1, 1, 10, 1, 5, 5, 6, 1, 1, 2, 6, 3, 1, 1, 1, 10, 3, 1, 1, 1, 13, 3, 32, 16, 13, 4, 1, 3, 12, 15, 2, 1, 4, 1, 2, 1, 3, 2, 3, 1, 1, 1, 2, 1, 5, 6, 1, 1, 1, 1, 1, 1, 4, 1, 1, 4, 1, 4, 1, 2, 2, 2, 5, 1, 4, 1, 1, 2, 1, 1, 16, 35, 1, 1, 4, 1, 6, 5, 5, 2, 4, 1, 2, 1, 2, 1, 7, 1, 31, 2, 2, 1, 1, 1, 31, 268, 8, 4, 20, 2, 7, 1, 1, 81, 1, 30, 25, 40, 6, 18, 12, 39, 25, 11, 21, 60, 78, 22, 183, 1, 9, 1, 54, 8, 111, 1, 144, 1, 103, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 30, 44, 5, 1, 1, 31, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 16, 256, 131, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 63, 1, 1, 1, 1, 32, 1, 1, 258, 48, 21, 2, 6, 3, 10, 166, 47, 1, 47, 1, 1, 1, 3, 2, 1, 1, 1, 1, 1, 1, 4, 1, 1, 2, 1, 6, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 6, 1, 1, 1, 1, 3, 1, 1, 5, 4, 1, 2, 38, 1, 1, 5, 1, 2, 56, 7, 1, 1, 14, 1, 23, 9, 7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 32, 2, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 9, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 10, 2, 68, 26, 1, 89, 12, 214, 26, 12, 4, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 9, 4, 2, 1, 5, 2, 3, 1, 1, 1, 2, 1, 86, 2, 2, 2, 2, 1, 1, 90, 1, 3, 1, 5, 41, 3, 94, 1, 2, 4, 10, 27, 5, 36, 12, 16, 31, 1, 10, 30, 8, 1, 15, 32, 10, 39, 15, 320, 6582, 10, 64, 20941, 51, 21, 1, 1143, 3, 55, 9, 40, 6, 2, 268, 1, 3, 16, 10, 2, 20, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1, 70, 10, 2, 6, 8, 23, 9, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 12, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 77, 2, 1, 7, 1, 3, 1, 4, 1, 23, 2, 2, 1, 4, 4, 6, 2, 1, 1, 6, 52, 4, 8, 2, 50, 16, 1, 9, 2, 10, 6, 18, 6, 3, 1, 4, 10, 28, 8, 2, 23, 11, 2, 11, 1, 29, 3, 3, 1, 47, 1, 2, 4, 2, 1, 4, 13, 1, 1, 10, 4, 2, 32, 41, 6, 2, 2, 2, 2, 9, 3, 1, 8, 1, 1, 2, 10, 2, 4, 16, 1, 6, 3, 1, 1, 4, 48, 1, 1, 3, 2, 2, 5, 2, 1, 1, 1, 24, 2, 1, 2, 11, 1, 2, 2, 2, 1, 2, 1, 1, 10, 6, 2, 6, 2, 6, 9, 7, 1, 7, 145, 35, 2, 1, 2, 1, 2, 1, 1, 1, 2, 10, 6, 11172, 12, 23, 4, 49, 4, 2048, 6400, 366, 2, 106, 38, 7, 12, 5, 5, 1, 1, 10, 1, 13, 1, 5, 1, 1, 1, 2, 1, 2, 1, 108, 16, 17, 363, 1, 1, 16, 64, 2, 54, 40, 12, 1, 1, 2, 16, 7, 1, 1, 1, 6, 7, 9, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 4, 3, 3, 1, 4, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 3, 1, 1, 1, 2, 4, 5, 1, 135, 2, 1, 1, 3, 1, 3, 1, 1, 1, 1, 1, 1, 2, 10, 2, 3, 2, 26, 1, 1, 1, 1, 1, 1, 26, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 10, 1, 45, 2, 31, 3, 6, 2, 6, 2, 6, 2, 3, 3, 2, 1, 1, 1, 2, 1, 1, 4, 2, 10, 3, 2, 2, 12, 1, 26, 1, 19, 1, 2, 1, 15, 2, 14, 34, 123, 5, 3, 4, 45, 3, 9, 53, 4, 17, 1, 5, 12, 52, 45, 1, 130, 29, 3, 49, 47, 31, 1, 4, 12, 17, 1, 8, 1, 53, 30, 1, 1, 36, 4, 8, 1, 5, 42, 40, 40, 78, 2, 10, 854, 6, 2, 1, 1, 44, 1, 2, 3, 1, 2, 23, 1, 1, 8, 160, 22, 6, 3, 1, 26, 5, 1, 64, 56, 6, 2, 64, 1, 3, 1, 2, 5, 4, 4, 1, 3, 1, 27, 4, 3, 4, 1, 8, 8, 9, 7, 29, 2, 1, 128, 54, 3, 7, 22, 2, 8, 19, 5, 8, 128, 73, 535, 31, 385, 1, 1, 1, 53, 15, 7, 4, 20, 10, 16, 2, 1, 45, 3, 4, 2, 2, 2, 1, 4, 14, 25, 7, 10, 6, 3, 36, 5, 1, 8, 1, 10, 4, 60, 2, 1, 48, 3, 9, 2, 4, 4, 7, 10, 1190, 43, 1, 1, 1, 2, 6, 1, 1, 8, 10, 2358, 879, 145, 99, 13, 4, 2956, 1071, 13265, 569, 1223, 69, 11, 1, 46, 16, 4, 13, 16480, 2, 8190, 246, 10, 39, 2, 60, 2, 3, 3, 6, 8, 8, 2, 7, 30, 4, 48, 34, 66, 3, 1, 186, 87, 9, 18, 142, 26, 26, 26, 7, 1, 18, 26, 26, 1, 1, 2, 2, 1, 2, 2, 2, 4, 1, 8, 4, 1, 1, 1, 7, 1, 11, 26, 26, 2, 1, 4, 2, 8, 1, 7, 1, 26, 2, 1, 4, 1, 5, 1, 1, 3, 7, 1, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 28, 2, 25, 1, 25, 1, 6, 25, 1, 25, 1, 6, 25, 1, 25, 1, 6, 25, 1, 25, 1, 6, 25, 1, 25, 1, 6, 1, 1, 2, 50, 5632, 4, 1, 27, 1, 2, 1, 1, 2, 1, 1, 10, 1, 4, 1, 1, 1, 1, 6, 1, 4, 1, 1, 1, 1, 1, 1, 3, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 4, 1, 7, 1, 4, 1, 4, 1, 1, 1, 10, 1, 17, 5, 3, 1, 5, 1, 17, 52, 2, 270, 44, 4, 100, 12, 15, 2, 14, 2, 15, 1, 15, 32, 11, 5, 31, 1, 60, 4, 43, 75, 29, 13, 43, 5, 9, 7, 2, 174, 33, 15, 6, 1, 70, 3, 20, 12, 37, 1, 5, 21, 17, 15, 63, 1, 1, 1, 182, 1, 4, 3, 62, 2, 4, 12, 24, 147, 70, 4, 11, 48, 70, 58, 116, 2188, 42711, 41, 4149, 11, 222, 16354, 542, 722403, 1, 30, 96, 128, 240, 65040, 65534, 2, 65534]));
-    $thiz.jl_Character$__f_charTypeIndices = $p_jl_Character$__uncompressDeltas__AI__AI($thiz, deltas);
-    $thiz.jl_Character$__f_bitmap$0 = (((2 | $thiz.jl_Character$__f_bitmap$0) << 24) >> 24)
-  };
-  return $thiz.jl_Character$__f_charTypeIndices
-}
-function $p_jl_Character$__charTypeIndices__AI($thiz) {
-  return (((((2 & $thiz.jl_Character$__f_bitmap$0) << 24) >> 24) === 0) ? $p_jl_Character$__charTypeIndices$lzycompute__AI($thiz) : $thiz.jl_Character$__f_charTypeIndices)
-}
-function $p_jl_Character$__charTypes$lzycompute__AI($thiz) {
-  if (((((4 & $thiz.jl_Character$__f_bitmap$0) << 24) >> 24) === 0)) {
-    $thiz.jl_Character$__f_charTypes = new $ac_I(new Int32Array([1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 5, 1, 2, 5, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 3, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 5, 2, 4, 27, 4, 27, 4, 27, 4, 27, 4, 27, 6, 1, 2, 1, 2, 4, 27, 1, 2, 0, 4, 2, 24, 0, 27, 1, 24, 1, 0, 1, 0, 1, 2, 1, 0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 25, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 28, 6, 7, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 1, 0, 4, 24, 0, 2, 0, 24, 20, 0, 26, 0, 6, 20, 6, 24, 6, 24, 6, 24, 6, 0, 5, 0, 5, 24, 0, 16, 0, 25, 24, 26, 24, 28, 6, 24, 0, 24, 5, 4, 5, 6, 9, 24, 5, 6, 5, 24, 5, 6, 16, 28, 6, 4, 6, 28, 6, 5, 9, 5, 28, 5, 24, 0, 16, 5, 6, 5, 6, 0, 5, 6, 5, 0, 9, 5, 6, 4, 28, 24, 4, 0, 5, 6, 4, 6, 4, 6, 4, 6, 0, 24, 0, 5, 6, 0, 24, 0, 5, 0, 5, 0, 6, 0, 6, 8, 5, 6, 8, 6, 5, 8, 6, 8, 6, 8, 5, 6, 5, 6, 24, 9, 24, 4, 5, 0, 5, 0, 6, 8, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 6, 5, 8, 6, 0, 8, 0, 8, 6, 5, 0, 8, 0, 5, 0, 5, 6, 0, 9, 5, 26, 11, 28, 26, 0, 6, 8, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 6, 0, 8, 6, 0, 6, 0, 6, 0, 6, 0, 5, 0, 5, 0, 9, 6, 5, 6, 0, 6, 8, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 6, 5, 8, 6, 0, 6, 8, 0, 8, 6, 0, 5, 0, 5, 6, 0, 9, 24, 26, 0, 6, 8, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 6, 5, 8, 6, 8, 6, 0, 8, 0, 8, 6, 0, 6, 8, 0, 5, 0, 5, 6, 0, 9, 28, 5, 11, 0, 6, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 8, 6, 8, 0, 8, 0, 8, 6, 0, 5, 0, 8, 0, 9, 11, 28, 26, 28, 0, 8, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 6, 8, 0, 6, 0, 6, 0, 6, 0, 5, 0, 5, 6, 0, 9, 0, 11, 28, 0, 8, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 6, 5, 8, 6, 8, 0, 6, 8, 0, 8, 6, 0, 8, 0, 5, 0, 5, 6, 0, 9, 0, 5, 0, 8, 0, 5, 0, 5, 0, 5, 0, 5, 8, 6, 0, 8, 0, 8, 6, 5, 0, 8, 0, 5, 6, 0, 9, 11, 0, 28, 5, 0, 8, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 6, 0, 8, 6, 0, 6, 0, 8, 0, 8, 24, 0, 5, 6, 5, 6, 0, 26, 5, 4, 6, 24, 9, 24, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 6, 5, 6, 0, 6, 5, 0, 5, 0, 4, 0, 6, 0, 9, 0, 5, 0, 5, 28, 24, 28, 24, 28, 6, 28, 9, 11, 28, 6, 28, 6, 28, 6, 21, 22, 21, 22, 8, 5, 0, 5, 0, 6, 8, 6, 24, 6, 5, 6, 0, 6, 0, 28, 6, 28, 0, 28, 24, 28, 24, 0, 5, 8, 6, 8, 6, 8, 6, 8, 6, 5, 9, 24, 5, 8, 6, 5, 6, 5, 8, 5, 8, 5, 6, 5, 6, 8, 6, 8, 6, 5, 8, 9, 8, 6, 28, 1, 0, 1, 0, 1, 0, 5, 24, 4, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 6, 24, 11, 0, 5, 28, 0, 5, 0, 20, 5, 24, 5, 12, 5, 21, 22, 0, 5, 24, 10, 0, 5, 0, 5, 6, 0, 5, 6, 24, 0, 5, 6, 0, 5, 0, 5, 0, 6, 0, 5, 6, 8, 6, 8, 6, 8, 6, 24, 4, 24, 26, 5, 6, 0, 9, 0, 11, 0, 24, 20, 24, 6, 12, 0, 9, 0, 5, 4, 5, 0, 5, 6, 5, 0, 5, 0, 5, 0, 6, 8, 6, 8, 0, 8, 6, 8, 6, 0, 28, 0, 24, 9, 5, 0, 5, 0, 5, 0, 8, 5, 8, 0, 9, 11, 0, 28, 5, 6, 8, 0, 24, 5, 8, 6, 8, 6, 0, 6, 8, 6, 8, 6, 8, 6, 0, 6, 9, 0, 9, 0, 24, 4, 24, 0, 6, 8, 5, 6, 8, 6, 8, 6, 8, 6, 8, 5, 0, 9, 24, 28, 6, 28, 0, 6, 8, 5, 8, 6, 8, 6, 8, 6, 8, 5, 9, 5, 6, 8, 6, 8, 6, 8, 6, 8, 0, 24, 5, 8, 6, 8, 6, 0, 24, 9, 0, 5, 9, 5, 4, 24, 0, 24, 0, 6, 24, 6, 8, 6, 5, 6, 5, 8, 6, 5, 0, 2, 4, 2, 4, 2, 4, 6, 0, 6, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 1, 0, 2, 1, 2, 1, 2, 0, 1, 0, 2, 0, 1, 0, 1, 0, 1, 0, 1, 2, 1, 2, 0, 2, 3, 2, 3, 2, 3, 2, 0, 2, 1, 3, 27, 2, 27, 2, 0, 2, 1, 3, 27, 2, 0, 2, 1, 0, 27, 2, 1, 27, 0, 2, 0, 2, 1, 3, 27, 0, 12, 16, 20, 24, 29, 30, 21, 29, 30, 21, 29, 24, 13, 14, 16, 12, 24, 29, 30, 24, 23, 24, 25, 21, 22, 24, 25, 24, 23, 24, 12, 16, 0, 16, 11, 4, 0, 11, 25, 21, 22, 4, 11, 25, 21, 22, 0, 4, 0, 26, 0, 6, 7, 6, 7, 6, 0, 28, 1, 28, 1, 28, 2, 1, 2, 1, 2, 28, 1, 28, 25, 1, 28, 1, 28, 1, 28, 1, 28, 1, 28, 2, 1, 2, 5, 2, 28, 2, 1, 25, 1, 2, 28, 25, 28, 2, 28, 11, 10, 1, 2, 10, 11, 0, 25, 28, 25, 28, 25, 28, 25, 28, 25, 28, 25, 28, 25, 28, 25, 28, 25, 28, 25, 28, 25, 28, 25, 28, 21, 22, 28, 25, 28, 25, 28, 25, 28, 0, 28, 0, 28, 0, 11, 28, 11, 28, 25, 28, 25, 28, 25, 28, 25, 28, 0, 28, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 11, 28, 25, 21, 22, 25, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 25, 28, 25, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 25, 21, 22, 21, 22, 25, 21, 22, 25, 28, 25, 28, 25, 0, 28, 0, 1, 0, 2, 0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 4, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 28, 1, 2, 1, 2, 6, 1, 2, 0, 24, 11, 24, 2, 0, 2, 0, 2, 0, 5, 0, 4, 24, 0, 6, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 6, 24, 29, 30, 29, 30, 24, 29, 30, 24, 29, 30, 24, 20, 24, 20, 24, 29, 30, 24, 29, 30, 21, 22, 21, 22, 21, 22, 21, 22, 24, 4, 24, 20, 0, 28, 0, 28, 0, 28, 0, 28, 0, 12, 24, 28, 4, 5, 10, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 28, 21, 22, 21, 22, 21, 22, 21, 22, 20, 21, 22, 28, 10, 6, 8, 20, 4, 28, 10, 4, 5, 24, 28, 0, 5, 0, 6, 27, 4, 5, 20, 5, 24, 4, 5, 0, 5, 0, 5, 0, 28, 11, 28, 5, 0, 28, 0, 5, 28, 0, 11, 28, 11, 28, 11, 28, 11, 28, 11, 28, 5, 0, 28, 5, 0, 5, 4, 5, 0, 28, 0, 5, 4, 24, 5, 4, 24, 5, 9, 5, 0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 5, 6, 7, 24, 6, 24, 4, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 6, 5, 10, 6, 24, 0, 27, 4, 27, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 4, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 4, 27, 1, 2, 1, 2, 0, 1, 2, 1, 2, 0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 4, 2, 5, 6, 5, 6, 5, 6, 5, 8, 6, 8, 28, 0, 11, 28, 26, 28, 0, 5, 24, 0, 8, 5, 8, 6, 0, 24, 9, 0, 6, 5, 24, 5, 0, 9, 5, 6, 24, 5, 6, 8, 0, 24, 5, 0, 6, 8, 5, 6, 8, 6, 8, 6, 8, 24, 0, 4, 9, 0, 24, 0, 5, 6, 8, 6, 8, 6, 0, 5, 6, 5, 6, 8, 0, 9, 0, 24, 5, 4, 5, 28, 5, 8, 0, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 0, 5, 4, 24, 5, 8, 6, 8, 24, 5, 4, 8, 6, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 8, 6, 8, 6, 8, 24, 8, 6, 0, 9, 0, 5, 0, 5, 0, 5, 0, 19, 18, 5, 0, 5, 0, 2, 0, 2, 0, 5, 6, 5, 25, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 27, 0, 5, 21, 22, 0, 5, 0, 5, 0, 5, 26, 28, 0, 6, 24, 21, 22, 24, 0, 6, 0, 24, 20, 23, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 21, 22, 24, 21, 22, 24, 23, 24, 0, 24, 20, 21, 22, 21, 22, 21, 22, 24, 25, 20, 25, 0, 24, 26, 24, 0, 5, 0, 5, 0, 16, 0, 24, 26, 24, 21, 22, 24, 25, 24, 20, 24, 9, 24, 25, 24, 1, 21, 24, 22, 27, 23, 27, 2, 21, 25, 22, 25, 21, 22, 24, 21, 22, 24, 5, 4, 5, 4, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 26, 25, 27, 28, 26, 0, 28, 25, 28, 0, 16, 28, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 24, 0, 11, 0, 28, 10, 11, 28, 11, 0, 28, 0, 28, 6, 0, 5, 0, 5, 0, 5, 0, 11, 0, 5, 10, 5, 10, 0, 5, 0, 24, 5, 0, 5, 24, 10, 0, 1, 2, 5, 0, 9, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 24, 11, 0, 5, 11, 0, 24, 5, 0, 24, 0, 5, 0, 5, 0, 5, 6, 0, 6, 0, 6, 5, 0, 5, 0, 5, 0, 6, 0, 6, 11, 0, 24, 0, 5, 11, 24, 0, 5, 0, 24, 5, 0, 11, 5, 0, 11, 0, 5, 0, 11, 0, 8, 6, 8, 5, 6, 24, 0, 11, 9, 0, 6, 8, 5, 8, 6, 8, 6, 24, 16, 24, 0, 5, 0, 9, 0, 6, 5, 6, 8, 6, 0, 9, 24, 0, 6, 8, 5, 8, 6, 8, 5, 24, 0, 9, 0, 5, 6, 8, 6, 8, 6, 8, 6, 0, 9, 0, 5, 0, 10, 0, 24, 0, 5, 0, 5, 0, 5, 0, 5, 8, 0, 6, 4, 0, 5, 0, 28, 0, 28, 0, 28, 8, 6, 28, 8, 16, 6, 28, 6, 28, 6, 28, 0, 28, 6, 28, 0, 28, 0, 11, 0, 1, 2, 1, 2, 0, 2, 1, 2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 2, 0, 2, 0, 2, 0, 2, 1, 2, 1, 0, 1, 0, 1, 0, 1, 0, 2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 1, 25, 2, 25, 2, 1, 25, 2, 25, 2, 1, 25, 2, 25, 2, 1, 25, 2, 25, 2, 1, 25, 2, 25, 2, 1, 2, 0, 9, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 25, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 11, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 28, 0, 5, 0, 5, 0, 5, 0, 5, 0, 16, 0, 16, 0, 6, 0, 18, 0, 18, 0]));
-    $thiz.jl_Character$__f_bitmap$0 = (((4 | $thiz.jl_Character$__f_bitmap$0) << 24) >> 24)
-  };
-  return $thiz.jl_Character$__f_charTypes
-}
-function $p_jl_Character$__charTypes__AI($thiz) {
-  return (((((4 & $thiz.jl_Character$__f_bitmap$0) << 24) >> 24) === 0) ? $p_jl_Character$__charTypes$lzycompute__AI($thiz) : $thiz.jl_Character$__f_charTypes)
-}
-function $p_jl_Character$__uncompressDeltas__AI__AI($thiz, deltas) {
-  var acc = $n(deltas).get(0);
-  var i = 1;
-  var len = $n(deltas).u.length;
-  while ((i !== len)) {
-    acc = ((acc + $n(deltas).get(i)) | 0);
-    $n(deltas).set(i, acc);
-    i = ((1 + i) | 0)
-  };
-  return deltas
-}
-function $p_jl_Character$__findIndexOfRange__AI__I__Z__I($thiz, startOfRangesArray, value, hasEmptyRanges) {
-  var i = $m_ju_Arrays$().binarySearch__AI__I__I(startOfRangesArray, value);
-  if ((i >= 0)) {
-    if (hasEmptyRanges) {
-      var j = ((1 + i) | 0);
-      while (((j < $n(startOfRangesArray).u.length) && ($n(startOfRangesArray).get(j) === value))) {
-        j = ((1 + j) | 0)
-      };
-      return j
-    } else {
-      return ((1 + i) | 0)
-    }
-  } else {
-    return (((-1) - i) | 0)
-  }
-}
 function $p_jl_Character$__nonASCIIZeroDigitCodePoints$lzycompute__AI($thiz) {
   if (((((32 & $thiz.jl_Character$__f_bitmap$0) << 24) >> 24) === 0)) {
     $thiz.jl_Character$__f_nonASCIIZeroDigitCodePoints = new $ac_I(new Int32Array([1632, 1776, 1984, 2406, 2534, 2662, 2790, 2918, 3046, 3174, 3302, 3430, 3664, 3792, 3872, 4160, 4240, 6112, 6160, 6470, 6608, 6784, 6800, 6992, 7088, 7232, 7248, 42528, 43216, 43264, 43472, 43600, 44016, 65296, 66720, 69734, 69872, 69942, 70096, 71360, 120782, 120792, 120802, 120812, 120822]));
@@ -12510,14 +12462,8 @@ function $p_jl_Character$__nonASCIIZeroDigitCodePoints$lzycompute__AI($thiz) {
 function $p_jl_Character$__nonASCIIZeroDigitCodePoints__AI($thiz) {
   return (((((32 & $thiz.jl_Character$__f_bitmap$0) << 24) >> 24) === 0) ? $p_jl_Character$__nonASCIIZeroDigitCodePoints$lzycompute__AI($thiz) : $thiz.jl_Character$__f_nonASCIIZeroDigitCodePoints)
 }
-function $p_jl_Character$__isSeparator$1__I__Z($thiz, tpe) {
-  return (((tpe === 12) || (tpe === 13)) || (tpe === 14))
-}
 /** @constructor */
 function $c_jl_Character$() {
-  this.jl_Character$__f_java$lang$Character$$charTypesFirst256 = null;
-  this.jl_Character$__f_charTypeIndices = null;
-  this.jl_Character$__f_charTypes = null;
   this.jl_Character$__f_nonASCIIZeroDigitCodePoints = null;
   this.jl_Character$__f_bitmap$0 = 0
 }
@@ -12567,9 +12513,6 @@ $c_jl_Character$.prototype.forDigit__I__I__C = (function(digit, radix) {
     var result = ((overBaseTen < 0) ? ((48 + digit) | 0) : ((97 + overBaseTen) | 0));
     return (65535 & result)
   }
-});
-$c_jl_Character$.prototype.isWhitespace__I__Z = (function(codePoint) {
-  return ((codePoint < 256) ? (((((((codePoint === 9) || (codePoint === 10)) || (codePoint === 11)) || (codePoint === 12)) || (codePoint === 13)) || ((codePoint >= 28) && (codePoint <= 31))) || ((codePoint !== 160) && $p_jl_Character$__isSeparator$1__I__Z(this, $n(this.java$lang$Character$$charTypesFirst256__AI()).get(codePoint)))) : (((codePoint !== 8199) && (codePoint !== 8239)) && $p_jl_Character$__isSeparator$1__I__Z(this, $p_jl_Character$__getTypeGE256__I__I(this, codePoint))))
 });
 $c_jl_Character$.prototype.toUpperCase__C__C = (function(ch) {
   return (65535 & this.toUpperCase__I__I(ch))
@@ -12642,9 +12585,6 @@ $c_jl_Character$.prototype.toLowerCase__I__I = (function(codePoint) {
       }
     }
   }
-});
-$c_jl_Character$.prototype.java$lang$Character$$charTypesFirst256__AI = (function() {
-  return (((((1 & this.jl_Character$__f_bitmap$0) << 24) >> 24) === 0) ? $p_jl_Character$__java$lang$Character$$charTypesFirst256$lzycompute__AI(this) : this.jl_Character$__f_java$lang$Character$$charTypesFirst256)
 });
 var $d_jl_Character$ = new $TypeData().initClass({
   jl_Character$: 0
@@ -17983,8 +17923,10 @@ function $p_Lcom_papauschek_puzzle_Puzzle$__elemsInfo$1__Lcom_papauschek_puzzle_
 }
 /** @constructor */
 function $c_Lcom_papauschek_puzzle_Puzzle$() {
+  this.Lcom_papauschek_puzzle_Puzzle$__f_PHRASE_SPACE = 0;
   this.Lcom_papauschek_puzzle_Puzzle$__f_rw = null;
   $n_Lcom_papauschek_puzzle_Puzzle$ = this;
+  this.Lcom_papauschek_puzzle_Puzzle$__f_PHRASE_SPACE = 126;
   var MacroImplicits_this = $m_Lupickle_default$();
   var x$1$proxy1 = $m_Lcom_papauschek_puzzle_Puzzle$();
   var $x_5 = MacroImplicits_this.ReadWriter__Lupickle_core_Types$ReadWriter$();
@@ -23920,6 +23862,9 @@ function $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, x, y) {
 function $p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, x, y) {
   return ($thiz.getChar__I__I__C(x, y) !== 32)
 }
+function $p_Lcom_papauschek_puzzle_Puzzle__isPhraseSpace__I__I__Z($thiz, x, y) {
+  return ($thiz.getChar__I__I__C(x, y) === $m_Lcom_papauschek_puzzle_Puzzle$().Lcom_papauschek_puzzle_Puzzle$__f_PHRASE_SPACE)
+}
 function $p_Lcom_papauschek_puzzle_Puzzle__fits__T__Z__I__I__Z($thiz, word, vertical, x, y) {
   var elem = false;
   elem = false;
@@ -23945,13 +23890,18 @@ function $p_Lcom_papauschek_puzzle_Puzzle__fits__T__Z__I__I__Z($thiz, word, vert
     var existingChar = $thiz.getChar__I__I__C(locX, locY);
     $m_sc_StringOps$();
     var this$12 = $n(word);
-    var same = (existingChar === $charAt(this$12, arg1));
-    var isEmpty$1 = (existingChar === 32);
-    if (same) {
-      var ev$5 = true;
-      elem = ev$5
-    };
-    res = ((same || isEmpty$1) && ((!isEmpty$1) || (vertical ? ((!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, (((-1) + locX) | 0), locY)) && (!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, ((1 + locX) | 0), locY))) : ((!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, locX, (((-1) + locY) | 0))) && (!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, locX, ((1 + locY) | 0)))))))
+    var wordChar = $charAt(this$12, arg1);
+    if ((wordChar === 32)) {
+      res = ((existingChar === 32) && (vertical ? ((!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, (((-1) + locX) | 0), locY)) && (!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, ((1 + locX) | 0), locY))) : ((!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, locX, (((-1) + locY) | 0))) && (!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, locX, ((1 + locY) | 0))))))
+    } else {
+      var same = (existingChar === wordChar);
+      var cellEmpty = (existingChar === 32);
+      if (same) {
+        var ev$5 = true;
+        elem = ev$5
+      };
+      res = ((same || cellEmpty) && ((!cellEmpty) || (vertical ? ((!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, (((-1) + locX) | 0), locY)) && (!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, ((1 + locX) | 0), locY))) : ((!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, locX, (((-1) + locY) | 0))) && (!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, locX, ((1 + locY) | 0)))))))
+    }
   };
   if ((res && elem)) {
     if (vertical) {
@@ -23980,11 +23930,11 @@ function $p_Lcom_papauschek_puzzle_Puzzle__hasAnnotationOverlap__T__Z__I__I__Z($
   if (vertical) {
     var hx = ((1 + x) | 0);
     var hy = (((-1) + y) | 0);
-    return (((((hx < $n($thiz.Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width) && (hy >= 0)) && $p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, hx, hy)) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, (((-1) + hx) | 0), hy)) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, hx, (((-1) + hy) | 0)))
+    return ((((((hx < $n($thiz.Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width) && (hy >= 0)) && $p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, hx, hy)) && (!$p_Lcom_papauschek_puzzle_Puzzle__isPhraseSpace__I__I__Z($thiz, hx, hy))) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, (((-1) + hx) | 0), hy)) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, hx, (((-1) + hy) | 0)))
   } else {
     var vx = (((-1) + x) | 0);
     var vy = ((1 + y) | 0);
-    return (((((vx >= 0) && (vy < $n($thiz.Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_height)) && $p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, vx, vy)) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, vx, (((-1) + vy) | 0))) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, (((-1) + vx) | 0), vy))
+    return ((((((vx >= 0) && (vy < $n($thiz.Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_height)) && $p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, vx, vy)) && (!$p_Lcom_papauschek_puzzle_Puzzle__isPhraseSpace__I__I__Z($thiz, vx, vy))) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, vx, (((-1) + vy) | 0))) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, (((-1) + vx) | 0), vy))
   }
 }
 function $p_Lcom_papauschek_puzzle_Puzzle__matchesWordAtLocation__T__I__I__Z__Z($thiz, word, x, y, vertical) {
@@ -24011,10 +23961,11 @@ function $p_Lcom_papauschek_puzzle_Puzzle__matchesWordAtLocation__T__I__I__Z__Z(
     };
     var locX = $uI(\u03b45$___1);
     var locY = $uI(\u03b45$___2);
-    var $x_1 = $thiz.getChar__I__I__C(locX, locY);
+    var gridChar = $thiz.getChar__I__I__C(locX, locY);
     $m_sc_StringOps$();
     var this$11 = $n(word);
-    res = ($x_1 === $charAt(this$11, arg1))
+    var wordChar = $charAt(this$11, arg1);
+    res = ((wordChar === 32) ? (gridChar === $m_Lcom_papauschek_puzzle_Puzzle$().Lcom_papauschek_puzzle_Puzzle$__f_PHRASE_SPACE) : (gridChar === wordChar))
   };
   var allMatch = res;
   if ((!allMatch)) {
@@ -24052,12 +24003,14 @@ function $p_Lcom_papauschek_puzzle_Puzzle__getWord__I__Z__T($thiz, point, vertic
     var elem = (vertical ? $thiz.getChar__I__I__C($m_Lcom_papauschek_puzzle_Point$().x$extension__I__I(point), (($m_Lcom_papauschek_puzzle_Point$().y$extension__I__I(point) + arg1) | 0)) : $thiz.getChar__I__I__C((($m_Lcom_papauschek_puzzle_Point$().x$extension__I__I(point) + arg1) | 0), $m_Lcom_papauschek_puzzle_Point$().y$extension__I__I(point)));
     this$10.addOne__O__scm_Growable($bC(elem))
   };
-  var this$14 = $n($as_sc_IterableOnceOps($n($as_sci_IndexedSeq($n(b).result__O())).takeWhile__F1__O(new $c_sjsr_AnonFunction1(((_$5) => {
+  var this$11 = $n($as_sc_IterableOnceOps($n($as_sc_IndexedSeqOps($n($as_sci_IndexedSeq($n(b).result__O())).takeWhile__F1__O(new $c_sjsr_AnonFunction1(((_$5) => {
     var _$5$1 = $uC(_$5);
-    var this$13 = $m_jl_Character$();
-    return (!this$13.isWhitespace__I__Z(_$5$1))
+    return (_$5$1 !== 32)
+  }))))).map__F1__O(new $c_sjsr_AnonFunction1(((ch) => {
+    var ch$1 = $uC(ch);
+    return $bC(((ch$1 === $m_Lcom_papauschek_puzzle_Puzzle$().Lcom_papauschek_puzzle_Puzzle$__f_PHRASE_SPACE) ? 32 : ch$1))
   })))));
-  return $f_sc_IterableOnceOps__mkString__T__T__T__T(this$14, "", "", "")
+  return $f_sc_IterableOnceOps__mkString__T__T__T__T(this$11, "", "", "")
 }
 /** @constructor */
 function $c_Lcom_papauschek_puzzle_Puzzle(chars, config, words) {
@@ -24167,7 +24120,7 @@ $c_Lcom_papauschek_puzzle_Puzzle.prototype.positions__sci_Map = (function() {
       while (true) {
         var arg1 = i;
         var char = $n(this.Lcom_papauschek_puzzle_Puzzle__f_chars).get(arg1);
-        if ((char !== 32)) {
+        if (((char !== 32) && (char !== $m_Lcom_papauschek_puzzle_Puzzle$().Lcom_papauschek_puzzle_Puzzle$__f_PHRASE_SPACE))) {
           var x = $intMod(arg1, $n(this.Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width);
           var y = $intDiv(arg1, $n(this.Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width);
           if ((($p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z(this, ((1 + x) | 0), y) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z(this, (((-1) + x) | 0), y)) && ((($p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z(this, ((1 + x) | 0), ((1 + y) | 0)) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z(this, ((1 + x) | 0), (((-1) + y) | 0))) && (x < (((-1) + $n(this.Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width) | 0))) || (($p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z(this, (((-1) + x) | 0), ((1 + y) | 0)) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z(this, (((-1) + x) | 0), (((-1) + y) | 0))) && (x > 0))))) {
@@ -24248,11 +24201,10 @@ $c_Lcom_papauschek_puzzle_Puzzle.prototype.copyWithWord__I__I__Z__T__Lcom_papaus
       var i = 0;
       while (true) {
         var arg1 = i;
-        var $x_2 = $n(newChars);
-        var $x_1 = $p_Lcom_papauschek_puzzle_Puzzle__toIndex__I__I__I(this, x, ((y + arg1) | 0));
         $m_sc_StringOps$();
         var this$10 = $n(word);
-        $x_2.set($x_1, $charAt(this$10, arg1));
+        var ch = $charAt(this$10, arg1);
+        $n(newChars).set($p_Lcom_papauschek_puzzle_Puzzle__toIndex__I__I__I(this, x, ((y + arg1) | 0)), ((ch === 32) ? $m_Lcom_papauschek_puzzle_Puzzle$().Lcom_papauschek_puzzle_Puzzle$__f_PHRASE_SPACE : ch));
         if ((i === scala$collection$immutable$Range$$lastElement)) {
           break
         };
@@ -24268,11 +24220,10 @@ $c_Lcom_papauschek_puzzle_Puzzle.prototype.copyWithWord__I__I__Z__T__Lcom_papaus
       var i$1 = 0;
       while (true) {
         var arg1$1 = i$1;
-        var $x_4 = $n(newChars);
-        var $x_3 = $p_Lcom_papauschek_puzzle_Puzzle__toIndex__I__I__I(this, ((x + arg1$1) | 0), y);
         $m_sc_StringOps$();
         var this$19 = $n(word);
-        $x_4.set($x_3, $charAt(this$19, arg1$1));
+        var ch$1 = $charAt(this$19, arg1$1);
+        $n(newChars).set($p_Lcom_papauschek_puzzle_Puzzle__toIndex__I__I__I(this, ((x + arg1$1) | 0), y), ((ch$1 === 32) ? $m_Lcom_papauschek_puzzle_Puzzle$().Lcom_papauschek_puzzle_Puzzle$__f_PHRASE_SPACE : ch$1));
         if ((i$1 === scala$collection$immutable$Range$$lastElement$1)) {
           break
         };
@@ -24604,7 +24555,7 @@ $c_Lcom_papauschek_puzzle_Puzzle.prototype.getAnnotation__sci_Map = (function() 
     while (it$1.sci_RangeIterator__f__hasNext) {
       var this$13 = $n(b$1);
       var arg1$1 = it$1.next__I();
-      var nonEmpty = (!$p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z(this, arg1, arg1$1));
+      var nonEmpty = ((!$p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z(this, arg1, arg1$1)) && (!$p_Lcom_papauschek_puzzle_Puzzle__isPhraseSpace__I__I__Z(this, arg1, arg1$1)));
       var vertical = $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z(this, arg1, (((-1) + arg1$1) | 0));
       var horizontal = $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z(this, (((-1) + arg1) | 0), arg1$1);
       var elem = new $c_T4(arg1$1, nonEmpty, vertical, horizontal);
@@ -24694,7 +24645,7 @@ $c_Lcom_papauschek_puzzle_Puzzle.prototype.getCharsShownInPartialSolution__s_uti
     var this$12 = new $c_sci_Range$Exclusive(0, end$1, 1);
     var p = new $c_sjsr_AnonFunction1(((arg1) => ((y) => {
       var y$1 = $uI(y);
-      return $p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z(this, arg1, y$1)
+      return ($p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z(this, arg1, y$1) && (!$p_Lcom_papauschek_puzzle_Puzzle__isPhraseSpace__I__I__Z(this, arg1, y$1)))
     }))(arg1));
     var xs = $as_sc_IterableOnce($ct_sc_IterableOps$WithFilter__sc_IterableOps__F1__(new $c_sc_IterableOps$WithFilter(), this$12, p).map__F1__O(new $c_sjsr_AnonFunction1(((arg1, random, solvedFraction, resultSet) => ((v1) => {
       var y$2 = $uI(v1);
@@ -30128,6 +30079,18 @@ function $f_sc_IndexedSeqOps__head__O($thiz) {
     };
     throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("head of empty " + $x_1))
   }
+}
+function $is_sc_IndexedSeqOps(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.sc_IndexedSeqOps)))
+}
+function $as_sc_IndexedSeqOps(obj) {
+  return (($is_sc_IndexedSeqOps(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.IndexedSeqOps"))
+}
+function $isArrayOf_sc_IndexedSeqOps(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.sc_IndexedSeqOps)))
+}
+function $asArrayOf_sc_IndexedSeqOps(obj, depth) {
+  return (($isArrayOf_sc_IndexedSeqOps(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.collection.IndexedSeqOps;", depth))
 }
 function $f_sc_Iterable__toString__T($thiz) {
   var start = ($thiz.className__T() + "(");
