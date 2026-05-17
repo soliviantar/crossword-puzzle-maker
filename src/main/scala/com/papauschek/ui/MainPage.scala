@@ -25,6 +25,7 @@ class MainPage:
   private val outputPuzzleElement = dom.document.getElementById("output-puzzle")
   private val outputCluesElement = dom.document.getElementById("output-clues")
   private val resultInfoElement = dom.document.getElementById("result-info")
+  private val wordInclusionStatusElement = dom.document.getElementById("word-inclusion-status").asInstanceOf[org.scalajs.dom.html.Element]
 
   private val generateButton = dom.document.getElementById("generate-button").asInstanceOf[Button]
   private val generateSpinner = dom.document.getElementById("generate-spinner").asInstanceOf[Div]
@@ -263,6 +264,13 @@ class MainPage:
     val unusedWords = mainInputWords.filterNot(refinedPuzzle.words.contains)
     val extraWords = refinedPuzzle.words -- initialPuzzle.words
     resultInfoElement.innerHTML = HtmlRenderer.renderPuzzleInfo(refinedPuzzle, unusedWords)
+    
+    if (unusedWords.isEmpty) {
+      wordInclusionStatusElement.innerHTML = "<strong>All your words were included.</strong>"
+    } else {
+      wordInclusionStatusElement.innerHTML = s"<strong>The following words were not used:</strong> ${unusedWords.mkString(", ")}"
+    }
+
     outputCluesElement.innerHTML = HtmlRenderer.renderClues(
       refinedPuzzle,
       extraWords,

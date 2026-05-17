@@ -1985,6 +1985,7 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_outputPuzzleElement = null;
   this.Lcom_papauschek_ui_MainPage__f_outputCluesElement = null;
   this.Lcom_papauschek_ui_MainPage__f_resultInfoElement = null;
+  this.Lcom_papauschek_ui_MainPage__f_wordInclusionStatusElement = null;
   this.Lcom_papauschek_ui_MainPage__f_generateButton = null;
   this.Lcom_papauschek_ui_MainPage__f_generateSpinner = null;
   this.Lcom_papauschek_ui_MainPage__f_resultPartialElement = null;
@@ -2035,6 +2036,7 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_outputPuzzleElement = document.getElementById("output-puzzle");
   this.Lcom_papauschek_ui_MainPage__f_outputCluesElement = document.getElementById("output-clues");
   this.Lcom_papauschek_ui_MainPage__f_resultInfoElement = document.getElementById("result-info");
+  this.Lcom_papauschek_ui_MainPage__f_wordInclusionStatusElement = document.getElementById("word-inclusion-status");
   this.Lcom_papauschek_ui_MainPage__f_generateButton = document.getElementById("generate-button");
   this.Lcom_papauschek_ui_MainPage__f_generateSpinner = document.getElementById("generate-spinner");
   var resultWithoutElement = document.getElementById("result-without");
@@ -2311,6 +2313,13 @@ $c_Lcom_papauschek_ui_MainPage.prototype.renderSolution__V = (function() {
   var that = $n(this.Lcom_papauschek_ui_MainPage__f_initialPuzzle).Lcom_papauschek_puzzle_Puzzle__f_words;
   var extraWords = $as_sci_Set(this$1.removedAll__sc_IterableOnce__sci_SetOps(that));
   this.Lcom_papauschek_ui_MainPage__f_resultInfoElement.innerHTML = $m_Lcom_papauschek_ui_HtmlRenderer$().renderPuzzleInfo__Lcom_papauschek_puzzle_Puzzle__sci_Seq__T(this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle, unusedWords);
+  if ($n(unusedWords).isEmpty__Z()) {
+    this.Lcom_papauschek_ui_MainPage__f_wordInclusionStatusElement.innerHTML = "<strong>All your words were included.</strong>"
+  } else {
+    var $x_2 = this.Lcom_papauschek_ui_MainPage__f_wordInclusionStatusElement;
+    var this$2 = $n(unusedWords);
+    $x_2.innerHTML = ("<strong>The following words were not used:</strong> " + $f_sc_IterableOnceOps__mkString__T__T__T__T(this$2, "", ", ", ""))
+  };
   this.Lcom_papauschek_ui_MainPage__f_outputCluesElement.innerHTML = $m_Lcom_papauschek_ui_HtmlRenderer$().renderClues__Lcom_papauschek_puzzle_Puzzle__sci_Set__sci_Map__Z__Z__T(this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle, extraWords, this.Lcom_papauschek_ui_MainPage__f_wordClues, $uZ(this.Lcom_papauschek_ui_MainPage__f_showSolutionsCheckbox.checked), $uZ(this.Lcom_papauschek_ui_MainPage__f_showCluesCheckbox.checked))
 });
 $c_Lcom_papauschek_ui_MainPage.prototype.refineSolution__V = (function() {
