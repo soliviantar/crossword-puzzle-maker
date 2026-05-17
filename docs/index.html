@@ -12,6 +12,16 @@
             display: none;
         }
     </style>
+    <style>
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+        .spinning {
+            display: inline-block;
+            animation: spin 0.8s linear infinite;
+        }
+    </style>
 </head>
 
 <body>
@@ -182,6 +192,7 @@ VUELVAN
                     <div class="d-flex justify-content-end align-items-center mb-3 mt-4">
                         <label for="main-title-input" class="form-label mb-0 me-2 print-hidden">Title:</label>
                         <input type="text" class="form-control w-auto me-3 print-hidden" id="main-title-input" value="Crossword Puzzle Generator">
+                        <button type="button" class="btn btn-outline-primary me-2" id="refresh-button"><i class="bi bi-arrow-clockwise"></i> New Variant</button>
                         <button type="button" class="btn btn-secondary" id="print-button"><i class="bi bi-printer-fill"></i> Print</button>
                     </div>
                 </div>

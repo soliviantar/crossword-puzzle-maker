@@ -122,6 +122,39 @@ case class Puzzle(chars: Array[Char],
       // test ends of word
       if (vertical) (!hasChar(x, y - 1) && !hasChar(x, y + word.length))
       else (!hasChar(x - 1, y) && !hasChar(x + word.length, y))
+    } && !hasAnnotationOverlap(word, vertical, x, y)
+
+  /** @return true if placing the given word would cause two word-number labels to
+   *          render inside the same empty cell, causing visual overlap.
+   *
+   *  The layout rule is:
+   *    - A horizontal word starting at (wx, wy) draws its number to the LEFT,
+   *      occupying the empty cell at (wx-1, wy).
+   *    - A vertical word starting at (vx, vy) draws its number ABOVE,
+   *      occupying the empty cell at (vx, vy-1).
+   *
+   *  Conflict: if (wx-1, wy) == (vx, vy-1), i.e. wx-1 == vx AND wy == vy-1,
+   *  both numbers land in the same empty cell.
+   *  Rearranging: vx = wx-1, vy = wy+1  →  a horizontal word at (wx,wy) conflicts
+   *  with a vertical word at (wx-1, wy+1), and vice-versa. */
+  private def hasAnnotationOverlap(word: String, vertical: Boolean, x: Int, y: Int): Boolean =
+    if (vertical) {
+      // New word is VERTICAL starting at (x, y).
+      // Conflict: a horizontal word already starts at (x+1, y-1).
+      // A horizontal word start at (hx, hy) means: hasChar(hx,hy) && isEmpty(hx-1,hy)
+      val hx = x + 1
+      val hy = y - 1
+      hx < config.width && hy >= 0 &&
+        hasChar(hx, hy) && isEmpty(hx - 1, hy) &&
+        isEmpty(hx, hy - 1) // extra guard: (hx,hy) is indeed a word-start, not mid-word
+    } else {
+      // New word is HORIZONTAL starting at (x, y).
+      // Conflict: a vertical word already starts at (x-1, y+1).
+      val vx = x - 1
+      val vy = y + 1
+      vx >= 0 && vy < config.height &&
+        hasChar(vx, vy) && isEmpty(vx, vy - 1) &&
+        isEmpty(vx - 1, vy) // extra guard: (vx,vy) is indeed a word-start, not mid-word
     }
 
   /** @return a simple text representation of the crossword puzzle, for debugging */

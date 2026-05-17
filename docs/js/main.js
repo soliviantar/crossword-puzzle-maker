@@ -1922,6 +1922,16 @@ function $m_Lcom_papauschek_ui_HtmlRenderer$() {
   };
   return $n_Lcom_papauschek_ui_HtmlRenderer$
 }
+function $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V($thiz) {
+  var newTitle = $as_T($thiz.Lcom_papauschek_ui_MainPage__f_mainTitleInputElement.value);
+  $thiz.Lcom_papauschek_ui_MainPage__f_mainTitleElement.textContent = newTitle;
+  var this$1 = $n($f_T__trim__T($n(newTitle)));
+  if ((this$1 === "")) {
+    $thiz.Lcom_papauschek_ui_MainPage__f_mainTitleElement.style.display = "none"
+  } else {
+    $thiz.Lcom_papauschek_ui_MainPage__f_mainTitleElement.style.display = "block"
+  }
+}
 function $p_Lcom_papauschek_ui_MainPage__normalizeWord__T__T($thiz, word) {
   var this$1 = $n($f_T__trim__T($n(word)));
   var this$2 = $n($as_T(this$1.toUpperCase()));
@@ -1964,6 +1974,8 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_widthInputElement = null;
   this.Lcom_papauschek_ui_MainPage__f_heightInputElement = null;
   this.Lcom_papauschek_ui_MainPage__f_languageSelect = null;
+  this.Lcom_papauschek_ui_MainPage__f_refreshButton = null;
+  this.Lcom_papauschek_ui_MainPage__f_refreshIcon = null;
   this.Lcom_papauschek_ui_MainPage__f_resultRow = null;
   this.Lcom_papauschek_ui_MainPage__f_refineRow = null;
   this.Lcom_papauschek_ui_MainPage__f_cluesRow = null;
@@ -2013,6 +2025,8 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_heightInputElement = document.getElementById("height");
   this.Lcom_papauschek_ui_MainPage__f_languageSelect = document.getElementById("language-select");
   var refineButton = document.getElementById("refine-button");
+  this.Lcom_papauschek_ui_MainPage__f_refreshButton = document.getElementById("refresh-button");
+  this.Lcom_papauschek_ui_MainPage__f_refreshIcon = this.Lcom_papauschek_ui_MainPage__f_refreshButton.querySelector("i");
   var printButton = document.getElementById("print-button");
   this.Lcom_papauschek_ui_MainPage__f_resultRow = document.getElementById("result-row");
   this.Lcom_papauschek_ui_MainPage__f_refineRow = document.getElementById("refine-row");
@@ -2020,88 +2034,95 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_mainTitleElement = document.getElementById("main-title");
   this.Lcom_papauschek_ui_MainPage__f_mainTitleInputElement = document.getElementById("main-title-input");
   this.Lcom_papauschek_ui_MainPage__f_mainTitleInputElement.addEventListener("input", ((_$1) => {
-    this.Lcom_papauschek_ui_MainPage__f_mainTitleElement.innerText = $as_T(this.Lcom_papauschek_ui_MainPage__f_mainTitleInputElement.value)
+    $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V(this)
   }));
-  this.Lcom_papauschek_ui_MainPage__f_generateButton.addEventListener("click", ((_$2) => {
+  this.Lcom_papauschek_ui_MainPage__f_mainTitleInputElement.addEventListener("change", ((_$2) => {
+    $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V(this)
+  }));
+  $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V(this);
+  this.Lcom_papauschek_ui_MainPage__f_generateButton.addEventListener("click", ((_$3) => {
     this.generateSolution__V()
   }));
-  refineButton.addEventListener("click", ((_$3) => {
+  refineButton.addEventListener("click", ((_$4) => {
     this.refineSolution__V()
   }));
-  printButton.addEventListener("click", ((_$4) => {
+  this.Lcom_papauschek_ui_MainPage__f_refreshButton.addEventListener("click", ((_$5) => {
+    this.generateSolution__V()
+  }));
+  printButton.addEventListener("click", ((_$6) => {
     this.printSolution__V()
   }));
-  resultWithoutElement.addEventListener("click", ((_$5) => {
+  resultWithoutElement.addEventListener("click", ((_$7) => {
     this.hidePartialSubmenu__V();
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_resultPartialElement.addEventListener("click", ((_$6) => {
+  this.Lcom_papauschek_ui_MainPage__f_resultPartialElement.addEventListener("click", ((_$8) => {
     this.showPartialSubmenu__V();
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_resultFullElement.addEventListener("click", ((_$7) => {
+  this.Lcom_papauschek_ui_MainPage__f_resultFullElement.addEventListener("click", ((_$9) => {
     this.hidePartialSubmenu__V();
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_partialRandomElement.addEventListener("click", ((_$8) => {
+  this.Lcom_papauschek_ui_MainPage__f_partialRandomElement.addEventListener("click", ((_$10) => {
     this.hideCustomInput__V();
     this.hideOddevenOptions__V();
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_partialOddElement.addEventListener("click", ((_$9) => {
+  this.Lcom_papauschek_ui_MainPage__f_partialOddElement.addEventListener("click", ((_$11) => {
     this.hideCustomInput__V();
     this.hideOddevenOptions__V();
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_partialEvenElement.addEventListener("click", ((_$10) => {
+  this.Lcom_papauschek_ui_MainPage__f_partialEvenElement.addEventListener("click", ((_$12) => {
     this.hideCustomInput__V();
     this.hideOddevenOptions__V();
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_partialOddEvenElement.addEventListener("click", ((_$11) => {
+  this.Lcom_papauschek_ui_MainPage__f_partialOddEvenElement.addEventListener("click", ((_$13) => {
     this.hideCustomInput__V();
     this.showOddevenOptions__V();
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_partialCustomElement.addEventListener("click", ((_$12) => {
+  this.Lcom_papauschek_ui_MainPage__f_partialCustomElement.addEventListener("click", ((_$14) => {
     this.showCustomInput__V();
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_customWordNumbersElement.addEventListener("input", ((_$13) => {
+  this.Lcom_papauschek_ui_MainPage__f_customWordNumbersElement.addEventListener("input", ((_$15) => {
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_gridName1Element.addEventListener("input", ((_$14) => {
+  this.Lcom_papauschek_ui_MainPage__f_gridName1Element.addEventListener("input", ((_$16) => {
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_gridName2Element.addEventListener("input", ((_$15) => {
+  this.Lcom_papauschek_ui_MainPage__f_gridName2Element.addEventListener("input", ((_$17) => {
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_titleSizeElement.addEventListener("input", ((_$16) => {
+  this.Lcom_papauschek_ui_MainPage__f_titleSizeElement.addEventListener("input", ((_$18) => {
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Element.addEventListener("input", ((_$17) => {
+  this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Element.addEventListener("input", ((_$19) => {
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_gridInstruction2Element.addEventListener("input", ((_$18) => {
+  this.Lcom_papauschek_ui_MainPage__f_gridInstruction2Element.addEventListener("input", ((_$20) => {
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_instructionFontSizeElement.addEventListener("input", ((_$19) => {
+  this.Lcom_papauschek_ui_MainPage__f_instructionFontSizeElement.addEventListener("input", ((_$21) => {
     this.renderSolution__V()
   }));
   this.showPartialSubmenu__V();
-  this.Lcom_papauschek_ui_MainPage__f_numberLightGrayElement.addEventListener("click", ((_$20) => {
+  this.Lcom_papauschek_ui_MainPage__f_numberLightGrayElement.addEventListener("click", ((_$22) => {
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_numberDarkGrayElement.addEventListener("click", ((_$21) => {
+  this.Lcom_papauschek_ui_MainPage__f_numberDarkGrayElement.addEventListener("click", ((_$23) => {
     this.renderSolution__V()
   }));
-  numberBlackElement.addEventListener("click", ((_$22) => {
+  numberBlackElement.addEventListener("click", ((_$24) => {
     this.renderSolution__V()
   }));
-  this.Lcom_papauschek_ui_MainPage__f_letterUppercaseElement.addEventListener("click", ((_$23) => {
+  this.Lcom_papauschek_ui_MainPage__f_letterUppercaseElement.addEventListener("click", ((_$25) => {
     this.renderSolution__V()
   }));
-  letterLowercaseElement.addEventListener("click", ((_$24) => {
+  letterLowercaseElement.addEventListener("click", ((_$26) => {
     this.renderSolution__V()
   }))
 }
@@ -2145,6 +2166,8 @@ $c_Lcom_papauschek_ui_MainPage.prototype.generateSolution__V = (function() {
     var puzzleConfig = new $c_Lcom_papauschek_puzzle_PuzzleConfig(width, height, wrapping);
     this.Lcom_papauschek_ui_MainPage__f_generateSpinner.classList.remove("invisible");
     this.Lcom_papauschek_ui_MainPage__f_generateButton.classList.add("invisible");
+    this.Lcom_papauschek_ui_MainPage__f_refreshIcon.classList.add("spinning");
+    this.Lcom_papauschek_ui_MainPage__f_refreshButton.disabled = true;
     var $x_1 = $m_Lcom_papauschek_ui_PuzzleGenerator$();
     $m_Lcom_papauschek_ui_NewPuzzleMessage$();
     var words = this.Lcom_papauschek_ui_MainPage__f_mainInputWords;
@@ -2152,13 +2175,15 @@ $c_Lcom_papauschek_ui_MainPage.prototype.generateSolution__V = (function() {
       var puzzles$1 = $as_sci_Seq(puzzles);
       this.Lcom_papauschek_ui_MainPage__f_generateSpinner.classList.add("invisible");
       this.Lcom_papauschek_ui_MainPage__f_generateButton.classList.remove("invisible");
+      this.Lcom_papauschek_ui_MainPage__f_refreshIcon.classList.remove("spinning");
+      this.Lcom_papauschek_ui_MainPage__f_refreshButton.disabled = false;
       this.Lcom_papauschek_ui_MainPage__f_resultRow.classList.remove("invisible");
       this.Lcom_papauschek_ui_MainPage__f_refineRow.classList.remove("invisible");
       this.Lcom_papauschek_ui_MainPage__f_cluesRow.classList.remove("invisible");
       var this$14 = $n(puzzles$1);
-      var f$1 = new $c_sjsr_AnonFunction1(((_$25) => {
-        var _$25$1 = $as_Lcom_papauschek_puzzle_Puzzle(_$25);
-        return $n(_$25$1).Lcom_papauschek_puzzle_Puzzle__f_density
+      var f$1 = new $c_sjsr_AnonFunction1(((_$27) => {
+        var _$27$1 = $as_Lcom_papauschek_puzzle_Puzzle(_$27);
+        return $n(_$27$1).Lcom_papauschek_puzzle_Puzzle__f_density
       }));
       var ord = $m_s_math_Ordering$DeprecatedDoubleOrdering$();
       this.Lcom_papauschek_ui_MainPage__f_initialPuzzle = $as_Lcom_papauschek_puzzle_Puzzle($f_sc_IterableOnceOps__maxBy__F1__s_math_Ordering__O(this$14, f$1, ord));
@@ -2219,8 +2244,8 @@ $c_Lcom_papauschek_ui_MainPage.prototype.refineSolution__V = (function() {
   var i = 0;
   while ((i < len)) {
     var arg1 = array[i];
-    var _$26 = $as_T(arg1);
-    var this$5 = $n(_$26);
+    var _$28 = $as_T(arg1);
+    var this$5 = $n(_$28);
     if ((this$5.length >= 4)) {
       $uI(res.push(arg1))
     };
@@ -23935,18 +23960,34 @@ function $p_Lcom_papauschek_puzzle_Puzzle__fits__T__Z__I__I__Z($thiz, word, vert
     if (vertical) {
       if ((!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, x, (((-1) + y) | 0)))) {
         var this$13 = $n(word);
-        return (!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, x, ((y + this$13.length) | 0)))
+        var $x_1 = (!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, x, ((y + this$13.length) | 0)))
       } else {
-        return false
+        var $x_1 = false
       }
     } else if ((!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, (((-1) + x) | 0), y))) {
       var this$14 = $n(word);
-      return (!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, ((x + this$14.length) | 0), y))
+      var $x_1 = (!$p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, ((x + this$14.length) | 0), y))
     } else {
-      return false
+      var $x_1 = false
     }
   } else {
+    var $x_1 = false
+  };
+  if ($x_1) {
+    return (!$p_Lcom_papauschek_puzzle_Puzzle__hasAnnotationOverlap__T__Z__I__I__Z($thiz, word, vertical, x, y))
+  } else {
     return false
+  }
+}
+function $p_Lcom_papauschek_puzzle_Puzzle__hasAnnotationOverlap__T__Z__I__I__Z($thiz, word, vertical, x, y) {
+  if (vertical) {
+    var hx = ((1 + x) | 0);
+    var hy = (((-1) + y) | 0);
+    return (((((hx < $n($thiz.Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width) && (hy >= 0)) && $p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, hx, hy)) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, (((-1) + hx) | 0), hy)) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, hx, (((-1) + hy) | 0)))
+  } else {
+    var vx = (((-1) + x) | 0);
+    var vy = ((1 + y) | 0);
+    return (((((vx >= 0) && (vy < $n($thiz.Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_height)) && $p_Lcom_papauschek_puzzle_Puzzle__hasChar__I__I__Z($thiz, vx, vy)) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, vx, (((-1) + vy) | 0))) && $p_Lcom_papauschek_puzzle_Puzzle__isEmpty__I__I__Z($thiz, (((-1) + vx) | 0), vy))
   }
 }
 function $p_Lcom_papauschek_puzzle_Puzzle__matchesWordAtLocation__T__I__I__Z__Z($thiz, word, x, y, vertical) {
