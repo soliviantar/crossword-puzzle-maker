@@ -31,7 +31,8 @@ object HtmlRenderer:
                    titleSize: String = "24",
                    gridInstruction1: String = "",
                    gridInstruction2: String = "",
-                   instructionFontSize: String = "16"): String =
+                   instructionFontSize: String = "16",
+                   mainTitle: String = ""): String =
 
     val annotation = puzzle.getAnnotation
 
@@ -142,7 +143,7 @@ object HtmlRenderer:
     val renderedPuzzle = (0 until puzzle.config.height).map(renderHeight).mkString("\r\n")
 
     // Handle oddeven mode by rendering two separate grids
-    if (showPartialSolution && partialMode == "oddeven") {
+    val resultHtml = if (showPartialSolution && partialMode == "oddeven") {
       val oddWordNumbers = annotation.values.flatten.map(_.index).filter(_ % 2 == 1).toSet
       val evenWordNumbers = annotation.values.flatten.map(_.index).filter(_ % 2 == 0).toSet
 
@@ -226,7 +227,7 @@ object HtmlRenderer:
          |  ${renderGrid(evenWordNumbers)}
          |</div>""".stripMargin
     } else {
-      s"""<svg viewBox="-8 -8 ${puzzle.config.width * 10 + 15} ${puzzle.config.height * 10 + 15}">
+      val svg = s"""<svg viewBox="-8 -8 ${puzzle.config.width * 10 + 15} ${puzzle.config.height * 10 + 15}">
         |  <style>
         |    .annotation-horizontal {
         |      font: 5px sans-serif;
@@ -243,7 +244,27 @@ object HtmlRenderer:
         |  </style>
         |  $renderedPuzzle
         |</svg>""".stripMargin
+
+      if (gridName1.nonEmpty || gridInstruction1.nonEmpty) {
+        s"""<div>
+           |  <div class="d-flex align-items-center mb-3">
+           |    ${if (gridName1.nonEmpty) s"""<h3 style="font-size: ${titleSize}px; margin: 0;">${gridName1}</h3>""" else ""}
+           |    ${if (gridInstruction1.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px; white-space: pre-wrap;">${gridInstruction1}</p>""" else ""}
+           |  </div>
+           |  $svg
+           |</div>""".stripMargin
+      } else {
+        svg
+      }
     }
+
+    val displayTitle = if (mainTitle.trim.isEmpty) "\u00a0" else mainTitle
+    s"""<div>
+       |  <div class="text-center mb-4">
+       |    <h2 style="font-size: 32px; font-weight: bold; margin: 0 0 15px 0;">$displayTitle</h2>
+       |  </div>
+       |  $resultHtml
+       |</div>""".stripMargin
 
 
   val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

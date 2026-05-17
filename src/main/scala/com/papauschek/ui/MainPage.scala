@@ -44,7 +44,10 @@ class MainPage:
   private val customInputContainer = dom.document.getElementById("custom-input-container").asInstanceOf[org.scalajs.dom.html.Element]
   private val customWordNumbersElement = dom.document.getElementById("custom-word-numbers").asInstanceOf[Input]
 
+  private val commonGridOptionsContainer = dom.document.getElementById("common-grid-options-container").asInstanceOf[org.scalajs.dom.html.Element]
   private val oddevenOptionsContainer = dom.document.getElementById("oddeven-options-container").asInstanceOf[org.scalajs.dom.html.Element]
+  private val gridTitle1Label = dom.document.getElementById("grid-title-1-label").asInstanceOf[org.scalajs.dom.html.Label]
+  private val gridInstruction1Label = dom.document.getElementById("grid-instruction-1-label").asInstanceOf[org.scalajs.dom.html.Label]
   private val gridName1Element = dom.document.getElementById("grid-name-1").asInstanceOf[Input]
   private val gridName2Element = dom.document.getElementById("grid-name-2").asInstanceOf[Input]
   private val titleSizeElement = dom.document.getElementById("title-size").asInstanceOf[Input]
@@ -82,8 +85,14 @@ class MainPage:
     mainTitleElement.style.display = "block"
   }
 
-  mainTitleInputElement.addEventListener("input", { _ => updateMainTitle() })
-  mainTitleInputElement.addEventListener("change", { _ => updateMainTitle() })
+  mainTitleInputElement.addEventListener("input", { _ => 
+    updateMainTitle()
+    renderSolution()
+  })
+  mainTitleInputElement.addEventListener("change", { _ => 
+    updateMainTitle()
+    renderSolution()
+  })
   updateMainTitle()
 
   generateButton.addEventListener("click", { _ => generateSolution() })
@@ -93,6 +102,8 @@ class MainPage:
 
   resultWithoutElement.addEventListener("click", { _ => 
     hidePartialSubmenu()
+    hideCustomInput()
+    hideOddevenOptions()
     renderSolution()
   })
   resultPartialElement.addEventListener("click", { _ => 
@@ -101,6 +112,8 @@ class MainPage:
   })
   resultFullElement.addEventListener("click", { _ => 
     hidePartialSubmenu()
+    hideCustomInput()
+    hideOddevenOptions()
     renderSolution()
   })
 
@@ -126,6 +139,7 @@ class MainPage:
   })
   partialCustomElement.addEventListener("click", { _ => 
     showCustomInput()
+    hideOddevenOptions()
     renderSolution()
   })
   
@@ -209,10 +223,24 @@ class MainPage:
 
   /** show oddeven options container */
   def showOddevenOptions(): Unit =
+    commonGridOptionsContainer.className = "col-12 col-lg-6"
+    gridTitle1Label.textContent = "First Grid Title:"
+    gridInstruction1Label.textContent = "First Grid Instructions:"
+    gridInstruction1Element.placeholder = "Instructions for the first grid"
+    if (gridName1Element.value.isEmpty) {
+      gridName1Element.value = "A"
+    }
     oddevenOptionsContainer.style.display = "block"
 
   /** hide oddeven options container */
   def hideOddevenOptions(): Unit =
+    commonGridOptionsContainer.className = "col-12"
+    gridTitle1Label.textContent = "Grid Title:"
+    gridInstruction1Label.textContent = "Instructions:"
+    gridInstruction1Element.placeholder = "Instructions for the grid"
+    if (gridName1Element.value == "A") {
+      gridName1Element.value = ""
+    }
     oddevenOptionsContainer.style.display = "none"
 
   /** show the generated puzzle */
@@ -259,7 +287,8 @@ class MainPage:
       titleSize = titleSize,
       gridInstruction1 = gridInstruction1,
       gridInstruction2 = gridInstruction2,
-      instructionFontSize = instructionFontSize)
+      instructionFontSize = instructionFontSize,
+      mainTitle = mainTitleInputElement.value)
 
     val unusedWords = mainInputWords.filterNot(refinedPuzzle.words.contains)
     val extraWords = refinedPuzzle.words -- initialPuzzle.words

@@ -1643,7 +1643,7 @@ function $h_Lcom_papauschek_ui_HtmlRenderer$() {
   /*<skip>*/
 }
 $h_Lcom_papauschek_ui_HtmlRenderer$.prototype = $c_Lcom_papauschek_ui_HtmlRenderer$.prototype;
-$c_Lcom_papauschek_ui_HtmlRenderer$.prototype.renderPuzzle__Lcom_papauschek_puzzle_Puzzle__Z__Z__T__T__T__T__T__T__T__T__T__T__T = (function(puzzle, showSolution, showPartialSolution, partialMode, customWordNumbers, numberColor, letterCase, gridName1, gridName2, titleSize, gridInstruction1, gridInstruction2, instructionFontSize) {
+$c_Lcom_papauschek_ui_HtmlRenderer$.prototype.renderPuzzle__Lcom_papauschek_puzzle_Puzzle__Z__Z__T__T__T__T__T__T__T__T__T__T__T__T = (function(puzzle, showSolution, showPartialSolution, partialMode, customWordNumbers, numberColor, letterCase, gridName1, gridName2, titleSize, gridInstruction1, gridInstruction2, instructionFontSize, mainTitle) {
   var annotation = $n(puzzle).getAnnotation__sci_Map();
   if (showPartialSolution) {
     var visiblePoints;
@@ -1905,12 +1905,46 @@ $c_Lcom_papauschek_ui_HtmlRenderer$.prototype.renderPuzzle__Lcom_papauschek_puzz
     $m_sc_StringOps$();
     var this$65 = $n(gridInstruction2);
     var x$1 = (((((((((((((((("<div>\r\n         |  <div class=\"d-flex align-items-center mb-3\">\r\n         |    <h3 style=\"font-size: " + titleSize) + "px; margin: 0;\">") + gridName1) + "</h3>\r\n         |    ") + $x_13) + "\r\n         |  </div>\r\n         |  ") + $x_12) + "\r\n         |  <div class=\"d-flex align-items-center mb-3 mt-4\">\r\n         |    <h3 style=\"font-size: ") + titleSize) + "px; margin: 0;\">") + gridName2) + "</h3>\r\n         |    ") + ((!(this$65 === "")) ? (((("<p class=\"mb-0 ms-3\" style=\"font-size: " + instructionFontSize) + "px; white-space: pre-wrap;\">") + gridInstruction2) + "</p>") : "")) + "\r\n         |  </div>\r\n         |  ") + $p_Lcom_papauschek_ui_HtmlRenderer$__renderGrid$1__Lcom_papauschek_puzzle_Puzzle__sci_Map__T__T__sci_Set__T(this, puzzle, annotation, letterCase, numberColor, evenWordNumbers$2)) + "\r\n         |</div>");
-    return $m_sc_StringOps$().stripMargin$extension__T__C__T(x$1, 124)
+    var resultHtml = $m_sc_StringOps$().stripMargin$extension__T__C__T(x$1, 124)
   } else {
     $m_sc_StringOps$();
     var x$2 = (((((((((("<svg viewBox=\"-8 -8 " + ((15 + Math.imul(10, $n($n(puzzle).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width)) | 0)) + " ") + ((15 + Math.imul(10, $n($n(puzzle).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_height)) | 0)) + "\">\r\n        |  <style>\r\n        |    .annotation-horizontal {\r\n        |      font: 5px sans-serif;\r\n        |      fill: ") + numberColor) + ";\r\n        |    }\r\n        |    .annotation-vertical {\r\n        |      font: 5px sans-serif;\r\n        |      fill: ") + numberColor) + ";\r\n        |    }\r\n        |    .letter {\r\n        |      font: 8px sans-serif;\r\n        |      fill: black;\r\n        |    }\r\n        |  </style>\r\n        |  ") + renderedPuzzle) + "\r\n        |</svg>");
-    return $m_sc_StringOps$().stripMargin$extension__T__C__T(x$2, 124)
-  }
+    var svg = $m_sc_StringOps$().stripMargin$extension__T__C__T(x$2, 124);
+    $m_sc_StringOps$();
+    var this$72 = $n(gridName1);
+    if ((!(this$72 === ""))) {
+      var $x_14 = true
+    } else {
+      $m_sc_StringOps$();
+      var this$75 = $n(gridInstruction1);
+      var $x_14 = (!(this$75 === ""))
+    };
+    if ($x_14) {
+      $m_sc_StringOps$();
+      $m_sc_StringOps$();
+      var this$78 = $n(gridName1);
+      if ((!(this$78 === ""))) {
+        var $x_15 = (((("<h3 style=\"font-size: " + titleSize) + "px; margin: 0;\">") + gridName1) + "</h3>")
+      } else {
+        var $x_15 = ""
+      };
+      $m_sc_StringOps$();
+      var this$81 = $n(gridInstruction1);
+      var x$3 = (((((("<div>\r\n           |  <div class=\"d-flex align-items-center mb-3\">\r\n           |    " + $x_15) + "\r\n           |    ") + ((!(this$81 === "")) ? (((("<p class=\"mb-0 ms-3\" style=\"font-size: " + instructionFontSize) + "px; white-space: pre-wrap;\">") + gridInstruction1) + "</p>") : "")) + "\r\n           |  </div>\r\n           |  ") + svg) + "\r\n           |</div>");
+      var resultHtml = $m_sc_StringOps$().stripMargin$extension__T__C__T(x$3, 124)
+    } else {
+      var resultHtml = svg
+    }
+  };
+  var this$84 = $n($f_T__trim__T($n(mainTitle)));
+  if ((this$84 === "")) {
+    var displayTitle = "\u00a0"
+  } else {
+    var displayTitle = mainTitle
+  };
+  $m_sc_StringOps$();
+  var x$4 = (((("<div>\r\n       |  <div class=\"text-center mb-4\">\r\n       |    <h2 style=\"font-size: 32px; font-weight: bold; margin: 0 0 15px 0;\">" + displayTitle) + "</h2>\r\n       |  </div>\r\n       |  ") + resultHtml) + "\r\n       |</div>");
+  return $m_sc_StringOps$().stripMargin$extension__T__C__T(x$4, 124)
 });
 $c_Lcom_papauschek_ui_HtmlRenderer$.prototype.renderClues__Lcom_papauschek_puzzle_Puzzle__sci_Set__sci_Map__Z__Z__T = (function(puzzle, extraWords, wordClues, showSolutions, showClues) {
   var this$2 = $n($n(puzzle).getFullAnnotation__sci_Seq());
@@ -1998,7 +2032,10 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_partialCustomElement = null;
   this.Lcom_papauschek_ui_MainPage__f_customInputContainer = null;
   this.Lcom_papauschek_ui_MainPage__f_customWordNumbersElement = null;
+  this.Lcom_papauschek_ui_MainPage__f_commonGridOptionsContainer = null;
   this.Lcom_papauschek_ui_MainPage__f_oddevenOptionsContainer = null;
+  this.Lcom_papauschek_ui_MainPage__f_gridTitle1Label = null;
+  this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Label = null;
   this.Lcom_papauschek_ui_MainPage__f_gridName1Element = null;
   this.Lcom_papauschek_ui_MainPage__f_gridName2Element = null;
   this.Lcom_papauschek_ui_MainPage__f_titleSizeElement = null;
@@ -2050,7 +2087,10 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_partialCustomElement = document.getElementById("partial-custom");
   this.Lcom_papauschek_ui_MainPage__f_customInputContainer = document.getElementById("custom-input-container");
   this.Lcom_papauschek_ui_MainPage__f_customWordNumbersElement = document.getElementById("custom-word-numbers");
+  this.Lcom_papauschek_ui_MainPage__f_commonGridOptionsContainer = document.getElementById("common-grid-options-container");
   this.Lcom_papauschek_ui_MainPage__f_oddevenOptionsContainer = document.getElementById("oddeven-options-container");
+  this.Lcom_papauschek_ui_MainPage__f_gridTitle1Label = document.getElementById("grid-title-1-label");
+  this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Label = document.getElementById("grid-instruction-1-label");
   this.Lcom_papauschek_ui_MainPage__f_gridName1Element = document.getElementById("grid-name-1");
   this.Lcom_papauschek_ui_MainPage__f_gridName2Element = document.getElementById("grid-name-2");
   this.Lcom_papauschek_ui_MainPage__f_titleSizeElement = document.getElementById("title-size");
@@ -2075,10 +2115,12 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_mainTitleElement = document.getElementById("main-title");
   this.Lcom_papauschek_ui_MainPage__f_mainTitleInputElement = document.getElementById("main-title-input");
   this.Lcom_papauschek_ui_MainPage__f_mainTitleInputElement.addEventListener("input", ((_$1) => {
-    $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V(this)
+    $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V(this);
+    this.renderSolution__V()
   }));
   this.Lcom_papauschek_ui_MainPage__f_mainTitleInputElement.addEventListener("change", ((_$2) => {
-    $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V(this)
+    $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V(this);
+    this.renderSolution__V()
   }));
   $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V(this);
   this.Lcom_papauschek_ui_MainPage__f_generateButton.addEventListener("click", ((_$3) => {
@@ -2095,6 +2137,8 @@ function $c_Lcom_papauschek_ui_MainPage() {
   }));
   resultWithoutElement.addEventListener("click", ((_$7) => {
     this.hidePartialSubmenu__V();
+    this.hideCustomInput__V();
+    this.hideOddevenOptions__V();
     this.renderSolution__V()
   }));
   this.Lcom_papauschek_ui_MainPage__f_resultPartialElement.addEventListener("click", ((_$8) => {
@@ -2103,6 +2147,8 @@ function $c_Lcom_papauschek_ui_MainPage() {
   }));
   this.Lcom_papauschek_ui_MainPage__f_resultFullElement.addEventListener("click", ((_$9) => {
     this.hidePartialSubmenu__V();
+    this.hideCustomInput__V();
+    this.hideOddevenOptions__V();
     this.renderSolution__V()
   }));
   this.Lcom_papauschek_ui_MainPage__f_partialRandomElement.addEventListener("click", ((_$10) => {
@@ -2127,6 +2173,7 @@ function $c_Lcom_papauschek_ui_MainPage() {
   }));
   this.Lcom_papauschek_ui_MainPage__f_partialCustomElement.addEventListener("click", ((_$14) => {
     this.showCustomInput__V();
+    this.hideOddevenOptions__V();
     this.renderSolution__V()
   }));
   this.Lcom_papauschek_ui_MainPage__f_customWordNumbersElement.addEventListener("input", ((_$15) => {
@@ -2284,9 +2331,24 @@ $c_Lcom_papauschek_ui_MainPage.prototype.hideCustomInput__V = (function() {
   this.Lcom_papauschek_ui_MainPage__f_customInputContainer.style.display = "none"
 });
 $c_Lcom_papauschek_ui_MainPage.prototype.showOddevenOptions__V = (function() {
+  this.Lcom_papauschek_ui_MainPage__f_commonGridOptionsContainer.className = "col-12 col-lg-6";
+  this.Lcom_papauschek_ui_MainPage__f_gridTitle1Label.textContent = "First Grid Title:";
+  this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Label.textContent = "First Grid Instructions:";
+  this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Element.placeholder = "Instructions for the first grid";
+  var this$1 = $n($as_T(this.Lcom_papauschek_ui_MainPage__f_gridName1Element.value));
+  if ((this$1 === "")) {
+    this.Lcom_papauschek_ui_MainPage__f_gridName1Element.value = "A"
+  };
   this.Lcom_papauschek_ui_MainPage__f_oddevenOptionsContainer.style.display = "block"
 });
 $c_Lcom_papauschek_ui_MainPage.prototype.hideOddevenOptions__V = (function() {
+  this.Lcom_papauschek_ui_MainPage__f_commonGridOptionsContainer.className = "col-12";
+  this.Lcom_papauschek_ui_MainPage__f_gridTitle1Label.textContent = "Grid Title:";
+  this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Label.textContent = "Instructions:";
+  this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Element.placeholder = "Instructions for the grid";
+  if (($as_T(this.Lcom_papauschek_ui_MainPage__f_gridName1Element.value) === "A")) {
+    this.Lcom_papauschek_ui_MainPage__f_gridName1Element.value = ""
+  };
   this.Lcom_papauschek_ui_MainPage__f_oddevenOptionsContainer.style.display = "none"
 });
 $c_Lcom_papauschek_ui_MainPage.prototype.renderSolution__V = (function() {
@@ -2302,7 +2364,7 @@ $c_Lcom_papauschek_ui_MainPage.prototype.renderSolution__V = (function() {
   var gridInstruction1 = $as_T(this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Element.value);
   var gridInstruction2 = $as_T(this.Lcom_papauschek_ui_MainPage__f_gridInstruction2Element.value);
   var instructionFontSize = $as_T(this.Lcom_papauschek_ui_MainPage__f_instructionFontSizeElement.value);
-  this.Lcom_papauschek_ui_MainPage__f_outputPuzzleElement.innerHTML = $m_Lcom_papauschek_ui_HtmlRenderer$().renderPuzzle__Lcom_papauschek_puzzle_Puzzle__Z__Z__T__T__T__T__T__T__T__T__T__T__T(this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle, showFullSolution, showPartialSolution, partialMode, customWordNumbers, numberColor, letterCase, gridName1, gridName2, titleSize, gridInstruction1, gridInstruction2, instructionFontSize);
+  this.Lcom_papauschek_ui_MainPage__f_outputPuzzleElement.innerHTML = $m_Lcom_papauschek_ui_HtmlRenderer$().renderPuzzle__Lcom_papauschek_puzzle_Puzzle__Z__Z__T__T__T__T__T__T__T__T__T__T__T__T(this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle, showFullSolution, showPartialSolution, partialMode, customWordNumbers, numberColor, letterCase, gridName1, gridName2, titleSize, gridInstruction1, gridInstruction2, instructionFontSize, $as_T(this.Lcom_papauschek_ui_MainPage__f_mainTitleInputElement.value));
   var $x_1 = this.Lcom_papauschek_ui_MainPage__f_mainInputWords;
   var \u03b41$ = $n(this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle).Lcom_papauschek_puzzle_Puzzle__f_words;
   var unusedWords = $as_sci_Seq($n($x_1).filterNot__F1__O(new $c_sjsr_AnonFunction1(((elem) => {
