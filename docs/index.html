@@ -278,10 +278,31 @@ VUELVAN
         </div>
     </div>
 
+    <div class="row invisible" id="clues-row">
+        <div class="col">
+
+            <h2><i class="bi bi-4-circle print-hidden"></i> Solution & Clues</h2>
+
+            <div class="d-flex align-items-center mb-3 mt-3 print-hidden">
+                <span class="me-3 font-weight-bold">Show in list:</span>
+                <div class="form-check form-check-inline me-3">
+                    <input class="form-check-input" type="checkbox" id="show-clues-solutions" checked>
+                    <label class="form-check-label" for="show-clues-solutions">Solutions</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="show-clues-clues" checked>
+                    <label class="form-check-label" for="show-clues-clues">Clues</label>
+                </div>
+            </div>
+            <div id="output-clues"></div>
+
+        </div>
+    </div>
+
     <div class="row print-hidden invisible" id="refine-row">
         <div class="col">
 
-            <h2><i class="bi bi-4-circle"></i> Add additional words from a dictionary <span class="text-muted">(Optional)</span></h2>
+            <h2><i class="bi bi-5-circle"></i> Add additional words from a dictionary <span class="text-muted">(Optional)</span></h2>
             <p>You can add more words from a dictionary to your puzzle to fill any gaps. Choose from one of the available dictionaries:</p>
             <div class="row">
                 <div class="col-lg-3">
@@ -297,27 +318,6 @@ VUELVAN
                 </div>
             </div>
             <p>(click multiple times for different results)</p>
-
-        </div>
-    </div>
-
-    <div class="row invisible" id="clues-row">
-        <div class="col">
-
-            <h2><i class="bi bi-5-circle print-hidden"></i> Solution & Clues</h2>
-
-            <div class="d-flex align-items-center mb-3 mt-3 print-hidden">
-                <span class="me-3 font-weight-bold">Show in list:</span>
-                <div class="form-check form-check-inline me-3">
-                    <input class="form-check-input" type="checkbox" id="show-clues-solutions" checked>
-                    <label class="form-check-label" for="show-clues-solutions">Solutions</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="show-clues-clues" checked>
-                    <label class="form-check-label" for="show-clues-clues">Clues</label>
-                </div>
-            </div>
-            <div id="output-clues"></div>
 
         </div>
     </div>
