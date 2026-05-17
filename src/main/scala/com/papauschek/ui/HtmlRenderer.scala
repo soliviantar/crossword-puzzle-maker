@@ -210,12 +210,12 @@ object HtmlRenderer:
       s"""<div>
          |  <div class="d-flex align-items-center mb-3">
          |    <h3 style="font-size: ${titleSize}px; margin: 0;">${gridName1}</h3>
-         |    ${if (gridInstruction1.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px;">${gridInstruction1}</p>""" else ""}
+         |    ${if (gridInstruction1.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px; white-space: pre-wrap;">${gridInstruction1}</p>""" else ""}
          |  </div>
          |  ${renderGrid(oddWordNumbers)}
          |  <div class="d-flex align-items-center mb-3 mt-4">
          |    <h3 style="font-size: ${titleSize}px; margin: 0;">${gridName2}</h3>
-         |    ${if (gridInstruction2.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px;">${gridInstruction2}</p>""" else ""}
+         |    ${if (gridInstruction2.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px; white-space: pre-wrap;">${gridInstruction2}</p>""" else ""}
          |  </div>
          |  ${renderGrid(evenWordNumbers)}
          |</div>""".stripMargin

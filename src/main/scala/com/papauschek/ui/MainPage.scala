@@ -64,6 +64,13 @@ class MainPage:
   private val resultRow = dom.document.getElementById("result-row").asInstanceOf[Div]
   private val refineRow = dom.document.getElementById("refine-row").asInstanceOf[Div]
   private val cluesRow = dom.document.getElementById("clues-row").asInstanceOf[Div]
+
+  private val mainTitleElement = dom.document.getElementById("main-title")
+  private val mainTitleInputElement = dom.document.getElementById("main-title-input").asInstanceOf[Input]
+  
+  mainTitleInputElement.addEventListener("input", { _ =>
+    mainTitleElement.innerText = mainTitleInputElement.value
+  })
   
   generateButton.addEventListener("click", { _ => generateSolution() })
   refineButton.addEventListener("click", { _ => refineSolution() })

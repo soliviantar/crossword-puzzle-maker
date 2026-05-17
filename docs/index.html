@@ -16,7 +16,7 @@
 
 <body>
 <div class="container">
-    <h1>Crossword Puzzle Generator</h1>
+    <h1 id="main-title">Crossword Puzzle Generator</h1>
 
     <div class="row print-hidden">
         <div class="col-lg-6">
@@ -135,8 +135,10 @@ VUELVAN
                             <input type="text" class="form-control" id="grid-name-2" placeholder="B" value="B">
                         </div>
 
-                        <label for="title-size" class="form-label">Title Size (px):</label>
-                        <input type="number" class="form-control mb-2" id="title-size" value="24" min="12" max="72">
+                        <div class="d-flex align-items-center mb-2">
+                            <label for="title-size" class="form-label mb-0 me-2 text-nowrap">Grid Title Size (px):</label>
+                            <input type="number" class="form-control form-control-sm" style="width: 80px;" id="title-size" value="24" min="12" max="72" step="1">
+                        </div>
 
                         <label class="form-label">Instructions:</label>
                         <div class="mb-2">
@@ -144,31 +146,44 @@ VUELVAN
                             <textarea class="form-control" id="grid-instruction-2" rows="3" placeholder="Instruction for second grid" style="resize: vertical;"></textarea>
                         </div>
 
-                        <label for="instruction-font-size" class="form-label">Instruction Font Size (px):</label>
-                        <input type="number" class="form-control" id="instruction-font-size" value="16" min="10" max="32">
+                        <div class="d-flex align-items-center mb-2">
+                            <label for="instruction-font-size" class="form-label mb-0 me-2 text-nowrap">Instruction Font Size (px):</label>
+                            <input type="number" class="form-control form-control-sm" style="width: 80px;" id="instruction-font-size" value="16" min="10" max="32" step="1">
+                        </div>
                     </div>
                     
-                    <div class="btn-group mb-3" role="group" aria-label="Number color selection">
-                        <input type="radio" class="btn-check" name="number-color" id="number-light-gray" autocomplete="off" checked>
-                        <label class="btn btn-outline-secondary" for="number-light-gray">Light Gray</label>
-
-                        <input type="radio" class="btn-check" name="number-color" id="number-dark-gray" autocomplete="off">
-                        <label class="btn btn-outline-secondary" for="number-dark-gray">Dark Gray</label>
-
-                        <input type="radio" class="btn-check" name="number-color" id="number-black" autocomplete="off">
-                        <label class="btn btn-outline-secondary" for="number-black">Black</label>
-                    </div>
-                    
-                    <div class="btn-group mb-3" role="group" aria-label="Letter case selection">
-                        <input type="radio" class="btn-check" name="letter-case" id="letter-uppercase" autocomplete="off" checked>
-                        <label class="btn btn-outline-info" for="letter-uppercase">CAPS</label>
-
-                        <input type="radio" class="btn-check" name="letter-case" id="letter-lowercase" autocomplete="off">
-                        <label class="btn btn-outline-info" for="letter-lowercase">lowercase</label>
-                    </div>
                 </div>
                 <div class="col-lg-6" style="text-align: right">
-                    <button type="button" class="btn btn-secondary" id="print-button"><i class="bi bi-printer-fill"></i> Print</button>
+                    <div class="d-flex justify-content-end align-items-center mb-3">
+                        <label class="form-label mb-0 me-2">Numbers shade:</label>
+                        <div class="btn-group" role="group" aria-label="Number color selection">
+                            <input type="radio" class="btn-check" name="number-color" id="number-light-gray" autocomplete="off">
+                            <label class="btn btn-outline-secondary" for="number-light-gray">Light Gray</label>
+
+                            <input type="radio" class="btn-check" name="number-color" id="number-dark-gray" autocomplete="off" checked>
+                            <label class="btn btn-outline-secondary" for="number-dark-gray">Dark Gray</label>
+
+                            <input type="radio" class="btn-check" name="number-color" id="number-black" autocomplete="off">
+                            <label class="btn btn-outline-secondary" for="number-black">Black</label>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-end align-items-center mb-3">
+                        <label class="form-label mb-0 me-2">Case:</label>
+                        <div class="btn-group" role="group" aria-label="Letter case selection">
+                            <input type="radio" class="btn-check" name="letter-case" id="letter-uppercase" autocomplete="off" checked>
+                            <label class="btn btn-outline-info" for="letter-uppercase">CAPS</label>
+
+                            <input type="radio" class="btn-check" name="letter-case" id="letter-lowercase" autocomplete="off">
+                            <label class="btn btn-outline-info" for="letter-lowercase">lowercase</label>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end align-items-center mb-3 mt-4">
+                        <label for="main-title-input" class="form-label mb-0 me-2 print-hidden">Title:</label>
+                        <input type="text" class="form-control w-auto me-3 print-hidden" id="main-title-input" value="Crossword Puzzle Generator">
+                        <button type="button" class="btn btn-secondary" id="print-button"><i class="bi bi-printer-fill"></i> Print</button>
+                    </div>
                 </div>
             </div>
 
