@@ -1559,51 +1559,77 @@ function $p_Lcom_papauschek_ui_HtmlRenderer$__renderGrid$1__Lcom_papauschek_puzz
   var x = (((((((((("<svg viewBox=\"-8 -8 " + ((15 + Math.imul(10, $n($n(puzzle$4).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width)) | 0)) + " ") + ((15 + Math.imul(10, $n($n(puzzle$4).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_height)) | 0)) + "\">\r\n          |  <style>\r\n          |    .annotation-horizontal {\r\n          |      font: 5px sans-serif;\r\n          |      fill: ") + numberColor$1) + ";\r\n          |    }\r\n          |    .annotation-vertical {\r\n          |      font: 5px sans-serif;\r\n          |      fill: ") + numberColor$1) + ";\r\n          |    }\r\n          |    .letter {\r\n          |      font: 8px sans-serif;\r\n          |      fill: black;\r\n          |    }\r\n          |  </style>\r\n          |  ") + gridRendered) + "\r\n          |</svg>");
   return $m_sc_StringOps$().stripMargin$extension__T__C__T(x, 124)
 }
-function $p_Lcom_papauschek_ui_HtmlRenderer$__renderDescriptions$1__sci_Seq__sci_Set__Z__T($thiz, annotations$1, extraWords$1, vertical) {
-  if (vertical) {
-    var this$4 = $n(annotations$1);
-    var f = new $c_sjsr_AnonFunction1(((a) => {
-      var a$1 = $as_Lcom_papauschek_puzzle_AnnotatedWord(a);
-      var _1 = $m_Lcom_papauschek_puzzle_Point$().x$extension__I__I($n(a$1).Lcom_papauschek_puzzle_AnnotatedWord__f_location);
-      var _2 = $m_Lcom_papauschek_puzzle_Point$().y$extension__I__I($n(a$1).Lcom_papauschek_puzzle_AnnotatedWord__f_location);
-      return new $c_T2(_1, _2)
-    }));
-    var ord1 = $m_s_math_Ordering$Int$();
-    var ord2 = $m_s_math_Ordering$Int$();
-    var ord = new $c_s_math_Ordering$Tuple2Ordering(ord1, ord2);
-    var sortedAnnotationValues = $as_sci_Seq($f_sc_SeqOps__sortBy__F1__s_math_Ordering__O(this$4, f, ord))
-  } else {
-    var this$7 = $n(annotations$1);
-    var f$1 = new $c_sjsr_AnonFunction1(((a$2) => {
-      var a$3 = $as_Lcom_papauschek_puzzle_AnnotatedWord(a$2);
-      var _1$1 = $m_Lcom_papauschek_puzzle_Point$().y$extension__I__I($n(a$3).Lcom_papauschek_puzzle_AnnotatedWord__f_location);
-      var _2$1 = $m_Lcom_papauschek_puzzle_Point$().x$extension__I__I($n(a$3).Lcom_papauschek_puzzle_AnnotatedWord__f_location);
-      return new $c_T2(_1$1, _2$1)
-    }));
-    var ord1$1 = $m_s_math_Ordering$Int$();
-    var ord2$1 = $m_s_math_Ordering$Int$();
-    var ord$1 = new $c_s_math_Ordering$Tuple2Ordering(ord1$1, ord2$1);
-    var sortedAnnotationValues = $as_sci_Seq($f_sc_SeqOps__sortBy__F1__s_math_Ordering__O(this$7, f$1, ord$1))
-  };
-  var this$11 = $n($as_sc_IterableOnceOps($n($as_sc_IterableOps($n(sortedAnnotationValues).filter__F1__O(new $c_sjsr_AnonFunction1(((_$23) => {
+function $p_Lcom_papauschek_ui_HtmlRenderer$__renderDescriptions$1__sci_Seq__sci_Set__sci_Map__Z__Z__Z__T($thiz, annotations$1, extraWords$1, wordClues$1, showSolutions$1, showClues$1, vertical) {
+  var sortedAnnotationValues = $as_sci_Seq($n(annotations$1).filter__F1__O(new $c_sjsr_AnonFunction1(((_$23) => {
     var _$23$1 = $as_Lcom_papauschek_puzzle_AnnotatedWord(_$23);
     return ($n(_$23$1).Lcom_papauschek_puzzle_AnnotatedWord__f_vertical === vertical)
-  }))))).map__F1__O(new $c_sjsr_AnonFunction1(((p) => {
+  }))));
+  var this$25 = $n($as_sc_IterableOnceOps($n(sortedAnnotationValues).map__F1__O(new $c_sjsr_AnonFunction1(((p) => {
     var p$1 = $as_Lcom_papauschek_puzzle_AnnotatedWord(p);
     var formattedWord = ($n(extraWords$1).contains__O__Z($n(p$1).Lcom_papauschek_puzzle_AnnotatedWord__f_fullWord) ? (("<strong>" + $n(p$1).Lcom_papauschek_puzzle_AnnotatedWord__f_fullWord) + "</strong>") : $n(p$1).Lcom_papauschek_puzzle_AnnotatedWord__f_fullWord);
     $m_Lcom_papauschek_puzzle_Point$().x$extension__I__I($n(p$1).Lcom_papauschek_puzzle_AnnotatedWord__f_location);
-    var this$8 = $n($m_s_Predef$().wrapString__T__sci_WrappedString($thiz.Lcom_papauschek_ui_HtmlRenderer$__f_alphabet));
-    var this$9 = new $c_s_PartialFunction$Lifted(this$8);
+    var this$3 = $n($m_s_Predef$().wrapString__T__sci_WrappedString($thiz.Lcom_papauschek_ui_HtmlRenderer$__f_alphabet));
+    var this$4 = new $c_s_PartialFunction$Lifted(this$3);
     var v1 = $m_Lcom_papauschek_puzzle_Point$().y$extension__I__I($n(p$1).Lcom_papauschek_puzzle_AnnotatedWord__f_location);
-    var this$10 = $n(this$9.apply__O__s_Option(v1));
-    if (this$10.isEmpty__Z()) {
+    var this$5 = $n(this$4.apply__O__s_Option(v1));
+    if (this$5.isEmpty__Z()) {
       /*<skip>*/
     } else {
-      this$10.get__O()
+      this$5.get__O()
     };
-    return (((("<div>" + $n(p$1).Lcom_papauschek_puzzle_AnnotatedWord__f_index) + ") ") + formattedWord) + "</div>")
+    var this$6 = $n($n(wordClues$1).get__O__s_Option($n(p$1).Lcom_papauschek_puzzle_AnnotatedWord__f_fullWord));
+    if (this$6.isEmpty__Z()) {
+      var $x_1 = true
+    } else {
+      var arg1 = this$6.get__O();
+      var _$24 = $as_T(arg1);
+      $m_sc_StringOps$();
+      var this$9 = $n(_$24);
+      var $x_1 = (!(this$9 === ""))
+    };
+    if ($x_1) {
+      var rawClue = this$6
+    } else {
+      var rawClue = $m_s_None$()
+    };
+    var wordPart = (showSolutions$1 ? formattedWord : "");
+    if (showClues$1) {
+      var this$10 = $n(rawClue);
+      var cluePart = $as_T((this$10.isEmpty__Z() ? "" : this$10.get__O()))
+    } else {
+      var cluePart = ""
+    };
+    $m_sc_StringOps$();
+    var this$13 = $n(wordPart);
+    if ((!(this$13 === ""))) {
+      $m_sc_StringOps$();
+      var this$16 = $n(cluePart);
+      var $x_2 = (!(this$16 === ""))
+    } else {
+      var $x_2 = false
+    };
+    if ($x_2) {
+      var content = ((wordPart + ": ") + cluePart)
+    } else {
+      $m_sc_StringOps$();
+      var this$19 = $n(wordPart);
+      if ((!(this$19 === ""))) {
+        var content = wordPart
+      } else {
+        $m_sc_StringOps$();
+        var this$22 = $n(cluePart);
+        if ((!(this$22 === ""))) {
+          var content = cluePart
+        } else {
+          var content = ""
+        }
+      }
+    };
+    $m_sc_StringOps$();
+    var x = (((("<div style=\"display: flex; align-items: baseline; margin-bottom: 2px;\">\r\n             |  <span style=\"display: inline-block; width: 30px; text-align: right; margin-right: 8px; flex-shrink: 0;\">" + $n(p$1).Lcom_papauschek_puzzle_AnnotatedWord__f_index) + ")</span>\r\n             |  <span>") + content) + "</span>\r\n             |</div>");
+    return $m_sc_StringOps$().stripMargin$extension__T__C__T(x, 124)
   })))));
-  return $f_sc_IterableOnceOps__mkString__T__T__T__T(this$11, "", "\r\n", "")
+  return $f_sc_IterableOnceOps__mkString__T__T__T__T(this$25, "", "\r\n", "")
 }
 /** @constructor */
 function $c_Lcom_papauschek_ui_HtmlRenderer$() {
@@ -1886,7 +1912,7 @@ $c_Lcom_papauschek_ui_HtmlRenderer$.prototype.renderPuzzle__Lcom_papauschek_puzz
     return $m_sc_StringOps$().stripMargin$extension__T__C__T(x$2, 124)
   }
 });
-$c_Lcom_papauschek_ui_HtmlRenderer$.prototype.renderClues__Lcom_papauschek_puzzle_Puzzle__sci_Set__T = (function(puzzle, extraWords) {
+$c_Lcom_papauschek_ui_HtmlRenderer$.prototype.renderClues__Lcom_papauschek_puzzle_Puzzle__sci_Set__sci_Map__Z__Z__T = (function(puzzle, extraWords, wordClues, showSolutions, showClues) {
   var this$2 = $n($n(puzzle).getFullAnnotation__sci_Seq());
   var f = new $c_sjsr_AnonFunction1(((_$22) => {
     var _$22$1 = $as_Lcom_papauschek_puzzle_AnnotatedWord(_$22);
@@ -1895,7 +1921,7 @@ $c_Lcom_papauschek_ui_HtmlRenderer$.prototype.renderClues__Lcom_papauschek_puzzl
   var ord = $m_s_math_Ordering$Int$();
   var annotations = $as_sci_Seq($f_sc_SeqOps__sortBy__F1__s_math_Ordering__O(this$2, f, ord));
   $m_sc_StringOps$();
-  var x = (((("<div class=\"row\">\r\n       |  <div class=\"col-lg-6\">\r\n       |    <h4>Horizontal</h4>\r\n       |    <p>" + $p_Lcom_papauschek_ui_HtmlRenderer$__renderDescriptions$1__sci_Seq__sci_Set__Z__T(this, annotations, extraWords, false)) + "</p>\r\n       |  </div>\r\n       |  <div class=\"col-lg-6\">\r\n       |    <h4>Vertical</h4>\r\n       |    <p>") + $p_Lcom_papauschek_ui_HtmlRenderer$__renderDescriptions$1__sci_Seq__sci_Set__Z__T(this, annotations, extraWords, true)) + "</p>\r\n       |  </div>\r\n       |</div>\r\n       |");
+  var x = (((("<div class=\"row\">\r\n       |  <div class=\"col-lg-6\">\r\n       |    <h4>Horizontal</h4>\r\n       |    <p>" + $p_Lcom_papauschek_ui_HtmlRenderer$__renderDescriptions$1__sci_Seq__sci_Set__sci_Map__Z__Z__Z__T(this, annotations, extraWords, wordClues, showSolutions, showClues, false)) + "</p>\r\n       |  </div>\r\n       |  <div class=\"col-lg-6\">\r\n       |    <h4>Vertical</h4>\r\n       |    <p>") + $p_Lcom_papauschek_ui_HtmlRenderer$__renderDescriptions$1__sci_Seq__sci_Set__sci_Map__Z__Z__Z__T(this, annotations, extraWords, wordClues, showSolutions, showClues, true)) + "</p>\r\n       |  </div>\r\n       |</div>\r\n       |");
   return $m_sc_StringOps$().stripMargin$extension__T__C__T(x, 124)
 });
 $c_Lcom_papauschek_ui_HtmlRenderer$.prototype.renderPuzzleInfo__Lcom_papauschek_puzzle_Puzzle__sci_Seq__T = (function(puzzle, unusedWords) {
@@ -1952,6 +1978,9 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_initialPuzzle = null;
   this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle = null;
   this.Lcom_papauschek_ui_MainPage__f_mainInputWords = null;
+  this.Lcom_papauschek_ui_MainPage__f_wordClues = null;
+  this.Lcom_papauschek_ui_MainPage__f_showSolutionsCheckbox = null;
+  this.Lcom_papauschek_ui_MainPage__f_showCluesCheckbox = null;
   this.Lcom_papauschek_ui_MainPage__f_inputElement = null;
   this.Lcom_papauschek_ui_MainPage__f_outputPuzzleElement = null;
   this.Lcom_papauschek_ui_MainPage__f_outputCluesElement = null;
@@ -1999,6 +2028,9 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_initialPuzzle = $n($x_1).empty__Lcom_papauschek_puzzle_PuzzleConfig__Lcom_papauschek_puzzle_Puzzle(new $c_Lcom_papauschek_puzzle_PuzzleConfig(width, height, wrapping));
   this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle = this.Lcom_papauschek_ui_MainPage__f_initialPuzzle;
   this.Lcom_papauschek_ui_MainPage__f_mainInputWords = $m_s_package$().s_package$__f_Nil;
+  this.Lcom_papauschek_ui_MainPage__f_wordClues = ($n($m_s_Predef$().s_Predef$__f_Map), $m_sci_Map$EmptyMap$());
+  this.Lcom_papauschek_ui_MainPage__f_showSolutionsCheckbox = document.getElementById("show-clues-solutions");
+  this.Lcom_papauschek_ui_MainPage__f_showCluesCheckbox = document.getElementById("show-clues-clues");
   this.Lcom_papauschek_ui_MainPage__f_inputElement = document.getElementById("input");
   this.Lcom_papauschek_ui_MainPage__f_outputPuzzleElement = document.getElementById("output-puzzle");
   this.Lcom_papauschek_ui_MainPage__f_outputCluesElement = document.getElementById("output-clues");
@@ -2131,6 +2163,12 @@ function $c_Lcom_papauschek_ui_MainPage() {
   }));
   letterLowercaseElement.addEventListener("click", ((_$26) => {
     this.renderSolution__V()
+  }));
+  this.Lcom_papauschek_ui_MainPage__f_showSolutionsCheckbox.addEventListener("change", ((_$27) => {
+    this.renderSolution__V()
+  }));
+  this.Lcom_papauschek_ui_MainPage__f_showCluesCheckbox.addEventListener("change", ((_$28) => {
+    this.renderSolution__V()
   }))
 }
 $c_Lcom_papauschek_ui_MainPage.prototype = new $h_O();
@@ -2144,26 +2182,58 @@ $c_Lcom_papauschek_ui_MainPage.prototype.generateSolution__V = (function() {
   $m_sc_StringOps$();
   var x = $as_T(this.Lcom_papauschek_ui_MainPage__f_inputElement.value);
   $m_sc_StringOps$();
-  var this$5 = new $c_sc_StringOps$$anon$1(x, true);
-  var f = new $c_sjsr_AnonFunction1(((word) => {
-    var word$1 = $as_T(word);
-    return $p_Lcom_papauschek_ui_MainPage__normalizeWord__T__T(this, word$1)
+  var this$4 = new $c_sc_StringOps$$anon$1(x, true);
+  var f = new $c_sjsr_AnonFunction1(((_$29) => {
+    var _$29$1 = $as_T(_$29);
+    return $f_T__trim__T($n(_$29$1))
   }));
-  var this$6 = new $c_sc_Iterator$$anon$9(this$5, f);
-  var rawInputWords = $m_sci_Seq$().from__sc_IterableOnce__sci_Seq(this$6);
-  var inputWords = $as_sci_Seq($n(rawInputWords).filter__F1__O(new $c_sjsr_AnonFunction1(((word$2) => {
-    var word$3 = $as_T(word$2);
+  var this$9 = new $c_sc_Iterator$$anon$9(this$4, f);
+  var p = new $c_sjsr_AnonFunction1(((line) => {
+    var line$1 = $as_T(line);
     $m_sc_StringOps$();
-    var this$9 = $n(word$3);
-    if ((!(this$9 === ""))) {
-      var this$10 = $n(word$3);
-      return (!((this$10.length >= 0) && ($as_T(this$10.substring(0, 1)) === "#")))
+    var this$7 = $n(line$1);
+    if ((!(this$7 === ""))) {
+      var this$8 = $n(line$1);
+      return (!((this$8.length >= 0) && ($as_T(this$8.substring(0, 1)) === "#")))
     } else {
       return false
     }
+  }));
+  var this$10 = new $c_sc_Iterator$$anon$6(this$9, p, false);
+  var lines = $m_sci_Seq$().from__sc_IterableOnce__sci_Seq(this$10);
+  var parsedLines = $as_sci_Seq($n(lines).map__F1__O(new $c_sjsr_AnonFunction1(((line$2) => {
+    var line$3 = $as_T(line$2);
+    var parts = $f_T__split__T__I__AT($n(line$3), ":", 2);
+    var rawWord = $f_T__trim__T($n($n(parts).get(0)));
+    var clue = (($n(parts).u.length > 1) ? $f_T__trim__T($n($n(parts).get(1))) : "");
+    return new $c_T2(rawWord, clue)
   }))));
-  var this$11 = $n(inputWords);
-  if ((!this$11.isEmpty__Z())) {
+  var $x_1 = $as_sc_IterableOnceOps($n(parsedLines).map__F1__O(new $c_sjsr_AnonFunction1(((x$1) => {
+    var x$1$1 = $as_T2(x$1);
+    if ((x$1$1 !== null)) {
+      var w = $as_T($n(x$1$1)._1__O());
+      var c = $as_T($n(x$1$1)._2__O());
+      var _1 = $p_Lcom_papauschek_ui_MainPage__normalizeWord__T__T(this, w);
+      return new $c_T2(_1, c)
+    };
+    throw new $c_s_MatchError(x$1$1)
+  }))));
+  var this$14 = $m_s_$less$colon$less$();
+  this.Lcom_papauschek_ui_MainPage__f_wordClues = $n($x_1).toMap__s_$less$colon$less__sci_Map(this$14.s_$less$colon$less$__f_singleton);
+  var inputWords = $as_sci_Seq($n($as_sc_IterableOps($n($as_sc_IterableOps($n(parsedLines).map__F1__O(new $c_sjsr_AnonFunction1(((_$30) => {
+    var _$30$1 = $as_T2(_$30);
+    return $as_T($n(_$30$1)._1__O())
+  }))))).map__F1__O(new $c_sjsr_AnonFunction1(((word) => {
+    var word$1 = $as_T(word);
+    return $p_Lcom_papauschek_ui_MainPage__normalizeWord__T__T(this, word$1)
+  }))))).filter__F1__O(new $c_sjsr_AnonFunction1(((_$31) => {
+    var _$31$1 = $as_T(_$31);
+    $m_sc_StringOps$();
+    var this$17 = $n(_$31$1);
+    return (!(this$17 === ""))
+  }))));
+  var this$18 = $n(inputWords);
+  if ((!this$18.isEmpty__Z())) {
     this.Lcom_papauschek_ui_MainPage__f_mainInputWords = $m_Lcom_papauschek_puzzle_PuzzleWords$().sortByBest__sci_Seq__sci_Seq(inputWords);
     $m_Lcom_papauschek_puzzle_PuzzleConfig$();
     var width = $doubleToInt($uD(this.Lcom_papauschek_ui_MainPage__f_widthInputElement.valueAsNumber));
@@ -2175,10 +2245,10 @@ $c_Lcom_papauschek_ui_MainPage.prototype.generateSolution__V = (function() {
     this.Lcom_papauschek_ui_MainPage__f_generateButton.classList.add("invisible");
     this.Lcom_papauschek_ui_MainPage__f_refreshIcon.classList.add("spinning");
     this.Lcom_papauschek_ui_MainPage__f_refreshButton.disabled = true;
-    var $x_1 = $m_Lcom_papauschek_ui_PuzzleGenerator$();
+    var $x_2 = $m_Lcom_papauschek_ui_PuzzleGenerator$();
     $m_Lcom_papauschek_ui_NewPuzzleMessage$();
     var words = this.Lcom_papauschek_ui_MainPage__f_mainInputWords;
-    $n($n($x_1).send__Lcom_papauschek_ui_NewPuzzleMessage__s_concurrent_Future(new $c_Lcom_papauschek_ui_NewPuzzleMessage(puzzleConfig, words))).foreach__F1__s_concurrent_ExecutionContext__V(new $c_sjsr_AnonFunction1(((puzzles) => {
+    $n($n($x_2).send__Lcom_papauschek_ui_NewPuzzleMessage__s_concurrent_Future(new $c_Lcom_papauschek_ui_NewPuzzleMessage(puzzleConfig, words))).foreach__F1__s_concurrent_ExecutionContext__V(new $c_sjsr_AnonFunction1(((puzzles) => {
       var puzzles$1 = $as_sci_Seq(puzzles);
       this.Lcom_papauschek_ui_MainPage__f_generateSpinner.classList.add("invisible");
       this.Lcom_papauschek_ui_MainPage__f_generateButton.classList.remove("invisible");
@@ -2187,13 +2257,13 @@ $c_Lcom_papauschek_ui_MainPage.prototype.generateSolution__V = (function() {
       this.Lcom_papauschek_ui_MainPage__f_resultRow.classList.remove("invisible");
       this.Lcom_papauschek_ui_MainPage__f_refineRow.classList.remove("invisible");
       this.Lcom_papauschek_ui_MainPage__f_cluesRow.classList.remove("invisible");
-      var this$14 = $n(puzzles$1);
-      var f$1 = new $c_sjsr_AnonFunction1(((_$27) => {
-        var _$27$1 = $as_Lcom_papauschek_puzzle_Puzzle(_$27);
-        return $n(_$27$1).Lcom_papauschek_puzzle_Puzzle__f_density
+      var this$21 = $n(puzzles$1);
+      var f$1 = new $c_sjsr_AnonFunction1(((_$32) => {
+        var _$32$1 = $as_Lcom_papauschek_puzzle_Puzzle(_$32);
+        return $n(_$32$1).Lcom_papauschek_puzzle_Puzzle__f_density
       }));
       var ord = $m_s_math_Ordering$DeprecatedDoubleOrdering$();
-      this.Lcom_papauschek_ui_MainPage__f_initialPuzzle = $as_Lcom_papauschek_puzzle_Puzzle($f_sc_IterableOnceOps__maxBy__F1__s_math_Ordering__O(this$14, f$1, ord));
+      this.Lcom_papauschek_ui_MainPage__f_initialPuzzle = $as_Lcom_papauschek_puzzle_Puzzle($f_sc_IterableOnceOps__maxBy__F1__s_math_Ordering__O(this$21, f$1, ord));
       this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle = this.Lcom_papauschek_ui_MainPage__f_initialPuzzle;
       this.renderSolution__V()
     })), $m_s_concurrent_ExecutionContext$().global__s_concurrent_ExecutionContextExecutor())
@@ -2241,7 +2311,7 @@ $c_Lcom_papauschek_ui_MainPage.prototype.renderSolution__V = (function() {
   var that = $n(this.Lcom_papauschek_ui_MainPage__f_initialPuzzle).Lcom_papauschek_puzzle_Puzzle__f_words;
   var extraWords = $as_sci_Set(this$1.removedAll__sc_IterableOnce__sci_SetOps(that));
   this.Lcom_papauschek_ui_MainPage__f_resultInfoElement.innerHTML = $m_Lcom_papauschek_ui_HtmlRenderer$().renderPuzzleInfo__Lcom_papauschek_puzzle_Puzzle__sci_Seq__T(this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle, unusedWords);
-  this.Lcom_papauschek_ui_MainPage__f_outputCluesElement.innerHTML = $m_Lcom_papauschek_ui_HtmlRenderer$().renderClues__Lcom_papauschek_puzzle_Puzzle__sci_Set__T(this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle, extraWords)
+  this.Lcom_papauschek_ui_MainPage__f_outputCluesElement.innerHTML = $m_Lcom_papauschek_ui_HtmlRenderer$().renderClues__Lcom_papauschek_puzzle_Puzzle__sci_Set__sci_Map__Z__Z__T(this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle, extraWords, this.Lcom_papauschek_ui_MainPage__f_wordClues, $uZ(this.Lcom_papauschek_ui_MainPage__f_showSolutionsCheckbox.checked), $uZ(this.Lcom_papauschek_ui_MainPage__f_showCluesCheckbox.checked))
 });
 $c_Lcom_papauschek_ui_MainPage.prototype.refineSolution__V = (function() {
   var language = $as_T(this.Lcom_papauschek_ui_MainPage__f_languageSelect.value);
@@ -2251,8 +2321,8 @@ $c_Lcom_papauschek_ui_MainPage.prototype.refineSolution__V = (function() {
   var i = 0;
   while ((i < len)) {
     var arg1 = array[i];
-    var _$28 = $as_T(arg1);
-    var this$5 = $n(_$28);
+    var _$33 = $as_T(arg1);
+    var this$5 = $n(_$33);
     if ((this$5.length >= 4)) {
       $uI(res.push(arg1))
     };
@@ -38530,106 +38600,6 @@ var $d_s_math_Ordering$Reverse = new $TypeData().initClass({
   Ljava_io_Serializable: 1
 });
 $c_s_math_Ordering$Reverse.prototype.$classData = $d_s_math_Ordering$Reverse;
-/** @constructor */
-function $c_s_math_Ordering$Tuple2Ordering(ord1, ord2) {
-  this.s_math_Ordering$Tuple2Ordering__f_ord1 = null;
-  this.s_math_Ordering$Tuple2Ordering__f_ord2 = null;
-  this.s_math_Ordering$Tuple2Ordering__f_ord1 = ord1;
-  this.s_math_Ordering$Tuple2Ordering__f_ord2 = ord2
-}
-$c_s_math_Ordering$Tuple2Ordering.prototype = new $h_O();
-$c_s_math_Ordering$Tuple2Ordering.prototype.constructor = $c_s_math_Ordering$Tuple2Ordering;
-/** @constructor */
-function $h_s_math_Ordering$Tuple2Ordering() {
-  /*<skip>*/
-}
-$h_s_math_Ordering$Tuple2Ordering.prototype = $c_s_math_Ordering$Tuple2Ordering.prototype;
-$c_s_math_Ordering$Tuple2Ordering.prototype.gt__O__O__Z = (function(x, y) {
-  return $f_s_math_Ordering__gt__O__O__Z(this, x, y)
-});
-$c_s_math_Ordering$Tuple2Ordering.prototype.isReverseOf__s_math_Ordering__Z = (function(other) {
-  return $f_s_math_Ordering__isReverseOf__s_math_Ordering__Z(this, other)
-});
-$c_s_math_Ordering$Tuple2Ordering.prototype.compare__T2__T2__I = (function(x, y) {
-  var compare1 = $n(this.s_math_Ordering$Tuple2Ordering__f_ord1).compare__O__O__I($n(x)._1__O(), $n(y)._1__O());
-  if ((compare1 !== 0)) {
-    return compare1
-  };
-  return $n(this.s_math_Ordering$Tuple2Ordering__f_ord2).compare__O__O__I($n(x)._2__O(), $n(y)._2__O())
-});
-$c_s_math_Ordering$Tuple2Ordering.prototype.equals__O__Z = (function(obj) {
-  if ((obj !== null)) {
-    if ((this === obj)) {
-      return true
-    }
-  };
-  if ((obj instanceof $c_s_math_Ordering$Tuple2Ordering)) {
-    var x3 = $as_s_math_Ordering$Tuple2Ordering(obj);
-    var x = this.s_math_Ordering$Tuple2Ordering__f_ord1;
-    var x$2 = $n(x3).s_math_Ordering$Tuple2Ordering__f_ord1;
-    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
-      var x$3 = this.s_math_Ordering$Tuple2Ordering__f_ord2;
-      var x$4 = $n(x3).s_math_Ordering$Tuple2Ordering__f_ord2;
-      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4))
-    } else {
-      return false
-    }
-  };
-  return false
-});
-$c_s_math_Ordering$Tuple2Ordering.prototype.hashCode__I = (function() {
-  var _1 = this.s_math_Ordering$Tuple2Ordering__f_ord1;
-  var _2 = this.s_math_Ordering$Tuple2Ordering__f_ord2;
-  var this$2 = $m_s_util_hashing_MurmurHash3$();
-  var h = (-889275714);
-  h = this$2.mix__I__I__I(h, $f_T__hashCode__I("Tuple2"));
-  var i = 0;
-  while ((i < 2)) {
-    var $x_1 = h;
-    var n = i;
-    switch (n) {
-      case 0: {
-        var x = _1;
-        break
-      }
-      case 1: {
-        var x = _2;
-        break
-      }
-      default: {
-        var x;
-        throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), (n + " is out of bounds (min 0, max 1)"))
-      }
-    };
-    h = this$2.mix__I__I__I($x_1, $m_sr_Statics$().anyHash__O__I(x));
-    i = ((1 + i) | 0)
-  };
-  return this$2.finalizeHash__I__I__I(h, 2)
-});
-$c_s_math_Ordering$Tuple2Ordering.prototype.compare__O__O__I = (function(x, y) {
-  return this.compare__T2__T2__I($as_T2(x), $as_T2(y))
-});
-function $as_s_math_Ordering$Tuple2Ordering(obj) {
-  return (((obj instanceof $c_s_math_Ordering$Tuple2Ordering) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.math.Ordering$Tuple2Ordering"))
-}
-function $isArrayOf_s_math_Ordering$Tuple2Ordering(obj, depth) {
-  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_math_Ordering$Tuple2Ordering)))
-}
-function $asArrayOf_s_math_Ordering$Tuple2Ordering(obj, depth) {
-  return (($isArrayOf_s_math_Ordering$Tuple2Ordering(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.math.Ordering$Tuple2Ordering;", depth))
-}
-var $d_s_math_Ordering$Tuple2Ordering = new $TypeData().initClass({
-  s_math_Ordering$Tuple2Ordering: 0
-}, false, "scala.math.Ordering$Tuple2Ordering", {
-  s_math_Ordering$Tuple2Ordering: 1,
-  O: 1,
-  s_math_Ordering: 1,
-  ju_Comparator: 1,
-  s_math_PartialOrdering: 1,
-  s_math_Equiv: 1,
-  Ljava_io_Serializable: 1
-});
-$c_s_math_Ordering$Tuple2Ordering.prototype.$classData = $d_s_math_Ordering$Tuple2Ordering;
 /** @constructor */
 function $c_s_reflect_ClassTag$GenericClassTag(runtimeClass) {
   this.s_reflect_ClassTag$GenericClassTag__f_runtimeClass = null;

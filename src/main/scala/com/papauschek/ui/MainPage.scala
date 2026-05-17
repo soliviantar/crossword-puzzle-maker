@@ -16,6 +16,10 @@ class MainPage:
   private var refinedPuzzle: Puzzle = initialPuzzle
 
   private var mainInputWords: Seq[String] = Nil
+  private var wordClues: Map[String, String] = Map.empty
+
+  private val showSolutionsCheckbox = dom.document.getElementById("show-clues-solutions").asInstanceOf[Input]
+  private val showCluesCheckbox = dom.document.getElementById("show-clues-clues").asInstanceOf[Input]
 
   private val inputElement = dom.document.getElementById("input").asInstanceOf[TextArea]
   private val outputPuzzleElement = dom.document.getElementById("output-puzzle")
@@ -144,10 +148,21 @@ class MainPage:
   letterUppercaseElement.addEventListener("click", { _ => renderSolution() })
   letterLowercaseElement.addEventListener("click", { _ => renderSolution() })
 
+  showSolutionsCheckbox.addEventListener("change", { _ => renderSolution() })
+  showCluesCheckbox.addEventListener("change", { _ => renderSolution() })
+
   /** read the words from the user interface and generate the puzzle in the background using web workers */
   def generateSolution(): Unit =
-    val rawInputWords = inputElement.value.linesIterator.map(normalizeWord).toSeq
-    val inputWords = rawInputWords.filter(word => word.nonEmpty && !word.startsWith("#"))
+    val lines = inputElement.value.linesIterator.map(_.trim).filter(line => line.nonEmpty && !line.startsWith("#")).toSeq
+    val parsedLines = lines.map { line =>
+      val parts = line.split(":", 2)
+      val rawWord = parts(0).trim
+      val clue = if (parts.length > 1) parts(1).trim else ""
+      (rawWord, clue)
+    }
+    wordClues = parsedLines.map { case (w, c) => (normalizeWord(w), c) }.toMap
+    val inputWords = parsedLines.map(_._1).map(normalizeWord).filter(_.nonEmpty)
+
     if (inputWords.nonEmpty) {
       mainInputWords = PuzzleWords.sortByBest(inputWords)
       val puzzleConfig = PuzzleConfig(
@@ -248,7 +263,13 @@ class MainPage:
     val unusedWords = mainInputWords.filterNot(refinedPuzzle.words.contains)
     val extraWords = refinedPuzzle.words -- initialPuzzle.words
     resultInfoElement.innerHTML = HtmlRenderer.renderPuzzleInfo(refinedPuzzle, unusedWords)
-    outputCluesElement.innerHTML = HtmlRenderer.renderClues(refinedPuzzle, extraWords)
+    outputCluesElement.innerHTML = HtmlRenderer.renderClues(
+      refinedPuzzle,
+      extraWords,
+      wordClues,
+      showSolutions = showSolutionsCheckbox.checked,
+      showClues = showCluesCheckbox.checked
+    )
 
   /** add words from a chosen dictionary to the puzzle */
   def refineSolution(): Unit =

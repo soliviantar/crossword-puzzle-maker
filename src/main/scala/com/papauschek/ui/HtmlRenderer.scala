@@ -249,20 +249,40 @@ object HtmlRenderer:
   val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
   /** @return HTML representing the clues (= solution) words for this puzzle */
-  def renderClues(puzzle: Puzzle, extraWords: Set[String]): String =
+  def renderClues(puzzle: Puzzle, 
+                  extraWords: Set[String],
+                  wordClues: Map[String, String] = Map.empty,
+                  showSolutions: Boolean = true,
+                  showClues: Boolean = true): String =
 
     val annotations = puzzle.getFullAnnotation.sortBy(_.index)
 
     def renderDescriptions(vertical: Boolean): String = {
-      val sortedAnnotationValues =
-        if (vertical) annotations.sortBy(a => (a.location.x, a.location.y))
-        else annotations.sortBy(a => (a.location.y, a.location.x))
-      sortedAnnotationValues.filter(_.vertical == vertical).map {
+      val sortedAnnotationValues = annotations.filter(_.vertical == vertical)
+      sortedAnnotationValues.map {
         p =>
           val formattedWord = if (extraWords.contains(p.fullWord)) s"<strong>${p.fullWord}</strong>" else p.fullWord
           val formattedLocation = s"${p.location.x + 1}${alphabet.lift.apply(p.location.y).getOrElse(' ')}"
-          "<div>" + p.index + ") " + formattedWord + "</div>"
-          //"<div>" + formattedLocation + ") " + formattedWord + "</div>"
+          
+          val rawClue = wordClues.get(p.fullWord).filter(_.nonEmpty)
+          
+          val wordPart = if (showSolutions) formattedWord else ""
+          val cluePart = if (showClues) rawClue.getOrElse("") else ""
+          
+          val content = if (wordPart.nonEmpty && cluePart.nonEmpty) {
+            s"$wordPart: $cluePart"
+          } else if (wordPart.nonEmpty) {
+            wordPart
+          } else if (cluePart.nonEmpty) {
+            cluePart
+          } else {
+            ""
+          }
+          
+          s"""<div style="display: flex; align-items: baseline; margin-bottom: 2px;">
+             |  <span style="display: inline-block; width: 30px; text-align: right; margin-right: 8px; flex-shrink: 0;">${p.index})</span>
+             |  <span>$content</span>
+             |</div>""".stripMargin
       }.mkString("\r\n")
     }
 
