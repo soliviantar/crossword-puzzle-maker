@@ -54,6 +54,11 @@ class MainPage:
   private val gridInstruction1Element = dom.document.getElementById("grid-instruction-1").asInstanceOf[TextArea]
   private val gridInstruction2Element = dom.document.getElementById("grid-instruction-2").asInstanceOf[TextArea]
   private val instructionFontSizeElement = dom.document.getElementById("instruction-font-size").asInstanceOf[Input]
+  
+  private val btnBold1 = dom.document.getElementById("btn-bold-1").asInstanceOf[Button]
+  private val btnItalic1 = dom.document.getElementById("btn-italic-1").asInstanceOf[Button]
+  private val btnBold2 = dom.document.getElementById("btn-bold-2").asInstanceOf[Button]
+  private val btnItalic2 = dom.document.getElementById("btn-italic-2").asInstanceOf[Button]
 
   private val numberLightGrayElement = dom.document.getElementById("number-light-gray").asInstanceOf[Input]
   private val numberDarkGrayElement = dom.document.getElementById("number-dark-gray").asInstanceOf[Input]
@@ -152,6 +157,23 @@ class MainPage:
   gridInstruction1Element.addEventListener("input", { _ => renderSolution() })
   gridInstruction2Element.addEventListener("input", { _ => renderSolution() })
   instructionFontSizeElement.addEventListener("input", { _ => renderSolution() })
+
+  btnBold1.addEventListener("click", { (e: dom.Event) =>
+    e.preventDefault()
+    applyTagToInstruction(gridInstruction1Element, "b")
+  })
+  btnItalic1.addEventListener("click", { (e: dom.Event) =>
+    e.preventDefault()
+    applyTagToInstruction(gridInstruction1Element, "i")
+  })
+  btnBold2.addEventListener("click", { (e: dom.Event) =>
+    e.preventDefault()
+    applyTagToInstruction(gridInstruction2Element, "b")
+  })
+  btnItalic2.addEventListener("click", { (e: dom.Event) =>
+    e.preventDefault()
+    applyTagToInstruction(gridInstruction2Element, "i")
+  })
 
   // Initialize partial submenu visibility
   showPartialSubmenu()
@@ -318,6 +340,19 @@ class MainPage:
   /** show the print dialog */
   def printSolution(): Unit =
     dom.window.print()
+
+  private def applyTagToInstruction(element: TextArea, tag: String): Unit =
+    val start = element.selectionStart
+    val end = element.selectionEnd
+    val text = element.value
+    val selectedText = text.substring(start, end)
+    val newText = text.substring(0, start) + s"<$tag>$selectedText</$tag>" + text.substring(end)
+    element.value = newText
+    val newStart = start + tag.length + 2
+    val newEnd = end + tag.length + 2
+    element.setSelectionRange(newStart, newEnd)
+    element.focus()
+    renderSolution()
 
   /** normalize words and expand german umlauts */
   private def normalizeWord(word: String): String =

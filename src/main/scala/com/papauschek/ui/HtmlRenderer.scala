@@ -31,7 +31,7 @@ object HtmlRenderer:
                    titleSize: String = "24",
                    gridInstruction1: String = "",
                    gridInstruction2: String = "",
-                   instructionFontSize: String = "16",
+                   instructionFontSize: String = "23",
                    mainTitle: String = ""): String =
 
     val annotation = puzzle.getAnnotation
@@ -194,7 +194,7 @@ object HtmlRenderer:
 
         val gridRendered = (0 until puzzle.config.height).map(renderHeightWithVisibility).mkString("\r\n")
 
-        s"""<svg viewBox="-8 -8 ${puzzle.config.width * 10 + 15} ${puzzle.config.height * 10 + 15}">
+        s"""<svg viewBox="-8 -8 ${puzzle.config.width * 10 + 15} ${puzzle.config.height * 10 + 15}" style="display: block; margin: 0;">
           |  <style>
           |    .annotation-horizontal {
           |      font: 5px sans-serif;
@@ -215,19 +215,20 @@ object HtmlRenderer:
 
       // Render odd grid first, then even grid
       s"""<div>
-         |  <div class="d-flex align-items-center mb-3">
+         |  <div class="d-flex align-items-center mb-0">
          |    <h3 style="font-size: ${titleSize}px; margin: 0;">${gridName1}</h3>
-         |    ${if (gridInstruction1.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px; white-space: pre-wrap;">${gridInstruction1}</p>""" else ""}
+         |    ${if (gridInstruction1.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px; white-space: pre-wrap; margin: 0;">${gridInstruction1}</p>""" else ""}
          |  </div>
          |  ${renderGrid(oddWordNumbers)}
-         |  <div class="d-flex align-items-center mb-3 mt-4">
+         |  <br>
+         |  <div class="d-flex align-items-center mb-0 mt-4">
          |    <h3 style="font-size: ${titleSize}px; margin: 0;">${gridName2}</h3>
-         |    ${if (gridInstruction2.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px; white-space: pre-wrap;">${gridInstruction2}</p>""" else ""}
+         |    ${if (gridInstruction2.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px; white-space: pre-wrap; margin: 0;">${gridInstruction2}</p>""" else ""}
          |  </div>
          |  ${renderGrid(evenWordNumbers)}
          |</div>""".stripMargin
     } else {
-      val svg = s"""<svg viewBox="-8 -8 ${puzzle.config.width * 10 + 15} ${puzzle.config.height * 10 + 15}">
+      val svg = s"""<svg viewBox="-8 -8 ${puzzle.config.width * 10 + 15} ${puzzle.config.height * 10 + 15}" style="display: block; margin: 0;">
         |  <style>
         |    .annotation-horizontal {
         |      font: 5px sans-serif;
@@ -247,9 +248,9 @@ object HtmlRenderer:
 
       if (gridName1.nonEmpty || gridInstruction1.nonEmpty) {
         s"""<div>
-           |  <div class="d-flex align-items-center mb-3">
+           |  <div class="d-flex align-items-center mb-0">
            |    ${if (gridName1.nonEmpty) s"""<h3 style="font-size: ${titleSize}px; margin: 0;">${gridName1}</h3>""" else ""}
-           |    ${if (gridInstruction1.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px; white-space: pre-wrap;">${gridInstruction1}</p>""" else ""}
+           |    ${if (gridInstruction1.nonEmpty) s"""<p class="mb-0 ms-3" style="font-size: ${instructionFontSize}px; white-space: pre-wrap; margin: 0;">${gridInstruction1}</p>""" else ""}
            |  </div>
            |  $svg
            |</div>""".stripMargin

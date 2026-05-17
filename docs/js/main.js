@@ -1556,7 +1556,7 @@ function $p_Lcom_papauschek_ui_HtmlRenderer$__renderGrid$1__Lcom_papauschek_puzz
   var this$7 = $n($as_sci_IndexedSeq($n(b).result__O()));
   var gridRendered = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$7, "", "\r\n", "");
   $m_sc_StringOps$();
-  var x = (((((((((("<svg viewBox=\"-8 -8 " + ((15 + Math.imul(10, $n($n(puzzle$4).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width)) | 0)) + " ") + ((15 + Math.imul(10, $n($n(puzzle$4).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_height)) | 0)) + "\">\r\n          |  <style>\r\n          |    .annotation-horizontal {\r\n          |      font: 5px sans-serif;\r\n          |      fill: ") + numberColor$1) + ";\r\n          |    }\r\n          |    .annotation-vertical {\r\n          |      font: 5px sans-serif;\r\n          |      fill: ") + numberColor$1) + ";\r\n          |    }\r\n          |    .letter {\r\n          |      font: 8px sans-serif;\r\n          |      fill: black;\r\n          |    }\r\n          |  </style>\r\n          |  ") + gridRendered) + "\r\n          |</svg>");
+  var x = (((((((((("<svg viewBox=\"-8 -8 " + ((15 + Math.imul(10, $n($n(puzzle$4).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width)) | 0)) + " ") + ((15 + Math.imul(10, $n($n(puzzle$4).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_height)) | 0)) + "\" style=\"display: block; margin: 0;\">\r\n          |  <style>\r\n          |    .annotation-horizontal {\r\n          |      font: 5px sans-serif;\r\n          |      fill: ") + numberColor$1) + ";\r\n          |    }\r\n          |    .annotation-vertical {\r\n          |      font: 5px sans-serif;\r\n          |      fill: ") + numberColor$1) + ";\r\n          |    }\r\n          |    .letter {\r\n          |      font: 8px sans-serif;\r\n          |      fill: black;\r\n          |    }\r\n          |  </style>\r\n          |  ") + gridRendered) + "\r\n          |</svg>");
   return $m_sc_StringOps$().stripMargin$extension__T__C__T(x, 124)
 }
 function $p_Lcom_papauschek_ui_HtmlRenderer$__renderDescriptions$1__sci_Seq__sci_Set__sci_Map__Z__Z__Z__T($thiz, annotations$1, extraWords$1, wordClues$1, showSolutions$1, showClues$1, vertical) {
@@ -1897,18 +1897,18 @@ $c_Lcom_papauschek_ui_HtmlRenderer$.prototype.renderPuzzle__Lcom_papauschek_puzz
     $m_sc_StringOps$();
     var this$62 = $n(gridInstruction1);
     if ((!(this$62 === ""))) {
-      var $x_13 = (((("<p class=\"mb-0 ms-3\" style=\"font-size: " + instructionFontSize) + "px; white-space: pre-wrap;\">") + gridInstruction1) + "</p>")
+      var $x_13 = (((("<p class=\"mb-0 ms-3\" style=\"font-size: " + instructionFontSize) + "px; white-space: pre-wrap; margin: 0;\">") + gridInstruction1) + "</p>")
     } else {
       var $x_13 = ""
     };
     var $x_12 = $p_Lcom_papauschek_ui_HtmlRenderer$__renderGrid$1__Lcom_papauschek_puzzle_Puzzle__sci_Map__T__T__sci_Set__T(this, puzzle, annotation, letterCase, numberColor, oddWordNumbers$2);
     $m_sc_StringOps$();
     var this$65 = $n(gridInstruction2);
-    var x$1 = (((((((((((((((("<div>\r\n         |  <div class=\"d-flex align-items-center mb-3\">\r\n         |    <h3 style=\"font-size: " + titleSize) + "px; margin: 0;\">") + gridName1) + "</h3>\r\n         |    ") + $x_13) + "\r\n         |  </div>\r\n         |  ") + $x_12) + "\r\n         |  <div class=\"d-flex align-items-center mb-3 mt-4\">\r\n         |    <h3 style=\"font-size: ") + titleSize) + "px; margin: 0;\">") + gridName2) + "</h3>\r\n         |    ") + ((!(this$65 === "")) ? (((("<p class=\"mb-0 ms-3\" style=\"font-size: " + instructionFontSize) + "px; white-space: pre-wrap;\">") + gridInstruction2) + "</p>") : "")) + "\r\n         |  </div>\r\n         |  ") + $p_Lcom_papauschek_ui_HtmlRenderer$__renderGrid$1__Lcom_papauschek_puzzle_Puzzle__sci_Map__T__T__sci_Set__T(this, puzzle, annotation, letterCase, numberColor, evenWordNumbers$2)) + "\r\n         |</div>");
+    var x$1 = (((((((((((((((("<div>\r\n         |  <div class=\"d-flex align-items-center mb-0\">\r\n         |    <h3 style=\"font-size: " + titleSize) + "px; margin: 0;\">") + gridName1) + "</h3>\r\n         |    ") + $x_13) + "\r\n         |  </div>\r\n         |  ") + $x_12) + "\r\n         |  <br>\r\n         |  <div class=\"d-flex align-items-center mb-0 mt-4\">\r\n         |    <h3 style=\"font-size: ") + titleSize) + "px; margin: 0;\">") + gridName2) + "</h3>\r\n         |    ") + ((!(this$65 === "")) ? (((("<p class=\"mb-0 ms-3\" style=\"font-size: " + instructionFontSize) + "px; white-space: pre-wrap; margin: 0;\">") + gridInstruction2) + "</p>") : "")) + "\r\n         |  </div>\r\n         |  ") + $p_Lcom_papauschek_ui_HtmlRenderer$__renderGrid$1__Lcom_papauschek_puzzle_Puzzle__sci_Map__T__T__sci_Set__T(this, puzzle, annotation, letterCase, numberColor, evenWordNumbers$2)) + "\r\n         |</div>");
     var resultHtml = $m_sc_StringOps$().stripMargin$extension__T__C__T(x$1, 124)
   } else {
     $m_sc_StringOps$();
-    var x$2 = (((((((((("<svg viewBox=\"-8 -8 " + ((15 + Math.imul(10, $n($n(puzzle).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width)) | 0)) + " ") + ((15 + Math.imul(10, $n($n(puzzle).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_height)) | 0)) + "\">\r\n        |  <style>\r\n        |    .annotation-horizontal {\r\n        |      font: 5px sans-serif;\r\n        |      fill: ") + numberColor) + ";\r\n        |    }\r\n        |    .annotation-vertical {\r\n        |      font: 5px sans-serif;\r\n        |      fill: ") + numberColor) + ";\r\n        |    }\r\n        |    .letter {\r\n        |      font: 8px sans-serif;\r\n        |      fill: black;\r\n        |    }\r\n        |  </style>\r\n        |  ") + renderedPuzzle) + "\r\n        |</svg>");
+    var x$2 = (((((((((("<svg viewBox=\"-8 -8 " + ((15 + Math.imul(10, $n($n(puzzle).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_width)) | 0)) + " ") + ((15 + Math.imul(10, $n($n(puzzle).Lcom_papauschek_puzzle_Puzzle__f_config).Lcom_papauschek_puzzle_PuzzleConfig__f_height)) | 0)) + "\" style=\"display: block; margin: 0;\">\r\n        |  <style>\r\n        |    .annotation-horizontal {\r\n        |      font: 5px sans-serif;\r\n        |      fill: ") + numberColor) + ";\r\n        |    }\r\n        |    .annotation-vertical {\r\n        |      font: 5px sans-serif;\r\n        |      fill: ") + numberColor) + ";\r\n        |    }\r\n        |    .letter {\r\n        |      font: 8px sans-serif;\r\n        |      fill: black;\r\n        |    }\r\n        |  </style>\r\n        |  ") + renderedPuzzle) + "\r\n        |</svg>");
     var svg = $m_sc_StringOps$().stripMargin$extension__T__C__T(x$2, 124);
     $m_sc_StringOps$();
     var this$72 = $n(gridName1);
@@ -1930,7 +1930,7 @@ $c_Lcom_papauschek_ui_HtmlRenderer$.prototype.renderPuzzle__Lcom_papauschek_puzz
       };
       $m_sc_StringOps$();
       var this$81 = $n(gridInstruction1);
-      var x$3 = (((((("<div>\r\n           |  <div class=\"d-flex align-items-center mb-3\">\r\n           |    " + $x_15) + "\r\n           |    ") + ((!(this$81 === "")) ? (((("<p class=\"mb-0 ms-3\" style=\"font-size: " + instructionFontSize) + "px; white-space: pre-wrap;\">") + gridInstruction1) + "</p>") : "")) + "\r\n           |  </div>\r\n           |  ") + svg) + "\r\n           |</div>");
+      var x$3 = (((((("<div>\r\n           |  <div class=\"d-flex align-items-center mb-0\">\r\n           |    " + $x_15) + "\r\n           |    ") + ((!(this$81 === "")) ? (((("<p class=\"mb-0 ms-3\" style=\"font-size: " + instructionFontSize) + "px; white-space: pre-wrap; margin: 0;\">") + gridInstruction1) + "</p>") : "")) + "\r\n           |  </div>\r\n           |  ") + svg) + "\r\n           |</div>");
       var resultHtml = $m_sc_StringOps$().stripMargin$extension__T__C__T(x$3, 124)
     } else {
       var resultHtml = svg
@@ -1998,6 +1998,43 @@ function $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V($thiz) {
   var this$1 = $n(newTitle);
   $x_1.textContent = ((this$1 === "") ? "\u00a0" : newTitle);
   $thiz.Lcom_papauschek_ui_MainPage__f_mainTitleElement.style.display = "block"
+}
+function $p_Lcom_papauschek_ui_MainPage__applyTagToInstruction__Lorg_scalajs_dom_HTMLTextAreaElement__T__V($thiz, element, tag) {
+  var start = $uI(element.selectionStart);
+  var end = $uI(element.selectionEnd);
+  var text = $as_T(element.value);
+  var this$1 = $n(text);
+  if ((start < 0)) {
+    $charAt(this$1, start)
+  };
+  if ((end > this$1.length)) {
+    $charAt(this$1, end)
+  };
+  if ((end < start)) {
+    $charAt(this$1, (-1))
+  };
+  var selectedText = $as_T(this$1.substring(start, end));
+  var this$2 = $n(text);
+  if ((start > this$2.length)) {
+    $charAt(this$2, start)
+  };
+  if ((start < 0)) {
+    $charAt(this$2, (-1))
+  };
+  var $x_1 = $as_T(this$2.substring(0, start));
+  var this$3 = $n(text);
+  if (((end < 0) || (end > this$3.length))) {
+    $charAt(this$3, end)
+  };
+  var newText = ((($x_1 + ((((("<" + tag) + ">") + selectedText) + "</") + tag)) + ">") + $as_T(this$3.substring(end)));
+  element.value = newText;
+  var this$4 = $n(tag);
+  var newStart = ((2 + ((start + this$4.length) | 0)) | 0);
+  var this$5 = $n(tag);
+  var newEnd = ((2 + ((end + this$5.length) | 0)) | 0);
+  element.setSelectionRange(newStart, newEnd);
+  element.focus();
+  $thiz.renderSolution__V()
 }
 function $p_Lcom_papauschek_ui_MainPage__normalizeWord__T__T($thiz, word) {
   var this$1 = $n($f_T__trim__T($n(word)));
@@ -2097,6 +2134,10 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Element = document.getElementById("grid-instruction-1");
   this.Lcom_papauschek_ui_MainPage__f_gridInstruction2Element = document.getElementById("grid-instruction-2");
   this.Lcom_papauschek_ui_MainPage__f_instructionFontSizeElement = document.getElementById("instruction-font-size");
+  var btnBold1 = document.getElementById("btn-bold-1");
+  var btnItalic1 = document.getElementById("btn-italic-1");
+  var btnBold2 = document.getElementById("btn-bold-2");
+  var btnItalic2 = document.getElementById("btn-italic-2");
   this.Lcom_papauschek_ui_MainPage__f_numberLightGrayElement = document.getElementById("number-light-gray");
   this.Lcom_papauschek_ui_MainPage__f_numberDarkGrayElement = document.getElementById("number-dark-gray");
   var numberBlackElement = document.getElementById("number-black");
@@ -2196,6 +2237,22 @@ function $c_Lcom_papauschek_ui_MainPage() {
   }));
   this.Lcom_papauschek_ui_MainPage__f_instructionFontSizeElement.addEventListener("input", ((_$21) => {
     this.renderSolution__V()
+  }));
+  btnBold1.addEventListener("click", ((e) => {
+    e.preventDefault();
+    $p_Lcom_papauschek_ui_MainPage__applyTagToInstruction__Lorg_scalajs_dom_HTMLTextAreaElement__T__V(this, this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Element, "b")
+  }));
+  btnItalic1.addEventListener("click", ((e$2) => {
+    e$2.preventDefault();
+    $p_Lcom_papauschek_ui_MainPage__applyTagToInstruction__Lorg_scalajs_dom_HTMLTextAreaElement__T__V(this, this.Lcom_papauschek_ui_MainPage__f_gridInstruction1Element, "i")
+  }));
+  btnBold2.addEventListener("click", ((e$3) => {
+    e$3.preventDefault();
+    $p_Lcom_papauschek_ui_MainPage__applyTagToInstruction__Lorg_scalajs_dom_HTMLTextAreaElement__T__V(this, this.Lcom_papauschek_ui_MainPage__f_gridInstruction2Element, "b")
+  }));
+  btnItalic2.addEventListener("click", ((e$4) => {
+    e$4.preventDefault();
+    $p_Lcom_papauschek_ui_MainPage__applyTagToInstruction__Lorg_scalajs_dom_HTMLTextAreaElement__T__V(this, this.Lcom_papauschek_ui_MainPage__f_gridInstruction2Element, "i")
   }));
   this.showPartialSubmenu__V();
   this.Lcom_papauschek_ui_MainPage__f_numberLightGrayElement.addEventListener("click", ((_$22) => {
