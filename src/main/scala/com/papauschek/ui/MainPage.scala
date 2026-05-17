@@ -72,12 +72,9 @@ class MainPage:
   
   private def updateMainTitle(): Unit = {
     val newTitle = mainTitleInputElement.value
-    mainTitleElement.textContent = newTitle
-    if (newTitle.trim.isEmpty) {
-      mainTitleElement.style.display = "none"
-    } else {
-      mainTitleElement.style.display = "block"
-    }
+    // Use a non-breaking space when empty so the h1 keeps its full height
+    mainTitleElement.textContent = if (newTitle.isEmpty) "\u00a0" else newTitle
+    mainTitleElement.style.display = "block"
   }
 
   mainTitleInputElement.addEventListener("input", { _ => updateMainTitle() })

@@ -1924,13 +1924,10 @@ function $m_Lcom_papauschek_ui_HtmlRenderer$() {
 }
 function $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V($thiz) {
   var newTitle = $as_T($thiz.Lcom_papauschek_ui_MainPage__f_mainTitleInputElement.value);
-  $thiz.Lcom_papauschek_ui_MainPage__f_mainTitleElement.textContent = newTitle;
-  var this$1 = $n($f_T__trim__T($n(newTitle)));
-  if ((this$1 === "")) {
-    $thiz.Lcom_papauschek_ui_MainPage__f_mainTitleElement.style.display = "none"
-  } else {
-    $thiz.Lcom_papauschek_ui_MainPage__f_mainTitleElement.style.display = "block"
-  }
+  var $x_1 = $thiz.Lcom_papauschek_ui_MainPage__f_mainTitleElement;
+  var this$1 = $n(newTitle);
+  $x_1.textContent = ((this$1 === "") ? "\u00a0" : newTitle);
+  $thiz.Lcom_papauschek_ui_MainPage__f_mainTitleElement.style.display = "block"
 }
 function $p_Lcom_papauschek_ui_MainPage__normalizeWord__T__T($thiz, word) {
   var this$1 = $n($f_T__trim__T($n(word)));
