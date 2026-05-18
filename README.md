@@ -12,6 +12,7 @@ Modified version of Chris' Crossword Puzzle Maker
 * Option to add clues in step 1 using :
 * Option to select what is printed in solution & clues sheet
 * Words can have spaces which resolve into empty boxes
+* Option to force including all words, which will increase the size of the grid if needed
 
 ## Try the modified version here:
 **https://soliviantar.github.io/crossword-puzzle-maker**
