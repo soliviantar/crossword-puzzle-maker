@@ -31,7 +31,7 @@ object HtmlRenderer:
                    titleSize: String = "24",
                    gridInstruction1: String = "",
                    gridInstruction2: String = "",
-                   instructionFontSize: String = "23",
+                   instructionFontSize: String = "15",
                    mainTitle: String = ""): String =
 
     val annotation = puzzle.getAnnotation
