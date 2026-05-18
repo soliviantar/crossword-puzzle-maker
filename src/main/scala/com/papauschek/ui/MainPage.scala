@@ -20,6 +20,7 @@ class MainPage:
 
   private val showSolutionsCheckbox = dom.document.getElementById("show-clues-solutions").asInstanceOf[Input]
   private val showCluesCheckbox = dom.document.getElementById("show-clues-clues").asInstanceOf[Input]
+  private val printSolutionsCheckbox = dom.document.getElementById("print-clues-solutions").asInstanceOf[Input]
 
   private val inputElement = dom.document.getElementById("input").asInstanceOf[TextArea]
   private val outputPuzzleElement = dom.document.getElementById("output-puzzle")
@@ -177,6 +178,7 @@ class MainPage:
 
   // Initialize partial submenu visibility
   showPartialSubmenu()
+  updatePrintVisibility()
 
   numberLightGrayElement.addEventListener("click", { _ => renderSolution() })
   numberDarkGrayElement.addEventListener("click", { _ => renderSolution() })
@@ -187,6 +189,7 @@ class MainPage:
 
   showSolutionsCheckbox.addEventListener("change", { _ => renderSolution() })
   showCluesCheckbox.addEventListener("change", { _ => renderSolution() })
+  printSolutionsCheckbox.addEventListener("change", { _ => updatePrintVisibility() })
 
   /** read the words from the user interface and generate the puzzle in the background using web workers */
   def generateSolution(): Unit =
@@ -226,6 +229,14 @@ class MainPage:
       }
     }
 
+
+  /** update print visibility of clues and solutions */
+  def updatePrintVisibility(): Unit =
+    if (printSolutionsCheckbox.checked) {
+      cluesRow.classList.remove("print-hidden")
+    } else {
+      cluesRow.classList.add("print-hidden")
+    }
 
   /** show partial solution submenu */
   def showPartialSubmenu(): Unit =
@@ -318,8 +329,10 @@ class MainPage:
     
     if (unusedWords.isEmpty) {
       wordInclusionStatusElement.innerHTML = "<strong>All your words were included.</strong>"
+      wordInclusionStatusElement.setAttribute("style", "")
     } else {
       wordInclusionStatusElement.innerHTML = s"<strong>The following words were not used:</strong> ${unusedWords.mkString(", ")}"
+      wordInclusionStatusElement.setAttribute("style", "color: red; font-size: 1.3rem;")
     }
 
     outputCluesElement.innerHTML = HtmlRenderer.renderClues(

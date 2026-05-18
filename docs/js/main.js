@@ -2052,6 +2052,7 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_wordClues = null;
   this.Lcom_papauschek_ui_MainPage__f_showSolutionsCheckbox = null;
   this.Lcom_papauschek_ui_MainPage__f_showCluesCheckbox = null;
+  this.Lcom_papauschek_ui_MainPage__f_printSolutionsCheckbox = null;
   this.Lcom_papauschek_ui_MainPage__f_inputElement = null;
   this.Lcom_papauschek_ui_MainPage__f_outputPuzzleElement = null;
   this.Lcom_papauschek_ui_MainPage__f_outputCluesElement = null;
@@ -2106,6 +2107,7 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_wordClues = ($n($m_s_Predef$().s_Predef$__f_Map), $m_sci_Map$EmptyMap$());
   this.Lcom_papauschek_ui_MainPage__f_showSolutionsCheckbox = document.getElementById("show-clues-solutions");
   this.Lcom_papauschek_ui_MainPage__f_showCluesCheckbox = document.getElementById("show-clues-clues");
+  this.Lcom_papauschek_ui_MainPage__f_printSolutionsCheckbox = document.getElementById("print-clues-solutions");
   this.Lcom_papauschek_ui_MainPage__f_inputElement = document.getElementById("input");
   this.Lcom_papauschek_ui_MainPage__f_outputPuzzleElement = document.getElementById("output-puzzle");
   this.Lcom_papauschek_ui_MainPage__f_outputCluesElement = document.getElementById("output-clues");
@@ -2255,6 +2257,7 @@ function $c_Lcom_papauschek_ui_MainPage() {
     $p_Lcom_papauschek_ui_MainPage__applyTagToInstruction__Lorg_scalajs_dom_HTMLTextAreaElement__T__V(this, this.Lcom_papauschek_ui_MainPage__f_gridInstruction2Element, "i")
   }));
   this.showPartialSubmenu__V();
+  this.updatePrintVisibility__V();
   this.Lcom_papauschek_ui_MainPage__f_numberLightGrayElement.addEventListener("click", ((_$22) => {
     this.renderSolution__V()
   }));
@@ -2275,6 +2278,9 @@ function $c_Lcom_papauschek_ui_MainPage() {
   }));
   this.Lcom_papauschek_ui_MainPage__f_showCluesCheckbox.addEventListener("change", ((_$28) => {
     this.renderSolution__V()
+  }));
+  this.Lcom_papauschek_ui_MainPage__f_printSolutionsCheckbox.addEventListener("change", ((_$29) => {
+    this.updatePrintVisibility__V()
   }))
 }
 $c_Lcom_papauschek_ui_MainPage.prototype = new $h_O();
@@ -2289,9 +2295,9 @@ $c_Lcom_papauschek_ui_MainPage.prototype.generateSolution__V = (function() {
   var x = $as_T(this.Lcom_papauschek_ui_MainPage__f_inputElement.value);
   $m_sc_StringOps$();
   var this$4 = new $c_sc_StringOps$$anon$1(x, true);
-  var f = new $c_sjsr_AnonFunction1(((_$29) => {
-    var _$29$1 = $as_T(_$29);
-    return $f_T__trim__T($n(_$29$1))
+  var f = new $c_sjsr_AnonFunction1(((_$30) => {
+    var _$30$1 = $as_T(_$30);
+    return $f_T__trim__T($n(_$30$1))
   }));
   var this$9 = new $c_sc_Iterator$$anon$9(this$4, f);
   var p = new $c_sjsr_AnonFunction1(((line) => {
@@ -2326,16 +2332,16 @@ $c_Lcom_papauschek_ui_MainPage.prototype.generateSolution__V = (function() {
   }))));
   var this$14 = $m_s_$less$colon$less$();
   this.Lcom_papauschek_ui_MainPage__f_wordClues = $n($x_1).toMap__s_$less$colon$less__sci_Map(this$14.s_$less$colon$less$__f_singleton);
-  var inputWords = $as_sci_Seq($n($as_sc_IterableOps($n($as_sc_IterableOps($n(parsedLines).map__F1__O(new $c_sjsr_AnonFunction1(((_$30) => {
-    var _$30$1 = $as_T2(_$30);
-    return $as_T($n(_$30$1)._1__O())
+  var inputWords = $as_sci_Seq($n($as_sc_IterableOps($n($as_sc_IterableOps($n(parsedLines).map__F1__O(new $c_sjsr_AnonFunction1(((_$31) => {
+    var _$31$1 = $as_T2(_$31);
+    return $as_T($n(_$31$1)._1__O())
   }))))).map__F1__O(new $c_sjsr_AnonFunction1(((word) => {
     var word$1 = $as_T(word);
     return $p_Lcom_papauschek_ui_MainPage__normalizeWord__T__T(this, word$1)
-  }))))).filter__F1__O(new $c_sjsr_AnonFunction1(((_$31) => {
-    var _$31$1 = $as_T(_$31);
+  }))))).filter__F1__O(new $c_sjsr_AnonFunction1(((_$32) => {
+    var _$32$1 = $as_T(_$32);
     $m_sc_StringOps$();
-    var this$17 = $n(_$31$1);
+    var this$17 = $n(_$32$1);
     return (!(this$17 === ""))
   }))));
   var this$18 = $n(inputWords);
@@ -2364,15 +2370,22 @@ $c_Lcom_papauschek_ui_MainPage.prototype.generateSolution__V = (function() {
       this.Lcom_papauschek_ui_MainPage__f_refineRow.classList.remove("invisible");
       this.Lcom_papauschek_ui_MainPage__f_cluesRow.classList.remove("invisible");
       var this$21 = $n(puzzles$1);
-      var f$1 = new $c_sjsr_AnonFunction1(((_$32) => {
-        var _$32$1 = $as_Lcom_papauschek_puzzle_Puzzle(_$32);
-        return $n(_$32$1).Lcom_papauschek_puzzle_Puzzle__f_density
+      var f$1 = new $c_sjsr_AnonFunction1(((_$33) => {
+        var _$33$1 = $as_Lcom_papauschek_puzzle_Puzzle(_$33);
+        return $n(_$33$1).Lcom_papauschek_puzzle_Puzzle__f_density
       }));
       var ord = $m_s_math_Ordering$DeprecatedDoubleOrdering$();
       this.Lcom_papauschek_ui_MainPage__f_initialPuzzle = $as_Lcom_papauschek_puzzle_Puzzle($f_sc_IterableOnceOps__maxBy__F1__s_math_Ordering__O(this$21, f$1, ord));
       this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle = this.Lcom_papauschek_ui_MainPage__f_initialPuzzle;
       this.renderSolution__V()
     })), $m_s_concurrent_ExecutionContext$().global__s_concurrent_ExecutionContextExecutor())
+  }
+});
+$c_Lcom_papauschek_ui_MainPage.prototype.updatePrintVisibility__V = (function() {
+  if ($uZ(this.Lcom_papauschek_ui_MainPage__f_printSolutionsCheckbox.checked)) {
+    this.Lcom_papauschek_ui_MainPage__f_cluesRow.classList.remove("print-hidden")
+  } else {
+    this.Lcom_papauschek_ui_MainPage__f_cluesRow.classList.add("print-hidden")
   }
 });
 $c_Lcom_papauschek_ui_MainPage.prototype.showPartialSubmenu__V = (function() {
@@ -2433,11 +2446,13 @@ $c_Lcom_papauschek_ui_MainPage.prototype.renderSolution__V = (function() {
   var extraWords = $as_sci_Set(this$1.removedAll__sc_IterableOnce__sci_SetOps(that));
   this.Lcom_papauschek_ui_MainPage__f_resultInfoElement.innerHTML = $m_Lcom_papauschek_ui_HtmlRenderer$().renderPuzzleInfo__Lcom_papauschek_puzzle_Puzzle__sci_Seq__T(this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle, unusedWords);
   if ($n(unusedWords).isEmpty__Z()) {
-    this.Lcom_papauschek_ui_MainPage__f_wordInclusionStatusElement.innerHTML = "<strong>All your words were included.</strong>"
+    this.Lcom_papauschek_ui_MainPage__f_wordInclusionStatusElement.innerHTML = "<strong>All your words were included.</strong>";
+    this.Lcom_papauschek_ui_MainPage__f_wordInclusionStatusElement.setAttribute("style", "")
   } else {
     var $x_2 = this.Lcom_papauschek_ui_MainPage__f_wordInclusionStatusElement;
     var this$2 = $n(unusedWords);
-    $x_2.innerHTML = ("<strong>The following words were not used:</strong> " + $f_sc_IterableOnceOps__mkString__T__T__T__T(this$2, "", ", ", ""))
+    $x_2.innerHTML = ("<strong>The following words were not used:</strong> " + $f_sc_IterableOnceOps__mkString__T__T__T__T(this$2, "", ", ", ""));
+    this.Lcom_papauschek_ui_MainPage__f_wordInclusionStatusElement.setAttribute("style", "color: red; font-size: 1.3rem;")
   };
   this.Lcom_papauschek_ui_MainPage__f_outputCluesElement.innerHTML = $m_Lcom_papauschek_ui_HtmlRenderer$().renderClues__Lcom_papauschek_puzzle_Puzzle__sci_Set__sci_Map__Z__Z__T(this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle, extraWords, this.Lcom_papauschek_ui_MainPage__f_wordClues, $uZ(this.Lcom_papauschek_ui_MainPage__f_showSolutionsCheckbox.checked), $uZ(this.Lcom_papauschek_ui_MainPage__f_showCluesCheckbox.checked))
 });
@@ -2449,8 +2464,8 @@ $c_Lcom_papauschek_ui_MainPage.prototype.refineSolution__V = (function() {
   var i = 0;
   while ((i < len)) {
     var arg1 = array[i];
-    var _$33 = $as_T(arg1);
-    var this$5 = $n(_$33);
+    var _$34 = $as_T(arg1);
+    var this$5 = $n(_$34);
     if ((this$5.length >= 4)) {
       $uI(res.push(arg1))
     };
