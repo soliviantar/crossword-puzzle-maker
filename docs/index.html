@@ -119,16 +119,24 @@ VENDRÍAS</textarea>
 
         <div class="col-lg-6">
             <h2><i class="bi bi-2-circle"></i> Choose Size</h2>
-            <label for="width" class="form-label">Specify width and height (maximum = 30x30):</label>
+            <label for="width" class="form-label">Specify width and height:</label>
             <div class="input-group mb-3" style="max-width: 180px;">
                 <input id="width" type="number" class="form-control" aria-label="Width" value="30">
                 <span class="input-group-text">x</span>
-                <input id="height" type="number" class="form-control" aria-label="Height" value="16">
+                <input id="height" type="number" class="form-control" aria-label="Height" value="15">
             </div>
 
             <button type="button" class="btn btn-primary" id="generate-button">Generate Puzzle</button>
             <div class="spinner-border text-primary invisible" id="generate-spinner" role="status">
                 <span class="visually-hidden">Loading...</span>
+            </div>
+            
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="checkbox" id="include-all-words">
+                <label class="form-check-label" for="include-all-words">
+                    Force including all words (slower)
+                    <i class="bi bi-info-circle text-muted ms-1" title="The generator always tries to fit all words in the selected grid size.&#10;If some words do not fit and your grid size is flexible, checking this will automatically expand the grid (width up to 36, then height up to 20) until all words fit."></i>
+                </label>
             </div>
         </div>
 
@@ -305,7 +313,7 @@ VENDRÍAS</textarea>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="print-clues-solutions">
-                    <label class="form-check-label" for="print-clues-solutions">Print solutions and clues?</label>
+                    <label class="form-check-label" for="print-clues-solutions">Print solutions and clues</label>
                 </div>
             </div>
             <div id="output-clues"></div>

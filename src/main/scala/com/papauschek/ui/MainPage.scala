@@ -21,6 +21,7 @@ class MainPage:
   private val showSolutionsCheckbox = dom.document.getElementById("show-clues-solutions").asInstanceOf[Input]
   private val showCluesCheckbox = dom.document.getElementById("show-clues-clues").asInstanceOf[Input]
   private val printSolutionsCheckbox = dom.document.getElementById("print-clues-solutions").asInstanceOf[Input]
+  private val includeAllWordsCheckbox = dom.document.getElementById("include-all-words").asInstanceOf[Input]
 
   private val inputElement = dom.document.getElementById("input").asInstanceOf[TextArea]
   private val outputPuzzleElement = dom.document.getElementById("output-puzzle")
@@ -205,27 +206,60 @@ class MainPage:
 
     if (inputWords.nonEmpty) {
       mainInputWords = PuzzleWords.sortByBest(inputWords)
-      val puzzleConfig = PuzzleConfig(
-        width = widthInputElement.valueAsNumber.toInt,
-        height = heightInputElement.valueAsNumber.toInt
-      )
+      val startWidth = widthInputElement.valueAsNumber.toInt
+      val height = heightInputElement.valueAsNumber.toInt
+
       generateSpinner.classList.remove("invisible")
       generateButton.classList.add("invisible")
       refreshIcon.classList.add("spinning")
       refreshButton.asInstanceOf[Input].disabled = true
 
-      PuzzleGenerator.send(NewPuzzleMessage(puzzleConfig, mainInputWords)).foreach {
-        puzzles =>
-          generateSpinner.classList.add("invisible")
-          generateButton.classList.remove("invisible")
-          refreshIcon.classList.remove("spinning")
-          refreshButton.asInstanceOf[Input].disabled = false
-          resultRow.classList.remove("invisible")
-          refineRow.classList.remove("invisible")
-          cluesRow.classList.remove("invisible")
-          initialPuzzle = puzzles.maxBy(_.density)
-          refinedPuzzle = initialPuzzle
-          renderSolution()
+      if (includeAllWordsCheckbox.checked) {
+        runIncludeAllWords(startWidth, height, tryCount = 1)
+      } else {
+        val puzzleConfig = PuzzleConfig(width = startWidth, height = height)
+        PuzzleGenerator.send(NewPuzzleMessage(puzzleConfig, mainInputWords)).foreach { puzzles =>
+          finishGeneration(puzzles)
+        }
+      }
+    }
+
+  private def finishGeneration(puzzles: Seq[Puzzle]): Unit =
+    generateSpinner.classList.add("invisible")
+    generateButton.classList.remove("invisible")
+    refreshIcon.classList.remove("spinning")
+    refreshButton.asInstanceOf[Input].disabled = false
+    resultRow.classList.remove("invisible")
+    refineRow.classList.remove("invisible")
+    cluesRow.classList.remove("invisible")
+    initialPuzzle = puzzles.maxBy(_.density)
+    refinedPuzzle = initialPuzzle
+    renderSolution()
+    updatePrintVisibility()
+
+  private def runIncludeAllWords(width: Int, height: Int, tryCount: Int): Unit =
+    widthInputElement.value = width.toString
+    heightInputElement.value = height.toString
+    val puzzleConfig = PuzzleConfig(width = width, height = height)
+    PuzzleGenerator.send(NewPuzzleMessage(puzzleConfig, mainInputWords)).foreach { puzzles =>
+      val bestPuzzle = puzzles.maxBy(_.density)
+      val unusedWords = mainInputWords.filterNot(bestPuzzle.words.contains)
+
+      if (unusedWords.isEmpty) {
+        // Success! All words fit
+        finishGeneration(puzzles)
+      } else if (tryCount < 3) {
+        // Retry with same size
+        runIncludeAllWords(width, height, tryCount + 1)
+      } else if (width < 36) {
+        // Make grid width bigger by 1 and retry
+        runIncludeAllWords(width + 1, height, tryCount = 1)
+      } else if (height < 20) {
+        // Width reached 36, make grid height bigger by 1 and retry
+        runIncludeAllWords(width, height + 1, tryCount = 1)
+      } else {
+        // Reached maximum width 36 and maximum height 20, finish and display best puzzle found
+        finishGeneration(puzzles)
       }
     }
 

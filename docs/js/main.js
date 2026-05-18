@@ -1999,6 +1999,61 @@ function $p_Lcom_papauschek_ui_MainPage__updateMainTitle__V($thiz) {
   $x_1.textContent = ((this$1 === "") ? "\u00a0" : newTitle);
   $thiz.Lcom_papauschek_ui_MainPage__f_mainTitleElement.style.display = "block"
 }
+function $p_Lcom_papauschek_ui_MainPage__finishGeneration__sci_Seq__V($thiz, puzzles) {
+  $thiz.Lcom_papauschek_ui_MainPage__f_generateSpinner.classList.add("invisible");
+  $thiz.Lcom_papauschek_ui_MainPage__f_generateButton.classList.remove("invisible");
+  $thiz.Lcom_papauschek_ui_MainPage__f_refreshIcon.classList.remove("spinning");
+  $thiz.Lcom_papauschek_ui_MainPage__f_refreshButton.disabled = false;
+  $thiz.Lcom_papauschek_ui_MainPage__f_resultRow.classList.remove("invisible");
+  $thiz.Lcom_papauschek_ui_MainPage__f_refineRow.classList.remove("invisible");
+  $thiz.Lcom_papauschek_ui_MainPage__f_cluesRow.classList.remove("invisible");
+  var this$1 = $n(puzzles);
+  var f = new $c_sjsr_AnonFunction1(((_$33) => {
+    var _$33$1 = $as_Lcom_papauschek_puzzle_Puzzle(_$33);
+    return $n(_$33$1).Lcom_papauschek_puzzle_Puzzle__f_density
+  }));
+  var ord = $m_s_math_Ordering$DeprecatedDoubleOrdering$();
+  $thiz.Lcom_papauschek_ui_MainPage__f_initialPuzzle = $as_Lcom_papauschek_puzzle_Puzzle($f_sc_IterableOnceOps__maxBy__F1__s_math_Ordering__O(this$1, f, ord));
+  $thiz.Lcom_papauschek_ui_MainPage__f_refinedPuzzle = $thiz.Lcom_papauschek_ui_MainPage__f_initialPuzzle;
+  $thiz.renderSolution__V();
+  $thiz.updatePrintVisibility__V()
+}
+function $p_Lcom_papauschek_ui_MainPage__runIncludeAllWords__I__I__I__V($thiz, width, height, tryCount) {
+  $thiz.Lcom_papauschek_ui_MainPage__f_widthInputElement.value = ("" + width);
+  $thiz.Lcom_papauschek_ui_MainPage__f_heightInputElement.value = ("" + height);
+  $m_Lcom_papauschek_puzzle_PuzzleConfig$();
+  $m_Lcom_papauschek_puzzle_PuzzleConfig$();
+  var wrapping = false;
+  var puzzleConfig = new $c_Lcom_papauschek_puzzle_PuzzleConfig(width, height, wrapping);
+  var $x_1 = $m_Lcom_papauschek_ui_PuzzleGenerator$();
+  $m_Lcom_papauschek_ui_NewPuzzleMessage$();
+  var words = $thiz.Lcom_papauschek_ui_MainPage__f_mainInputWords;
+  $n($n($x_1).send__Lcom_papauschek_ui_NewPuzzleMessage__s_concurrent_Future(new $c_Lcom_papauschek_ui_NewPuzzleMessage(puzzleConfig, words))).foreach__F1__s_concurrent_ExecutionContext__V(new $c_sjsr_AnonFunction1(((puzzles) => {
+    var puzzles$1 = $as_sci_Seq(puzzles);
+    var this$6 = $n(puzzles$1);
+    var f = new $c_sjsr_AnonFunction1(((_$34) => {
+      var _$34$1 = $as_Lcom_papauschek_puzzle_Puzzle(_$34);
+      return $n(_$34$1).Lcom_papauschek_puzzle_Puzzle__f_density
+    }));
+    var ord = $m_s_math_Ordering$DeprecatedDoubleOrdering$();
+    var bestPuzzle = $as_Lcom_papauschek_puzzle_Puzzle($f_sc_IterableOnceOps__maxBy__F1__s_math_Ordering__O(this$6, f, ord));
+    var unusedWords = $as_sci_Seq($n($thiz.Lcom_papauschek_ui_MainPage__f_mainInputWords).filterNot__F1__O(new $c_sjsr_AnonFunction1(((elem) => {
+      var elem$1 = $as_T(elem);
+      return $n($n(bestPuzzle).Lcom_papauschek_puzzle_Puzzle__f_words).contains__O__Z(elem$1)
+    }))));
+    if ($n(unusedWords).isEmpty__Z()) {
+      $p_Lcom_papauschek_ui_MainPage__finishGeneration__sci_Seq__V($thiz, puzzles$1)
+    } else if ((tryCount < 3)) {
+      $p_Lcom_papauschek_ui_MainPage__runIncludeAllWords__I__I__I__V($thiz, width, height, ((1 + tryCount) | 0))
+    } else if ((width < 36)) {
+      $p_Lcom_papauschek_ui_MainPage__runIncludeAllWords__I__I__I__V($thiz, ((1 + width) | 0), height, 1)
+    } else if ((height < 20)) {
+      $p_Lcom_papauschek_ui_MainPage__runIncludeAllWords__I__I__I__V($thiz, width, ((1 + height) | 0), 1)
+    } else {
+      $p_Lcom_papauschek_ui_MainPage__finishGeneration__sci_Seq__V($thiz, puzzles$1)
+    }
+  })), $m_s_concurrent_ExecutionContext$().global__s_concurrent_ExecutionContextExecutor())
+}
 function $p_Lcom_papauschek_ui_MainPage__applyTagToInstruction__Lorg_scalajs_dom_HTMLTextAreaElement__T__V($thiz, element, tag) {
   var start = $uI(element.selectionStart);
   var end = $uI(element.selectionEnd);
@@ -2053,6 +2108,7 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_showSolutionsCheckbox = null;
   this.Lcom_papauschek_ui_MainPage__f_showCluesCheckbox = null;
   this.Lcom_papauschek_ui_MainPage__f_printSolutionsCheckbox = null;
+  this.Lcom_papauschek_ui_MainPage__f_includeAllWordsCheckbox = null;
   this.Lcom_papauschek_ui_MainPage__f_inputElement = null;
   this.Lcom_papauschek_ui_MainPage__f_outputPuzzleElement = null;
   this.Lcom_papauschek_ui_MainPage__f_outputCluesElement = null;
@@ -2108,6 +2164,7 @@ function $c_Lcom_papauschek_ui_MainPage() {
   this.Lcom_papauschek_ui_MainPage__f_showSolutionsCheckbox = document.getElementById("show-clues-solutions");
   this.Lcom_papauschek_ui_MainPage__f_showCluesCheckbox = document.getElementById("show-clues-clues");
   this.Lcom_papauschek_ui_MainPage__f_printSolutionsCheckbox = document.getElementById("print-clues-solutions");
+  this.Lcom_papauschek_ui_MainPage__f_includeAllWordsCheckbox = document.getElementById("include-all-words");
   this.Lcom_papauschek_ui_MainPage__f_inputElement = document.getElementById("input");
   this.Lcom_papauschek_ui_MainPage__f_outputPuzzleElement = document.getElementById("output-puzzle");
   this.Lcom_papauschek_ui_MainPage__f_outputCluesElement = document.getElementById("output-clues");
@@ -2347,38 +2404,27 @@ $c_Lcom_papauschek_ui_MainPage.prototype.generateSolution__V = (function() {
   var this$18 = $n(inputWords);
   if ((!this$18.isEmpty__Z())) {
     this.Lcom_papauschek_ui_MainPage__f_mainInputWords = $m_Lcom_papauschek_puzzle_PuzzleWords$().sortByBest__sci_Seq__sci_Seq(inputWords);
-    $m_Lcom_papauschek_puzzle_PuzzleConfig$();
-    var width = $doubleToInt($uD(this.Lcom_papauschek_ui_MainPage__f_widthInputElement.valueAsNumber));
+    var startWidth = $doubleToInt($uD(this.Lcom_papauschek_ui_MainPage__f_widthInputElement.valueAsNumber));
     var height = $doubleToInt($uD(this.Lcom_papauschek_ui_MainPage__f_heightInputElement.valueAsNumber));
-    $m_Lcom_papauschek_puzzle_PuzzleConfig$();
-    var wrapping = false;
-    var puzzleConfig = new $c_Lcom_papauschek_puzzle_PuzzleConfig(width, height, wrapping);
     this.Lcom_papauschek_ui_MainPage__f_generateSpinner.classList.remove("invisible");
     this.Lcom_papauschek_ui_MainPage__f_generateButton.classList.add("invisible");
     this.Lcom_papauschek_ui_MainPage__f_refreshIcon.classList.add("spinning");
     this.Lcom_papauschek_ui_MainPage__f_refreshButton.disabled = true;
-    var $x_2 = $m_Lcom_papauschek_ui_PuzzleGenerator$();
-    $m_Lcom_papauschek_ui_NewPuzzleMessage$();
-    var words = this.Lcom_papauschek_ui_MainPage__f_mainInputWords;
-    $n($n($x_2).send__Lcom_papauschek_ui_NewPuzzleMessage__s_concurrent_Future(new $c_Lcom_papauschek_ui_NewPuzzleMessage(puzzleConfig, words))).foreach__F1__s_concurrent_ExecutionContext__V(new $c_sjsr_AnonFunction1(((puzzles) => {
-      var puzzles$1 = $as_sci_Seq(puzzles);
-      this.Lcom_papauschek_ui_MainPage__f_generateSpinner.classList.add("invisible");
-      this.Lcom_papauschek_ui_MainPage__f_generateButton.classList.remove("invisible");
-      this.Lcom_papauschek_ui_MainPage__f_refreshIcon.classList.remove("spinning");
-      this.Lcom_papauschek_ui_MainPage__f_refreshButton.disabled = false;
-      this.Lcom_papauschek_ui_MainPage__f_resultRow.classList.remove("invisible");
-      this.Lcom_papauschek_ui_MainPage__f_refineRow.classList.remove("invisible");
-      this.Lcom_papauschek_ui_MainPage__f_cluesRow.classList.remove("invisible");
-      var this$21 = $n(puzzles$1);
-      var f$1 = new $c_sjsr_AnonFunction1(((_$33) => {
-        var _$33$1 = $as_Lcom_papauschek_puzzle_Puzzle(_$33);
-        return $n(_$33$1).Lcom_papauschek_puzzle_Puzzle__f_density
-      }));
-      var ord = $m_s_math_Ordering$DeprecatedDoubleOrdering$();
-      this.Lcom_papauschek_ui_MainPage__f_initialPuzzle = $as_Lcom_papauschek_puzzle_Puzzle($f_sc_IterableOnceOps__maxBy__F1__s_math_Ordering__O(this$21, f$1, ord));
-      this.Lcom_papauschek_ui_MainPage__f_refinedPuzzle = this.Lcom_papauschek_ui_MainPage__f_initialPuzzle;
-      this.renderSolution__V()
-    })), $m_s_concurrent_ExecutionContext$().global__s_concurrent_ExecutionContextExecutor())
+    if ($uZ(this.Lcom_papauschek_ui_MainPage__f_includeAllWordsCheckbox.checked)) {
+      $p_Lcom_papauschek_ui_MainPage__runIncludeAllWords__I__I__I__V(this, startWidth, height, 1)
+    } else {
+      $m_Lcom_papauschek_puzzle_PuzzleConfig$();
+      $m_Lcom_papauschek_puzzle_PuzzleConfig$();
+      var wrapping = false;
+      var puzzleConfig = new $c_Lcom_papauschek_puzzle_PuzzleConfig(startWidth, height, wrapping);
+      var $x_2 = $m_Lcom_papauschek_ui_PuzzleGenerator$();
+      $m_Lcom_papauschek_ui_NewPuzzleMessage$();
+      var words = this.Lcom_papauschek_ui_MainPage__f_mainInputWords;
+      $n($n($x_2).send__Lcom_papauschek_ui_NewPuzzleMessage__s_concurrent_Future(new $c_Lcom_papauschek_ui_NewPuzzleMessage(puzzleConfig, words))).foreach__F1__s_concurrent_ExecutionContext__V(new $c_sjsr_AnonFunction1(((puzzles) => {
+        var puzzles$1 = $as_sci_Seq(puzzles);
+        $p_Lcom_papauschek_ui_MainPage__finishGeneration__sci_Seq__V(this, puzzles$1)
+      })), $m_s_concurrent_ExecutionContext$().global__s_concurrent_ExecutionContextExecutor())
+    }
   }
 });
 $c_Lcom_papauschek_ui_MainPage.prototype.updatePrintVisibility__V = (function() {
@@ -2464,8 +2510,8 @@ $c_Lcom_papauschek_ui_MainPage.prototype.refineSolution__V = (function() {
   var i = 0;
   while ((i < len)) {
     var arg1 = array[i];
-    var _$34 = $as_T(arg1);
-    var this$5 = $n(_$34);
+    var _$35 = $as_T(arg1);
+    var this$5 = $n(_$35);
     if ((this$5.length >= 4)) {
       $uI(res.push(arg1))
     };
